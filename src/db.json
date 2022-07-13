@@ -3,6 +3,31 @@
     {
       "id": "ericka",
       "fullName": "Ericka Tabo",
+      "password": "password123",
+      "workspaces": [1, 2]
+    },
+    {
+      "id": "millie",
+      "fullName": "Millie Bobby Brown",
+      "password": "password123",
+      "workspaces": [1, 2]
+    },
+    {
+      "id": "taylor",
+      "fullName": "Taylor Swift",
+      "password": "password123",
+      "workspaces": [1, 2]
+    },
+    {
+      "id": "steve",
+      "fullName": "Joe Keery",
+      "password": "password123",
+      "workspaces": [1, 2]
+    },
+    {
+      "id": "dusty-bun",
+      "fullName": "Gaten Matarazzo",
+      "password": "password123",
       "workspaces": [1, 2]
     }
   ],
@@ -12,6 +37,7 @@
       "name": "Exist Software Labs, Inc.",
       "owner": "exist",
       "when": "Mon-Fri",
+      "members": ["ericka", "millie", "taylor", "steve", "dusty-bun"],
       "attendance": {
         "6": {
           "8": [
@@ -150,6 +176,7 @@
       "name": "My Session",
       "owner": "ericka",
       "when": "Tue, Thu",
+      "members": ["millie", "taylor", "steve", "dusty-bun"],
       "attendance": {
         "6": {
           "31": [
