@@ -1,0 +1,197 @@
+{
+  "users": [
+    {
+      "id": "ericka",
+      "fullName": "Ericka Tabo",
+      "workspaces": [1, 2]
+    }
+  ],
+  "workspaces": [
+    {
+      "id": 1,
+      "name": "Exist Software Labs, Inc.",
+      "owner": "exist",
+      "when": "Mon-Fri",
+      "attendance": {
+        "6": {
+          "8": [
+            {
+              "user": "millie",
+              "time": ["9:05 AM - 10:30 AM"],
+              "duration": "1hr 25mins"
+            },
+            {
+              "user": "taylor",
+              "time": ["9:04 AM - 10:04 AM"],
+              "duration": "1hr"
+            },
+            {
+              "user": "steve",
+              "time": ["10:00 AM - 10:30 AM", "9:02 AM - 9:48 AM"],
+              "duration": "1hr 16mins"
+            },
+            {
+              "user": "dusty-bun",
+              "time": ["8:59 AM - 10:30 AM"],
+              "duration": "1hr 31mins"
+            },
+            { "user": "ericka", "time": ["8:50 AM"], "duration": "0mins" }
+          ],
+          "3": [
+            {
+              "user": "millie",
+              "time": ["9:05 AM - 10:30 AM"],
+              "duration": "1hr 25mins"
+            },
+            {
+              "user": "taylor",
+              "time": ["9:04 AM - 10:04 AM"],
+              "duration": "1hr"
+            },
+            {
+              "user": "steve",
+              "time": ["10:00 AM - 10:30 AM", "9:02 AM - 9:48 AM"],
+              "duration": "1hr 16mins"
+            },
+            {
+              "user": "dusty-bun",
+              "time": ["8:59 AM - 10:30 AM"],
+              "duration": "1hr 31mins"
+            },
+            {
+              "user": "ericka",
+              "time": ["10:46 AM - 11:00 AM", "8:59 AM - 10:30 AM"],
+              "duration": "1hr 45mins"
+            }
+          ],
+          "2": [
+            {
+              "user": "millie",
+              "time": ["9:05 AM - 10:30 AM"],
+              "duration": "1hr 25mins"
+            },
+            {
+              "user": "taylor",
+              "time": ["9:04 AM - 10:04 AM"],
+              "duration": "1hr"
+            },
+            {
+              "user": "steve",
+              "time": ["10:00 AM - 10:30 AM", "9:02 AM - 9:48 AM"],
+              "duration": "1hr 16mins"
+            },
+            {
+              "user": "dusty-bun",
+              "time": ["8:59 AM - 10:30 AM"],
+              "duration": "1hr 31mins"
+            },
+            {
+              "user": "ericka",
+              "time": ["10:00 AM - 10:30 AM", "9:02 AM - 9:48 AM"],
+              "duration": "1hr 16mins"
+            }
+          ],
+          "1": [
+            {
+              "user": "millie",
+              "time": ["9:05 AM - 10:30 AM"],
+              "duration": "1hr 25mins"
+            },
+            {
+              "user": "taylor",
+              "time": ["9:04 AM - 10:04 AM"],
+              "duration": "1hr"
+            },
+            {
+              "user": "steve",
+              "time": ["10:00 AM - 10:30 AM", "9:02 AM - 9:48 AM"],
+              "duration": "1hr 16mins"
+            },
+            {
+              "user": "dusty-bun",
+              "time": ["8:59 AM - 10:30 AM"],
+              "duration": "1hr 31mins"
+            }
+          ]
+        },
+        "5": {
+          "3": [
+            {
+              "user": "millie",
+              "time": ["9:05 AM - 10:30 AM"],
+              "duration": "1hr 25mins"
+            },
+            {
+              "user": "taylor",
+              "time": ["9:04 AM - 10:04 AM"],
+              "duration": "1hr"
+            },
+            {
+              "user": "steve",
+              "time": ["10:00 AM - 10:30 AM", "9:02 AM - 9:48 AM"],
+              "duration": "1hr 16mins"
+            },
+            {
+              "user": "dusty-bun",
+              "time": ["8:59 AM - 10:30 AM"],
+              "duration": "1hr 31mins"
+            },
+            {
+              "user": "ericka",
+              "time": ["10:00 AM - 10:30 AM", "9:02 AM - 9:48 AM"],
+              "duration": "1hr 16mins"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "My Session",
+      "owner": "ericka",
+      "when": "Tue, Thu",
+      "attendance": {
+        "6": {
+          "31": [
+            {
+              "user": "millie",
+              "time": ["9:05 AM - 10:30 AM"],
+              "duration": "1hr 25mins"
+            },
+            {
+              "user": "taylor",
+              "time": ["9:04 AM - 10:04 AM"],
+              "duration": "1hr"
+            },
+            {
+              "user": "steve",
+              "time": ["10:00 AM - 10:30 AM", "9:02 AM - 9:48 AM"],
+              "duration": "1hr 16mins"
+            },
+            {
+              "user": "dusty-bun",
+              "time": ["8:59 AM - 10:30 AM"],
+              "duration": "1hr 31mins"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "calendar": [
+    {
+      "id": "ericka",
+      "events": {
+        "7": {
+          "7": ["Event (@Somewhere)"],
+          "31": ["Yay"]
+        },
+        "6": {
+          "8": ["Sesh (10AM @ Exist Software Labs, Inc.)"],
+          "18": ["Birthday"],
+          "19": ["Gala", "Swimming"]
+        }
+      }
+    }
+  ]
+}
