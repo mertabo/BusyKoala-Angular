@@ -22,6 +22,6 @@ import { WorkspacesListComponent } from './workspaces-list/workspaces-list.compo
     WorkspacesComponent,
     WorkspacesListComponent,
   ],
-  imports: [CommonModule, CalendarModule, WorkspacesRoutingModule],
+  imports: [CommonModule, WorkspacesRoutingModule, CalendarModule],
 })
 export class WorkspacesModule {}
