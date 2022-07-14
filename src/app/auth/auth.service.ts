@@ -27,6 +27,7 @@ export class AuthService {
     return this.isLoggedIn;
   }
 
+  // https://www.quora.com/How-do-I-update-a-username-on-Navbar-after-a-user-login-without-refreshing-the-page-with-Angular
   getEmitter() {
     return this.fireIsLoggedIn;
   }

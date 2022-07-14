@@ -1,9 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+
+/*
+  ===============
+  CSS RESET
+  ===============
+*/
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
 */
-
 html,
 body,
 div,
@@ -128,7 +133,53 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+/*
+  ===============
+  CUSTOM CSS
+  ===============
+*/
 body {
   font: 400 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial,
     sans-serif;
+}
+.content {
+  padding-top: 79px;
+}
+h1,
+h2 {
+  font-weight: 900 !important;
+}
+.navbar-brand {
+  font-size: 32px;
+  font-weight: 900;
+}
+a {
+  color: #58abdd;
+  text-decoration: none;
+}
+a:hover,
+a.active {
+  color: #488fbb;
+}
+a.active {
+  font-weight: 900;
+}
+
+/*
+  ===============
+  BUTTONS
+  ===============
+*/
+.btn-cta {
+  color: white;
+  border: 1px solid #58abdd;
+  background-color: #58abdd;
+  text-transform: uppercase;
+  padding: 0.8em 1.5em;
+}
+.btn-cta:hover {
+  color: white;
+  border: 1px solid #488fbb;
+  background-color: #488fbb;
 }

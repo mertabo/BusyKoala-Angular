@@ -1,16 +1,10 @@
-.navbar-brand {
-  font-size: 32px;
-  font-weight: 900;
-}
-a {
+.nav-link {
   color: #58abdd;
+  text-decoration: none;
 }
-a:hover,
-a.active {
+.nav-link:hover,
+.nav-link.active {
   color: #488fbb;
-}
-a.active {
-  font-weight: 900;
 }
 .dropdown a.active {
   background-color: #488fbb;

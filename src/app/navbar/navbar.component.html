@@ -1,12 +1,45 @@
-<!-- Navbar for logged in users -->
-<nav *ngIf="isLoggedIn" class="navbar navbar-expand-lg border-bottom">
+<!-- Navbar for guests -->
+<nav
+  *ngIf="!isLoggedIn"
+  class="navbar navbar-expand border-bottom fixed-top bg-white"
+>
   <div class="container-fluid m-2">
-    <a
-      class="navbar-brand"
-      routerLink="/"
-      routerLinkActive="active"
-      ariaCurrentWhenActive="page"
-    >
+    <a class="navbar-brand" routerLink="/" ariaCurrentWhenActive="page">
+      BusyKoala
+    </a>
+
+    <ul class="navbar-nav mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/calendar"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+        >
+          Calendar
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/login"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+        >
+          Login
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Navbar for logged in users -->
+<nav
+  *ngIf="isLoggedIn"
+  class="navbar navbar-expand-lg border-bottom fixed-top bg-white"
+>
+  <div class="container-fluid m-2">
+    <a class="navbar-brand" routerLink="/" ariaCurrentWhenActive="page">
       BusyKoala
     </a>
 
@@ -78,42 +111,5 @@
         </li>
       </ul>
     </div>
-  </div>
-</nav>
-
-<!-- Navbar for guests -->
-<nav *ngIf="!isLoggedIn" class="navbar navbar-expand border-bottom">
-  <div class="container-fluid m-2">
-    <a
-      class="navbar-brand"
-      routerLink="/"
-      routerLinkActive="active"
-      ariaCurrentWhenActive="page"
-    >
-      BusyKoala
-    </a>
-
-    <ul class="navbar-nav mb-2 mb-lg-0">
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/calendar"
-          routerLinkActive="active"
-          ariaCurrentWhenActive="page"
-        >
-          Calendar
-        </a>
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/login"
-          routerLinkActive="active"
-          ariaCurrentWhenActive="page"
-        >
-          Login
-        </a>
-      </li>
-    </ul>
   </div>
 </nav>
