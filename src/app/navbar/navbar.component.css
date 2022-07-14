@@ -1,0 +1,29 @@
+.navbar-brand {
+  font-size: 32px;
+  font-weight: 900;
+}
+a {
+  color: #58abdd;
+}
+a:hover,
+a.active {
+  color: #488fbb;
+}
+a.active {
+  font-weight: 900;
+}
+.dropdown a.active {
+  background-color: #488fbb;
+  color: white;
+}
+[data-initials]:before {
+  background: #099bdd;
+  color: white;
+  content: attr(data-initials);
+  display: inline-block;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+}

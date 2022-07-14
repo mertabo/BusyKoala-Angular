@@ -1,15 +1,142 @@
-<a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page"
-  >BusyKoala</a
->
 <a
   routerLink="/workspaces"
   routerLinkActive="active"
   ariaCurrentWhenActive="page"
-  >Workspaces</a
 >
-<a routerLink="/calendar" routerLinkActive="active" ariaCurrentWhenActive="page"
-  >Calendar</a
+  Workspaces
+</a>
+<a
+  routerLink="/calendar"
+  routerLinkActive="active"
+  ariaCurrentWhenActive="page"
 >
-<a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page"
-  >Login</a
+  Calendar
+</a>
+<!-- Navbar for logged in users
+
+<a
+  class="nav-link"
+  routerLink="/workspaces"
+  routerLinkActive="active"
+  ariaCurrentWhenActive="page"
 >
+  Workspaces
+</a>
+<nav *ngIf="isLoggedIn" class="navbar navbar-expand-lg border-bottom">
+  <div class="container-fluid m-2">
+    <a
+      class="navbar-brand"
+      routerLink="/"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+    >
+      BusyKoala
+    </a>
+
+    <div class="d-none d-lg-block">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/workspaces"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+          >
+            Workspaces
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/calendar"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+          >
+            Calendar
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="dropdown">
+      <button
+        class="btn user-icon p-0"
+        type="button"
+        id="dropdownMenuButton"
+        data-bs-toggle="dropdown"
+        data-initials="ET"
+        aria-expanded="false"
+      ></button>
+      <ul
+        class="dropdown-menu dropdown-menu-end"
+        aria-labelledby="dropdownMenuButton"
+      >
+        <li class="d-lg-none">
+          <ul>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="/workspaces"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+              >
+                Workspaces
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="/calendar"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+              >
+                Calendar
+              </a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+          </ul>
+        </li>
+        <li>
+          <a class="dropdown-item text-danger" href="/">Log out</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+Navbar for guests
+<nav *ngIf="!isLoggedIn" class="navbar navbar-expand border-bottom">
+  <div class="container-fluid m-2">
+    <a
+      class="navbar-brand"
+      routerLink="/"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+    >
+      BusyKoala
+    </a>
+
+    <ul class="navbar-nav mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/calendar"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+        >
+          Calendar
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/login"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+        >
+          Login
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav> -->
