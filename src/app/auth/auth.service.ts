@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 import { tap, delay } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { tap, delay } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
+  @Output() fireIsLoggedIn = new EventEmitter();
   isLoggedIn = false;
 
   // store the URL so we can redirect after logging in
@@ -20,8 +21,13 @@ export class AuthService {
     );
   }
 
-  logout(): void {
+  logout(): boolean {
     window.sessionStorage.clear();
     this.isLoggedIn = false;
+    return this.isLoggedIn;
+  }
+
+  getEmitter() {
+    return this.fireIsLoggedIn;
   }
 }

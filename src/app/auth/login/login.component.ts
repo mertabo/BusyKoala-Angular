@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
         };
 
         // Redirect the user
+        this.authService.fireIsLoggedIn.emit();
         this.router.navigate([redirectUrl], navigationExtras);
       }
     });
