@@ -5,7 +5,7 @@ import { WorkspacesComponent } from './workspaces/workspaces.component';
 
 const routes: Routes = [
   {
-    path: 'workspaces',
+    path: '',
     component: WorkspacesComponent,
     canActivate: [AuthGuard],
   },

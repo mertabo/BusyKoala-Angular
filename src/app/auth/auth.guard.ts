@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import {
   CanActivate,
+  CanLoad,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   Router,
-  UrlTree,
+  Route,
 } from '@angular/router';
 
 import { AuthService } from './auth.service';
@@ -12,19 +13,25 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanLoad {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): true | UrlTree {
+  ): boolean {
     const url: string = state.url;
 
     return this.checkLogin(url);
   }
 
-  checkLogin(url: string): true | UrlTree {
+  canLoad(route: Route): boolean {
+    const url = `/${route.path}`;
+
+    return this.checkLogin(url);
+  }
+
+  checkLogin(url: string): boolean {
     if (this.authService.isLoggedIn) {
       return true;
     }
@@ -33,6 +40,7 @@ export class AuthGuard implements CanActivate {
     this.authService.redirectUrl = url;
 
     // Redirect to the login page
-    return this.router.parseUrl('/login');
+    this.router.navigate(['/login']);
+    return false;
   }
 }

@@ -15,9 +15,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login().subscribe(() => {
       if (this.authService.isLoggedIn) {
-        // Usually you would use the redirect URL from the auth service.
-        // However to keep the example simple, we will always redirect to `/admin`.
-        const redirectUrl = '/workspaces';
+        const redirectUrl = this.authService.redirectUrl;
 
         // Set our navigation extras object
         // that passes on our global query params and fragment

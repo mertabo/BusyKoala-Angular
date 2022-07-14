@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { WorkspacesRoutingModule } from './workspaces-routing.module';
-import { MonthsModule } from '../months/months.module';
+import { CalendarModule } from '../calendar/calendar.module';
 
 import { AttendeesMonthComponent } from './attendees-month/attendees-month.component';
 import { AttendeesTodayComponent } from './attendees-today/attendees-today.component';
@@ -22,6 +22,6 @@ import { WorkspacesListComponent } from './workspaces-list/workspaces-list.compo
     WorkspacesComponent,
     WorkspacesListComponent,
   ],
-  imports: [CommonModule, MonthsModule, WorkspacesRoutingModule],
+  imports: [CommonModule, CalendarModule, WorkspacesRoutingModule],
 })
 export class WorkspacesModule {}
