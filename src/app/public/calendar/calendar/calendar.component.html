@@ -1,19 +1,41 @@
 <div class="body-content">
   <div class="d-flex full-height">
+    <!-- 
+      Toggler for create event form offcanvas
+      for screen sizes below 768px  
+    -->
     <aside class="d-md-none">
-      <button class="btn w-100 h-100 rounded-0">></button>
+      <button
+        class="btn w-100 h-100 rounded-0"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offCanvasCreateEventForm"
+      >
+        <i class="fa fa-angle-right"></i>
+      </button>
     </aside>
 
-    <aside class="container-content d-none d-md-inline">
-      <h3 class="fs-3">Create event</h3>
-      <div class="scrollable-container" id="create-event-form-container">
-        <div class="scrollable-content">
-          <app-create-event-form></app-create-event-form>
-        </div>
+    <!-- 
+      Create event form offcanvas for screen sizes below 768px  
+    -->
+    <aside
+      class="offcanvas offcanvas-start d-md-none"
+      tabindex="-1"
+      id="offCanvasCreateEventForm"
+    >
+      <div class="offcanvas-body">
+        <app-create-event-form></app-create-event-form>
       </div>
-      <button class="btn btn-cta w-100">Add event</button>
     </aside>
 
+    <!-- 
+      Create event form sidebar
+      for screen sizes greater than 767px
+    -->
+    <aside class="container-content d-none d-md-inline">
+      <app-create-event-form></app-create-event-form>
+    </aside>
+
+    <!-- Calendar -->
     <section class="container-content">
       <p>months</p>
       <div class="scrollable-container">

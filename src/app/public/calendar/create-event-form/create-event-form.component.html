@@ -1,1 +1,64 @@
-<p>create-event-form works!</p>
+<!-- Title -->
+<div class="d-flex justify-content-between">
+  <h3 class="fs-3">Create an event</h3>
+  <button
+    type="button"
+    class="btn-close text-reset p-0 d-md-none"
+    data-bs-dismiss="offcanvas"
+    aria-label="Close"
+  ></button>
+</div>
+
+<!-- Form -->
+<div class="scrollable-container" id="create-event-form-container">
+  <div class="scrollable-content">
+    <form nz-form [formGroup]="createEventForm" [nzLayout]="'vertical'">
+      <!-- Title field -->
+      <nz-form-item>
+        <nz-form-label nzRequired nzFor="title">Title</nz-form-label>
+        <nz-form-control nzErrorTip="Please input the title!">
+          <input
+            nz-input
+            formControlName="title"
+            placeholder="Input title"
+            (focusout)="handleFocusOut('title')"
+          />
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- Date field -->
+      <nz-form-item>
+        <nz-form-label nzRequired nzFor="date">Date</nz-form-label>
+        <nz-form-control nzErrorTip="Please input the date!">
+          <nz-date-picker
+            formControlName="date"
+            (focusout)="handleFocusOut('date')"
+          ></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- Time field -->
+      <nz-form-item>
+        <nz-form-label nzFor="time">Time</nz-form-label>
+        <nz-form-control>
+          <nz-time-picker formControlName="time"></nz-time-picker>
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- Workplace field -->
+      <nz-form-item>
+        <nz-form-label nzFor="workplace">Workplace</nz-form-label>
+        <nz-form-control>
+          <input
+            nz-input
+            formControlName="workplace"
+            placeholder="Input workplace"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+</div>
+
+<!-- Submit button -->
+<button class="btn btn-cta w-100" (click)="submitForm()">Add event</button>
