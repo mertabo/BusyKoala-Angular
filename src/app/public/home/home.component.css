@@ -4,20 +4,8 @@ section {
 .desc {
   background-color: #f5f5f5;
 }
-footer {
-  padding: 50px 0;
-}
 .fa {
   color: #58abdd;
   font-size: 60px;
   padding: 25px 0;
-}
-.fa-brands {
-  font-size: 25px;
-  margin: 0 10px;
-}
-@media (min-width: 768px) {
-  .fa-brands:last-child {
-    margin-right: 0;
-  }
 }
