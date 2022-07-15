@@ -144,11 +144,14 @@ body {
     sans-serif;
 }
 .body-content {
-  margin-top: 71px;
+  padding-top: 71px;
 }
 h1,
 h2 {
   font-weight: 900 !important;
+}
+h5 {
+  font-weight: 700;
 }
 .navbar-brand {
   font-size: 32px;
