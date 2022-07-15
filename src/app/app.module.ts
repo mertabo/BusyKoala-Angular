@@ -5,13 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { Router } from '@angular/router';
+import { PublicModule } from './public/public.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NavbarComponent],
-  imports: [BrowserModule, AuthModule, AppRoutingModule],
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    AuthModule,
+    AppRoutingModule,
+    PublicModule,
+    SharedModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

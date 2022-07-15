@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { WorkspacesRoutingModule } from './workspaces-routing.module';
-import { CalendarModule } from '../calendar/calendar.module';
+import { CalendarModule } from '../../public/calendar/calendar.module';
 
 import { AttendeesMonthComponent } from './attendees-month/attendees-month.component';
 import { AttendeesTodayComponent } from './attendees-today/attendees-today.component';
