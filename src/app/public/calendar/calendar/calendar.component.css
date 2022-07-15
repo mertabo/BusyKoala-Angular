@@ -1,5 +1,11 @@
 aside {
   width: 300px;
+  border-right: 1px solid #dee2e6;
+}
+@media (max-width: 767px) {
+  aside {
+    width: auto;
+  }
 }
 section {
   width: calc(100vw - 300px);
