@@ -1,0 +1,24 @@
+aside {
+  width: 300px;
+}
+section {
+  width: calc(100vw - 300px);
+}
+.full-height {
+  height: calc(100vh - 71px);
+}
+.container-content {
+  padding: 30px 20px;
+}
+.scrollable-container {
+  height: 100%;
+  padding: 20px 0;
+}
+#create-event-form-container {
+  height: calc(100% - 20px - 24px - 30px);
+}
+.scrollable-content {
+  height: 100%;
+  overflow-y: auto;
+  word-wrap: break-word;
+}

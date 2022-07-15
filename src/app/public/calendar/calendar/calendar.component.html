@@ -1,5 +1,22 @@
-<div class="content">
-  <app-create-event-form></app-create-event-form>
-  <p>calendar works!</p>
-  <app-months></app-months>
+<div class="body-content">
+  <div class="d-flex full-height">
+    <aside class="container-content border-end">
+      <h3 class="fs-3">Create event</h3>
+      <div class="scrollable-container" id="create-event-form-container">
+        <div class="scrollable-content">
+          <app-create-event-form></app-create-event-form>
+        </div>
+      </div>
+      <button class="btn btn-cta w-100">Add event</button>
+    </aside>
+
+    <section class="container-content">
+      <p>months</p>
+      <div class="scrollable-container">
+        <div class="scrollable-content">
+          <p>calendar</p>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>

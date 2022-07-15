@@ -143,8 +143,8 @@ body {
   font: 400 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial,
     sans-serif;
 }
-.content {
-  padding-top: 79px;
+.body-content {
+  margin-top: 71px;
 }
 h1,
 h2 {
