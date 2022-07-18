@@ -14,10 +14,9 @@ import { CalendarRoutingModule } from './calendar-routing.module';
 
 import { CalendarComponent } from './calendar/calendar.component';
 import { CreateEventFormComponent } from './create-event-form/create-event-form.component';
-import { MonthsComponent } from './months/months.component';
 
 @NgModule({
-  declarations: [CalendarComponent, CreateEventFormComponent, MonthsComponent],
+  declarations: [CalendarComponent, CreateEventFormComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -31,6 +30,6 @@ import { MonthsComponent } from './months/months.component';
     NzBadgeModule,
     NzPopoverModule,
   ],
-  exports: [MonthsComponent],
+  exports: [],
 })
 export class CalendarModule {}
