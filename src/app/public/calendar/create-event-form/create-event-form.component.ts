@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  FormControl,
-  AbstractControl,
-} from '@angular/forms';
+import { formatDate } from '@angular/common';
+import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-create-event-form',
@@ -44,15 +39,19 @@ export class CreateEventFormComponent implements OnInit {
         newEvent = `${newEvent} (`;
 
         if (timeControl.value) {
-          newEvent = `${newEvent}${timeControl.value}`;
+          newEvent = `${newEvent}${formatDate(
+            timeControl.value,
+            'h:mm a',
+            'en-US'
+          )}`;
 
           if (workplaceControl.value) {
-            newEvent = `${newEvent} @ `;
+            newEvent = `${newEvent} `;
           }
         }
 
         if (workplaceControl.value) {
-          newEvent = `${newEvent}${workplaceControl.value}`;
+          newEvent = `${newEvent}@ ${workplaceControl.value}`;
         }
 
         newEvent = `${newEvent})`;
