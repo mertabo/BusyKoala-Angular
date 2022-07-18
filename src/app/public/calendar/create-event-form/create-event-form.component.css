@@ -5,3 +5,7 @@ nz-time-picker {
 #create-event-form-container {
   height: calc(100% - 20px - 24px - 30px);
 }
+/* https://stackoverflow.com/questions/42892584/angular-material-md-datepicker-inside-bootstrap-modal */
+::ng-deep .cdk-overlay-container {
+  z-index: 1200 !important;
+}

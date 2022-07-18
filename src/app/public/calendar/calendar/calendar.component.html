@@ -23,7 +23,9 @@
       id="offCanvasCreateEventForm"
     >
       <div class="offcanvas-body">
-        <app-create-event-form></app-create-event-form>
+        <app-create-event-form
+          (submitted)="onSubmitted($event)"
+        ></app-create-event-form>
       </div>
     </aside>
 
