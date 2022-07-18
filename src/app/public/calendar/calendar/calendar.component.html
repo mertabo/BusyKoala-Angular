@@ -36,11 +36,34 @@
     </aside>
 
     <!-- Calendar -->
-    <section class="container-content">
-      <p>months</p>
+    <section id="calendar">
       <div class="scrollable-container">
         <div class="scrollable-content">
-          <p>calendar</p>
+          <nz-calendar
+            [(ngModel)]="selectedDate"
+            (nzSelectChange)="selectChange($event)"
+          >
+            <ul *nzDateCell="let date" class="events">
+              <ng-container [ngSwitch]="date.getDate()">
+                <ng-container *ngFor="let eventDate of events | keyvalue">
+                  <ng-container
+                    *ngIf="selectedDate.getMonth() === date.getMonth()"
+                  >
+                    <ng-container *ngSwitchCase="eventDate.key">
+                      <li
+                        nz-popover
+                        *ngFor="let event of eventDate.value"
+                        [nzPopoverTitle]="formatEventDate(date)"
+                        [nzPopoverContent]="event"
+                      >
+                        <nz-badge nzStatus="cyan" [nzText]="event"></nz-badge>
+                      </li>
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </ul>
+          </nz-calendar>
         </div>
       </div>
     </section>

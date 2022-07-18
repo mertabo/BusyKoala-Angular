@@ -209,14 +209,16 @@
     {
       "id": "ericka",
       "events": {
-        "7": {
-          "7": ["Event (@Somewhere)"],
-          "31": ["Yay"]
-        },
-        "6": {
-          "8": ["Sesh (10AM @ Exist Software Labs, Inc.)"],
-          "18": ["Birthday"],
-          "19": ["Gala", "Swimming"]
+        "2022": {
+          "7": {
+            "7": ["Event (@Somewhere)"],
+            "31": ["Yay"]
+          },
+          "6": {
+            "8": ["Sesh (10AM @ Exist Software Labs, Inc.)"],
+            "18": ["Birthday"],
+            "19": ["Gala", "Swimming"]
+          }
         }
       }
     }
