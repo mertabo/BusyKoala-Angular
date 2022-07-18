@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
@@ -8,6 +8,8 @@ import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
   styleUrls: ['./create-event-form.component.css'],
 })
 export class CreateEventFormComponent implements OnInit {
+  @Output() submitted = new EventEmitter<any>();
+
   createEventForm = this.fb.group({
     title: [null, Validators.required],
     date: [null, Validators.required],
@@ -57,7 +59,8 @@ export class CreateEventFormComponent implements OnInit {
         newEvent = `${newEvent})`;
       }
 
-      console.log(newEvent);
+      this.submitted.emit({ date: dateControl.value, event: newEvent });
+      this.createEventForm.reset();
     } else {
       if (titleControl.invalid) this.markAsInvalid(titleControl);
       if (dateControl.invalid) this.markAsInvalid(dateControl);

@@ -48,6 +48,32 @@ export class CalendarComponent implements OnInit {
     }
   }
 
+  onSubmitted(eventData: any): void {
+    const newEventDate = eventData.date;
+    const newEvent = eventData.event;
+
+    if (
+      this.selectedDate.getFullYear() === newEventDate.getFullYear() &&
+      this.selectedDate.getMonth() === newEventDate.getMonth()
+    ) {
+      // check if there are existing events in selected date
+      let existingDate = Object.entries(this.events).find(([key, value]) => {
+        if (key == newEventDate.getDate()) return value;
+      })?.[1] as Array<string>;
+
+      this.calendarService.addEvent(newEvent).subscribe((event: any) => {
+        // add new event
+        if (existingDate) existingDate.push(newEvent);
+        else {
+          this.events = {
+            ...this.events,
+            [newEventDate.getDate()]: [event],
+          };
+        }
+      });
+    }
+  }
+
   constructor(private calendarService: CalendarService) {}
 
   ngOnInit(): void {

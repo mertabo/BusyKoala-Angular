@@ -32,7 +32,9 @@
       for screen sizes greater than 767px
     -->
     <aside class="container-content d-none d-md-inline">
-      <app-create-event-form></app-create-event-form>
+      <app-create-event-form
+        (submitted)="onSubmitted($event)"
+      ></app-create-event-form>
     </aside>
 
     <!-- Calendar -->

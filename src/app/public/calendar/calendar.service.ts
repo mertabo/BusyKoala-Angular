@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CalendarService {
   calendarUrl = 'http://localhost:3000/calendar/ericka';
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    }),
+  };
 
   getCalendar(): Observable<any> {
     return this.http
@@ -15,6 +20,10 @@ export class CalendarService {
       .pipe(
         catchError(this.handleError<any>('getCalendar', { id: '', events: {} }))
       );
+  }
+
+  addEvent(event: any): Observable<any> {
+    return of(event).pipe(delay(1000));
   }
 
   /**
