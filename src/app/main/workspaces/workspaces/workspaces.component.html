@@ -1,4 +1,43 @@
-<p>workspaces works!</p>
-<app-workspaces-list></app-workspaces-list>
-<app-other-workspace></app-other-workspace>
-<app-own-workspace></app-own-workspace>
+<div class="body-content">
+  <div class="d-flex full-height">
+    <!-- 
+      Toggler for workspaces list offcanvas
+      for screen sizes below 992px  
+    -->
+    <aside class="d-lg-none">
+      <button
+        class="btn w-100 h-100 rounded-0"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offCanvasCreateEventForm"
+      >
+        <i class="fa fa-angle-right"></i>
+      </button>
+    </aside>
+
+    <!-- 
+      Workspaces list offcanvas for screen sizes below 992px  
+    -->
+    <aside
+      class="offcanvas offcanvas-start d-lg-none"
+      tabindex="-1"
+      id="offCanvasCreateEventForm"
+    >
+      <div class="offcanvas-body">
+        <app-workspaces-list></app-workspaces-list>
+      </div>
+    </aside>
+
+    <!-- 
+      Workspaces list sidebar
+      for screen sizes greater than 991px
+    -->
+    <aside class="container-content d-none d-lg-inline">
+      <app-workspaces-list></app-workspaces-list>
+    </aside>
+
+    <!-- Workspace information -->
+    <section class="info-container-wsc container-content">
+      <app-own-workspace></app-own-workspace>
+    </section>
+  </div>
+</div>

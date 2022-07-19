@@ -1,0 +1,15 @@
+#workspaces-container {
+  height: calc(100% - 20px - 40px - 30px);
+}
+button .card {
+  border: none;
+}
+button .card.active {
+  background-color: #f5f5f5;
+}
+button .card:hover {
+  background-color: #f0f0f0;
+}
+button.m-1 {
+  width: calc(100% - 8px);
+}

@@ -1,1 +1,8 @@
-<p>attendees-today works!</p>
+<nz-card nzHoverable [nzTitle]="titleTemplate" class="text-secondary">
+  <p>Duration:</p>
+  <p>Time in - Time out:</p>
+</nz-card>
+
+<ng-template #titleTemplate>
+  <h6>Name</h6>
+</ng-template>

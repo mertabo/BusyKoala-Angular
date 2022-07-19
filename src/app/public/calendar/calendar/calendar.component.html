@@ -2,9 +2,9 @@
   <div class="d-flex full-height">
     <!-- 
       Toggler for create event form offcanvas
-      for screen sizes below 768px  
+      for screen sizes below 992px  
     -->
-    <aside class="d-md-none">
+    <aside class="d-lg-none">
       <button
         class="btn w-100 h-100 rounded-0"
         data-bs-toggle="offcanvas"
@@ -15,10 +15,10 @@
     </aside>
 
     <!-- 
-      Create event form offcanvas for screen sizes below 768px  
+      Create event form offcanvas for screen sizes below 992px  
     -->
     <aside
-      class="offcanvas offcanvas-start d-md-none"
+      class="offcanvas offcanvas-start d-lg-none"
       tabindex="-1"
       id="offCanvasCreateEventForm"
     >
@@ -31,16 +31,16 @@
 
     <!-- 
       Create event form sidebar
-      for screen sizes greater than 767px
+      for screen sizes greater than 991px
     -->
-    <aside class="container-content d-none d-md-inline">
+    <aside class="container-content d-none d-lg-inline">
       <app-create-event-form
         (submitted)="onSubmitted($event)"
       ></app-create-event-form>
     </aside>
 
     <!-- Calendar -->
-    <section id="calendar">
+    <section id="calendar" class="info-container-wsc">
       <div class="scrollable-container">
         <div class="scrollable-content">
           <nz-calendar

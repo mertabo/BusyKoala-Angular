@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+
 import { WorkspacesRoutingModule } from './workspaces-routing.module';
 
 import { AttendeesMonthComponent } from './attendees-month/attendees-month.component';
@@ -21,6 +25,12 @@ import { WorkspacesListComponent } from './workspaces-list/workspaces-list.compo
     WorkspacesComponent,
     WorkspacesListComponent,
   ],
-  imports: [CommonModule, WorkspacesRoutingModule],
+  imports: [
+    CommonModule,
+    WorkspacesRoutingModule,
+    NzDatePickerModule,
+    NzButtonModule,
+    NzCardModule,
+  ],
 })
 export class WorkspacesModule {}
