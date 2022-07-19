@@ -37,7 +37,8 @@
 
     <!-- Workspace information -->
     <section class="info-container-wsc container-content">
-      <app-own-workspace></app-own-workspace>
+      <app-own-workspace *ngIf="false"></app-own-workspace>
+      <app-other-workspace *ngIf="true"></app-other-workspace>
     </section>
   </div>
 </div>

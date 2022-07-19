@@ -1,9 +1,17 @@
 <!-- Header -->
-<nz-button-group class="me-2">
-  <button nz-button>Today</button>
-  <button nz-button>Month</button>
-</nz-button-group>
-<nz-date-picker nzMode="month"></nz-date-picker>
+<div class="button-group d-flex justify-content-between">
+  <div>
+    <nz-button-group class="me-2">
+      <button nz-button>Today</button>
+      <button nz-button>Month</button>
+    </nz-button-group>
+    <nz-date-picker nzMode="month"></nz-date-picker>
+  </div>
+  <div>
+    <button nz-button nzType="text" class="me-2">Invite link</button>
+    <button nz-button nzType="text">Start session</button>
+  </div>
+</div>
 
 <!-- Attendees today -->
 <div *ngIf="false" class="scrollable-container">
