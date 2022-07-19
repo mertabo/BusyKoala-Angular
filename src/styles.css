@@ -212,6 +212,16 @@ a.active {
   border: 1px solid #488fbb;
   background-color: #488fbb;
 }
+.btn-text {
+  color: #58abdd;
+  border: 0;
+  text-transform: uppercase;
+  padding: 0.8em 1.5em;
+}
+.btn-text:hover {
+  color: #58abdd;
+  background-color: #e9f7ff;
+}
 /*
   ===============
   INSIDE APP
