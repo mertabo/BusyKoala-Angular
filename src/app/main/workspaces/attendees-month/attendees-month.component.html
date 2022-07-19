@@ -1,1 +1,41 @@
-<p>attendees-month works!</p>
+<nz-card nzHoverable [nzTitle]="titleTemplate" class="mb-3">
+  <p>
+    <span class="text-secondary">Number of attendees: </span
+    ><b class="fw-bold">21</b>
+  </p>
+  <table class="table table-hover mt-3">
+    <thead>
+      <tr>
+        <th scope="col-4">Name</th>
+        <th scope="col-4">Time in - Time out</th>
+        <th scope="col-4">Duration</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <td>Larry the Birdddddddddddddddddddddddddd</td>
+        <td>@twitter</td>
+        <td>@twitter</td>
+      </tr>
+
+      <tr>
+        <td colspan="3" class="text-center text-secondary">See all...</td>
+      </tr>
+    </tbody>
+  </table>
+</nz-card>
+
+<ng-template #titleTemplate>
+  <h6>Date</h6>
+</ng-template>

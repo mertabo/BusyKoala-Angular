@@ -1,0 +1,18 @@
+h6 {
+  font-weight: 700;
+  color: #58abdd;
+}
+table {
+  table-layout: fixed;
+}
+th {
+  font-weight: 700;
+}
+tr {
+  border-bottom: 1px solid #dee2e6;
+}
+p,
+td {
+  font-size: 16px;
+  color: #363636;
+}
