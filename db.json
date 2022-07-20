@@ -33,7 +33,7 @@
   ],
   "workspaces": [
     {
-      "id": 1,
+      "id": "1",
       "ongoing": "true",
       "name": "Exist Software Labs, Inc.",
       "owner": "exist",
@@ -173,7 +173,7 @@
       }
     },
     {
-      "id": 2,
+      "id": "2",
       "ongoing": "false",
       "name": "My Session",
       "owner": "ericka",

@@ -10,11 +10,11 @@
       *ngFor="let workspace of workspaces"
       class="btn border-0 p-0 m-1"
       [routerLink]="'/workspaces/' + workspace.id"
-      (click)="selectWorkspace(workspace)"
+      (click)="selectWorkspace(workspace.id)"
     >
       <div
         class="card text-start"
-        [class.active]="selectedWorkspace === workspace"
+        [class.active]="selectedWorkspaceID === workspace.id"
       >
         <div class="card-body">
           <h5 class="card-title">{{ workspace.name }}</h5>
