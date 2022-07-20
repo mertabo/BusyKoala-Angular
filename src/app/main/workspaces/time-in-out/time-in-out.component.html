@@ -2,7 +2,7 @@
   *ngIf="timeInOutData"
   nzHoverable
   [nzTitle]="titleTemplate"
-  [nzActions]="[actionTimeOut]"
+  [nzActions]="currentlyTimedIn ? [actionTimeOut] : []"
 >
   <p>
     <span class="text-secondary">Duration: </span
