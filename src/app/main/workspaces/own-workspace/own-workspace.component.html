@@ -2,8 +2,10 @@
 <div class="button-group d-flex justify-content-between">
   <div>
     <nz-button-group class="me-2">
-      <button nz-button>Today</button>
-      <button nz-button>Month</button>
+      <nz-radio-group [(ngModel)]="buttonView">
+        <label nz-radio-button nzValue="today">Today</label>
+        <label nz-radio-button nzValue="month">Month</label>
+      </nz-radio-group>
     </nz-button-group>
     <nz-date-picker nzMode="month"></nz-date-picker>
   </div>
@@ -14,7 +16,7 @@
 </div>
 
 <!-- Attendees today -->
-<div *ngIf="false" class="scrollable-container">
+<div *ngIf="buttonView === 'today'" class="scrollable-container">
   <div class="scrollable-content">
     <div class="container-fluid">
       <div class="row g-2 pt-2 pb-3">
@@ -30,7 +32,7 @@
 </div>
 
 <!-- Summary of attendees per month -->
-<div *ngIf="true" class="scrollable-container">
+<div *ngIf="buttonView === 'month'" class="scrollable-container">
   <div class="scrollable-content">
     <div class="p-2">
       <div *ngFor="let e of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">

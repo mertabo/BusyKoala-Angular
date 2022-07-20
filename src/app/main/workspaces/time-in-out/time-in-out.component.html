@@ -1,4 +1,4 @@
-<nz-card nzHoverable [nzTitle]="titleTemplate">
+<nz-card nzHoverable [nzTitle]="titleTemplate" [nzActions]="[actionTimeOut]">
   <p>
     <span class="text-secondary">Duration: </span><b class="fw-bold">32 mins</b>
   </p>
@@ -33,4 +33,7 @@
 
 <ng-template #titleTemplate>
   <h6>Date</h6>
+</ng-template>
+<ng-template #actionTimeOut>
+  <span>Time out</span>
 </ng-template>

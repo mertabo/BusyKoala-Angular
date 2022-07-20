@@ -6,11 +6,18 @@
 <!-- Workspaces -->
 <div class="scrollable-container" id="workspaces-container">
   <div class="scrollable-content">
-    <button class="btn border-0 p-0 m-1">
-      <div class="card text-start active">
+    <button
+      *ngFor="let workspace of workspaces"
+      class="btn border-0 p-0 m-1"
+      (click)="selectWorkspace(workspace)"
+    >
+      <div
+        class="card text-start"
+        [class.active]="selectedWorkspace === workspace"
+      >
         <div class="card-body">
-          <h5 class="card-title">Workspace title</h5>
-          <p class="card-subtitle mb-2 text-secondary">Workspace when</p>
+          <h5 class="card-title">{{ workspace.name }}</h5>
+          <p class="card-subtitle mb-2 text-secondary">{{ workspace.when }}</p>
         </div>
       </div>
     </button>
