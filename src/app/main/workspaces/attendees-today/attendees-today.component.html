@@ -1,11 +1,14 @@
-<nz-card nzHoverable [nzTitle]="titleTemplate">
+<nz-card *ngIf="attendee" nzHoverable [nzTitle]="titleTemplate">
   <p>
-    <span class="text-secondary">Duration: </span><b class="fw-bold">32 mins</b>
+    <span class="text-secondary">Duration: </span
+    ><b class="fw-bold">{{ attendee.duration }}</b>
   </p>
   <p class="text-secondary pt-3">Time in - Time out:</p>
-  <b class="fw-bold">12:00 AM - 12:00 AM</b>
+  <p *ngFor="let time of attendee.time">
+    <b class="fw-bold">{{ time }}</b>
+  </p>
 </nz-card>
 
 <ng-template #titleTemplate>
-  <h6>Name</h6>
+  <h6>{{ name }}</h6>
 </ng-template>
