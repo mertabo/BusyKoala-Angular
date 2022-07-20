@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { WorkspacesService } from '../workspaces.service';
 import { Workspace } from '../workspaces';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-workspaces-list',
@@ -10,21 +11,29 @@ import { Workspace } from '../workspaces';
 export class WorkspacesListComponent implements OnInit {
   workspaces: Workspace[] = [];
   selectedWorkspace?: Workspace;
-  @Output() newWorkspace = new EventEmitter<Workspace>();
 
   getWorkspaces(): void {
     this.workspacesService.getWorkspaces().subscribe((data: any) => {
       this.workspaces = data;
-      if (data) this.selectedWorkspace = data[0];
+
+      if (data) {
+        this.selectedWorkspace = data[0];
+        this.router.navigate([this.selectedWorkspace!.id], {
+          relativeTo: this.route,
+        });
+      }
     });
   }
 
   selectWorkspace(workspace: Workspace): void {
     this.selectedWorkspace = workspace;
-    this.newWorkspace.emit(workspace);
   }
 
-  constructor(private workspacesService: WorkspacesService) {}
+  constructor(
+    private workspacesService: WorkspacesService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.getWorkspaces();

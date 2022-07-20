@@ -16,6 +16,12 @@ export class WorkspacesService {
       .pipe(catchError(this.handleError<any>([])));
   }
 
+  getWorkspace(id: string): Observable<Workspace> {
+    return this.http
+      .get<any>(`${this.workspacesUrl}/${id}`)
+      .pipe(catchError(this.handleError<any>({})));
+  }
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.

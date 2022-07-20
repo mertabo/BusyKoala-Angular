@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -20,6 +21,7 @@ import { OtherWorkspaceComponent } from './other-workspace/other-workspace.compo
 import { OwnWorkspaceComponent } from './own-workspace/own-workspace.component';
 import { TimeInOutComponent } from './time-in-out/time-in-out.component';
 import { WorkspacesComponent } from './workspaces/workspaces.component';
+import { WorkspacesChildComponent } from './workspaces-child/workspaces-child.component';
 import { WorkspacesListComponent } from './workspaces-list/workspaces-list.component';
 
 @NgModule({
@@ -31,12 +33,14 @@ import { WorkspacesListComponent } from './workspaces-list/workspaces-list.compo
     OwnWorkspaceComponent,
     TimeInOutComponent,
     WorkspacesComponent,
+    WorkspacesChildComponent,
     WorkspacesListComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
     WorkspacesRoutingModule,
     NzDatePickerModule,
     NzButtonModule,

@@ -6,9 +6,10 @@
 <!-- Workspaces -->
 <div class="scrollable-container" id="workspaces-container">
   <div class="scrollable-content">
-    <button
+    <a
       *ngFor="let workspace of workspaces"
       class="btn border-0 p-0 m-1"
+      [routerLink]="'/workspaces/' + workspace.id"
       (click)="selectWorkspace(workspace)"
     >
       <div
@@ -20,7 +21,7 @@
           <p class="card-subtitle mb-2 text-secondary">{{ workspace.when }}</p>
         </div>
       </div>
-    </button>
+    </a>
   </div>
 </div>
 

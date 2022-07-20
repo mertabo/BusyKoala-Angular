@@ -32,9 +32,7 @@
       for screen sizes greater than 991px
     -->
     <aside class="container-content d-none d-lg-inline">
-      <app-workspaces-list
-        (newWorkspace)="selectWorkspace($event)"
-      ></app-workspaces-list>
+      <app-workspaces-list></app-workspaces-list>
     </aside>
 
     <!-- Add workspace modal toggled by app-workspaces-list -->
@@ -42,8 +40,7 @@
 
     <!-- Workspace information -->
     <section class="info-container-wsc container-content">
-      <app-own-workspace *ngIf="ownWorkspace"></app-own-workspace>
-      <app-other-workspace *ngIf="!ownWorkspace"></app-other-workspace>
+      <router-outlet></router-outlet>
     </section>
   </div>
 </div>
