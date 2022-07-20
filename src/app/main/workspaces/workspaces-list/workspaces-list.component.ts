@@ -65,7 +65,6 @@ export class WorkspacesListComponent implements OnInit, OnDestroy {
     this.getWorkspaces();
   }
 
-  // https://www.codingcatlady.net/2017/12/Unsubscribe-from-Navigation-Events.html
   ngOnDestroy() {
     this.routeSubscription.unsubscribe();
   }

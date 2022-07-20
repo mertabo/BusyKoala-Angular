@@ -1,6 +1,10 @@
 <!-- Header -->
 <div class="button-group d-flex justify-content-between">
-  <nz-date-picker nzMode="month"></nz-date-picker>
+  <nz-date-picker
+    nzMode="month"
+    [(ngModel)]="selectedMonth"
+    (nzOnOpenChange)="onClose($event)"
+  ></nz-date-picker>
   <button nz-button nzType="text">Time in</button>
 </div>
 
@@ -10,10 +14,13 @@
     <div class="container-fluid">
       <div class="row g-2 pt-2 pb-3">
         <div
-          *ngFor="let e of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+          *ngFor="let data of timeInOutData; let i = index"
           class="col-12 col-md-6"
         >
-          <app-time-in-out></app-time-in-out>
+          <app-time-in-out
+            [timeInOutData]="data"
+            [date]="dates[i]"
+          ></app-time-in-out>
         </div>
       </div>
     </div>

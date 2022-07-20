@@ -1,6 +1,12 @@
-<nz-card nzHoverable [nzTitle]="titleTemplate" [nzActions]="[actionTimeOut]">
+<nz-card
+  *ngIf="timeInOutData"
+  nzHoverable
+  [nzTitle]="titleTemplate"
+  [nzActions]="[actionTimeOut]"
+>
   <p>
-    <span class="text-secondary">Duration: </span><b class="fw-bold">32 mins</b>
+    <span class="text-secondary">Duration: </span
+    ><b class="fw-bold">{{ timeInOutData.duration }}</b>
   </p>
   <table class="table table-hover mt-3">
     <thead>
@@ -11,17 +17,9 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td>00:00 MM</td>
-        <td>00:00 MM</td>
-      </tr>
-      <tr>
-        <td>00:00 MM</td>
-        <td>00:00 MM</td>
-      </tr>
-      <tr>
-        <td>00:00 MM</td>
-        <td>00:00 MM</td>
+      <tr *ngFor="let time of times">
+        <td>{{ time[0] }}</td>
+        <td>{{ time[1] }}</td>
       </tr>
 
       <tr>
@@ -32,7 +30,7 @@
 </nz-card>
 
 <ng-template #titleTemplate>
-  <h6>Date</h6>
+  <h6>{{ date }}</h6>
 </ng-template>
 <ng-template #actionTimeOut>
   <span>Time out</span>

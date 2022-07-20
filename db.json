@@ -40,135 +40,137 @@
       "when": "Mon-Fri",
       "members": ["ericka", "millie", "taylor", "steve", "dusty-bun"],
       "attendance": {
-        "6": {
-          "8": [
-            {
-              "user": "millie",
-              "time": ["9:05 AM - 10:30 AM"],
-              "duration": "1hr 25mins"
-            },
-            {
-              "user": "taylor",
-              "time": ["9:04 AM - 10:04 AM"],
-              "duration": "1hr"
-            },
-            {
-              "user": "steve",
-              "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
-              "duration": "1hr 16mins"
-            },
-            {
-              "user": "dusty-bun",
-              "time": ["8:59 AM - 10:30 AM"],
-              "duration": "1hr 31mins"
-            },
-            { "user": "ericka", "time": ["8:50 AM"], "duration": "0mins" }
-          ],
-          "3": [
-            {
-              "user": "millie",
-              "time": ["9:05 AM - 10:30 AM"],
-              "duration": "1hr 25mins"
-            },
-            {
-              "user": "taylor",
-              "time": ["9:04 AM - 10:04 AM"],
-              "duration": "1hr"
-            },
-            {
-              "user": "steve",
-              "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
-              "duration": "1hr 16mins"
-            },
-            {
-              "user": "dusty-bun",
-              "time": ["8:59 AM - 10:30 AM"],
-              "duration": "1hr 31mins"
-            },
-            {
-              "user": "ericka",
-              "time": ["8:59 AM - 10:30 AM", "10:46 AM - 11:00 AM"],
-              "duration": "1hr 45mins"
-            }
-          ],
-          "2": [
-            {
-              "user": "millie",
-              "time": ["9:05 AM - 10:30 AM"],
-              "duration": "1hr 25mins"
-            },
-            {
-              "user": "taylor",
-              "time": ["9:04 AM - 10:04 AM"],
-              "duration": "1hr"
-            },
-            {
-              "user": "steve",
-              "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
-              "duration": "1hr 16mins"
-            },
-            {
-              "user": "dusty-bun",
-              "time": ["8:59 AM - 10:30 AM"],
-              "duration": "1hr 31mins"
-            },
-            {
-              "user": "ericka",
-              "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
-              "duration": "1hr 16mins"
-            }
-          ],
-          "1": [
-            {
-              "user": "millie",
-              "time": ["9:05 AM - 10:30 AM"],
-              "duration": "1hr 25mins"
-            },
-            {
-              "user": "taylor",
-              "time": ["9:04 AM - 10:04 AM"],
-              "duration": "1hr"
-            },
-            {
-              "user": "steve",
-              "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
-              "duration": "1hr 16mins"
-            },
-            {
-              "user": "dusty-bun",
-              "time": ["8:59 AM - 10:30 AM"],
-              "duration": "1hr 31mins"
-            }
-          ]
-        },
-        "5": {
-          "3": [
-            {
-              "user": "millie",
-              "time": ["9:05 AM - 10:30 AM"],
-              "duration": "1hr 25mins"
-            },
-            {
-              "user": "taylor",
-              "time": ["9:04 AM - 10:04 AM"],
-              "duration": "1hr"
-            },
-            {
-              "user": "steve",
-              "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
-              "duration": "1hr 16mins"
-            },
-            {
-              "user": "dusty-bun",
-              "time": ["8:59 AM - 10:30 AM"],
-              "duration": "1hr 31mins"
-            },
-            {
-              "user": "ericka",
-              "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
-              "duration": "1hr 16mins"
-            }
-          ]
+        "2022": {
+          "6": {
+            "8": [
+              {
+                "user": "millie",
+                "time": ["9:05 AM - 10:30 AM"],
+                "duration": "1hr 25mins"
+              },
+              {
+                "user": "taylor",
+                "time": ["9:04 AM - 10:04 AM"],
+                "duration": "1hr"
+              },
+              {
+                "user": "steve",
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
+                "duration": "1hr 16mins"
+              },
+              {
+                "user": "dusty-bun",
+                "time": ["8:59 AM - 10:30 AM"],
+                "duration": "1hr 31mins"
+              },
+              { "user": "ericka", "time": ["8:50 AM"], "duration": "0mins" }
+            ],
+            "3": [
+              {
+                "user": "millie",
+                "time": ["9:05 AM - 10:30 AM"],
+                "duration": "1hr 25mins"
+              },
+              {
+                "user": "taylor",
+                "time": ["9:04 AM - 10:04 AM"],
+                "duration": "1hr"
+              },
+              {
+                "user": "steve",
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
+                "duration": "1hr 16mins"
+              },
+              {
+                "user": "dusty-bun",
+                "time": ["8:59 AM - 10:30 AM"],
+                "duration": "1hr 31mins"
+              },
+              {
+                "user": "ericka",
+                "time": ["8:59 AM - 10:30 AM", "10:46 AM - 11:00 AM"],
+                "duration": "1hr 45mins"
+              }
+            ],
+            "2": [
+              {
+                "user": "millie",
+                "time": ["9:05 AM - 10:30 AM"],
+                "duration": "1hr 25mins"
+              },
+              {
+                "user": "taylor",
+                "time": ["9:04 AM - 10:04 AM"],
+                "duration": "1hr"
+              },
+              {
+                "user": "steve",
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
+                "duration": "1hr 16mins"
+              },
+              {
+                "user": "dusty-bun",
+                "time": ["8:59 AM - 10:30 AM"],
+                "duration": "1hr 31mins"
+              },
+              {
+                "user": "ericka",
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
+                "duration": "1hr 16mins"
+              }
+            ],
+            "1": [
+              {
+                "user": "millie",
+                "time": ["9:05 AM - 10:30 AM"],
+                "duration": "1hr 25mins"
+              },
+              {
+                "user": "taylor",
+                "time": ["9:04 AM - 10:04 AM"],
+                "duration": "1hr"
+              },
+              {
+                "user": "steve",
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
+                "duration": "1hr 16mins"
+              },
+              {
+                "user": "dusty-bun",
+                "time": ["8:59 AM - 10:30 AM"],
+                "duration": "1hr 31mins"
+              }
+            ]
+          },
+          "5": {
+            "3": [
+              {
+                "user": "millie",
+                "time": ["9:05 AM - 10:30 AM"],
+                "duration": "1hr 25mins"
+              },
+              {
+                "user": "taylor",
+                "time": ["9:04 AM - 10:04 AM"],
+                "duration": "1hr"
+              },
+              {
+                "user": "steve",
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
+                "duration": "1hr 16mins"
+              },
+              {
+                "user": "dusty-bun",
+                "time": ["8:59 AM - 10:30 AM"],
+                "duration": "1hr 31mins"
+              },
+              {
+                "user": "ericka",
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
+                "duration": "1hr 16mins"
+              }
+            ]
+          }
         }
       }
     },
@@ -180,29 +182,31 @@
       "when": "Tue, Thu",
       "members": ["millie", "taylor", "steve", "dusty-bun"],
       "attendance": {
-        "6": {
-          "31": [
-            {
-              "user": "millie",
-              "time": ["9:05 AM - 10:30 AM"],
-              "duration": "1hr 25mins"
-            },
-            {
-              "user": "taylor",
-              "time": ["9:04 AM - 10:04 AM"],
-              "duration": "1hr"
-            },
-            {
-              "user": "steve",
-              "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
-              "duration": "1hr 16mins"
-            },
-            {
-              "user": "dusty-bun",
-              "time": ["8:59 AM - 10:30 AM"],
-              "duration": "1hr 31mins"
-            }
-          ]
+        "2022": {
+          "6": {
+            "31": [
+              {
+                "user": "millie",
+                "time": ["9:05 AM - 10:30 AM"],
+                "duration": "1hr 25mins"
+              },
+              {
+                "user": "taylor",
+                "time": ["9:04 AM - 10:04 AM"],
+                "duration": "1hr"
+              },
+              {
+                "user": "steve",
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
+                "duration": "1hr 16mins"
+              },
+              {
+                "user": "dusty-bun",
+                "time": ["8:59 AM - 10:30 AM"],
+                "duration": "1hr 31mins"
+              }
+            ]
+          }
         }
       }
     }

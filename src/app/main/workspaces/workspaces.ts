@@ -5,5 +5,5 @@ export interface Workspace {
   owner: string;
   when: string;
   members: string[];
-  attendance: {};
+  attendance: any;
 }
