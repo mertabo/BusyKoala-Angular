@@ -83,11 +83,10 @@ export class OwnWorkspaceComponent implements OnInit {
   }
 
   updateSession(): void {
+    this.workspace!.ongoing = this.ongoing === 'Start' ? 'true' : 'false';
+
     this.workspacesService
-      .updateWorkspace(this.workspace!.id, {
-        ...this.workspace,
-        ongoing: this.ongoing === 'Start' ? 'true' : 'false',
-      })
+      .updateWorkspace(this.workspace!)
       .subscribe((data) => {
         this.workspace = data;
         this.ongoing = data.ongoing === 'true' ? 'End' : 'Start';

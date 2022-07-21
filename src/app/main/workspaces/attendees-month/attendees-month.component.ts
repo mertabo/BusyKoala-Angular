@@ -11,13 +11,9 @@ import { User } from 'src/app/auth/user';
 })
 export class AttendeesMonthComponent implements OnInit {
   @Input() data: any;
-  $try!: Observable<User>;
 
   getFullName(user: string) {
-    // return of('ok');
-    this.$try = this.authService
-      .getUser(user)
-      .pipe(tap((data) => data.fullName));
+    return this.authService.getUser(user).pipe(tap((data) => data.fullName));
   }
 
   constructor(private authService: AuthService) {}

@@ -28,10 +28,10 @@ export class WorkspacesService {
       .pipe(catchError(this.handleError<any>({})));
   }
 
-  updateWorkspace(id: string, updatedWorkspace: any): Observable<Workspace> {
+  updateWorkspace(updatedWorkspace: Workspace): Observable<Workspace> {
     return this.http
       .put<any>(
-        `${this.workspacesUrl}/${id}`,
+        `${this.workspacesUrl}/${updatedWorkspace.id}`,
         updatedWorkspace,
         this.httpOptions
       )

@@ -14,7 +14,7 @@
 
     <tbody>
       <tr *ngFor="let attendee of data[1]">
-        <td>{{ attendee.user }}</td>
+        <td>{{ getFullName(attendee.user) }}</td>
         <td>
           <p *ngFor="let time of attendee.time">{{ time }}</p>
         </td>

@@ -258,7 +258,7 @@
     },
     {
       "id": "2",
-      "ongoing": "false",
+      "ongoing": "true",
       "code": "fdsnOiwD",
       "name": "My Session",
       "owner": "ericka",
