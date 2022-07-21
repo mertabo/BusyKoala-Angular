@@ -12,3 +12,7 @@ export const MONTHS = [
   'Nov',
   'Dev',
 ];
+
+export const AGE_SUFFIX = ['yr', 'mo', 'day', 'hr', 'min'];
+
+export const TIME_SEPARATOR = ' - ';

@@ -4,6 +4,7 @@
   [nzTitle]="titleTemplate"
   [nzActions]="currentlyTimedIn ? [actionTimeOut] : []"
 >
+  <p>{{ timeInOutData.time }}</p>
   <p>
     <span class="text-secondary">Duration: </span
     ><b class="fw-bold">{{ timeInOutData.duration }}</b>
@@ -33,5 +34,5 @@
   <h6>{{ date }}</h6>
 </ng-template>
 <ng-template #actionTimeOut>
-  <span>Time out</span>
+  <span (click)="timeOut()">Time out</span>
 </ng-template>

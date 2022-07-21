@@ -19,7 +19,7 @@ export class OwnWorkspaceComponent implements OnInit {
   attendeesToday: any[] = [];
   attendeesMonth?: any;
   MONTHS = MONTHS;
-  ongoing = 'Start';
+  ongoing = '';
 
   getWorkspace(id: string): void {
     this.workspacesService.getWorkspace(id).subscribe((data: Workspace) => {
@@ -89,8 +89,8 @@ export class OwnWorkspaceComponent implements OnInit {
       .updateWorkspace(this.workspace!)
       .subscribe((data) => {
         this.workspace = data;
-        this.ongoing = data.ongoing === 'true' ? 'End' : 'Start';
         this.showSessionUpdate();
+        this.ongoing = data.ongoing === 'true' ? 'End' : 'Start';
       });
   }
 

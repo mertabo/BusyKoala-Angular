@@ -20,7 +20,12 @@
     <button nz-button nzType="text" class="me-2" (click)="showInviteLink()">
       Invite link
     </button>
-    <button nz-button nzType="text" (click)="updateSession()">
+    <button
+      nz-button
+      nzType="text"
+      (click)="updateSession()"
+      [disabled]="!ongoing"
+    >
       {{ ongoing + " session" }}
     </button>
   </div>

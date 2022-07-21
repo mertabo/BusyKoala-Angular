@@ -13,8 +13,8 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let attendee of data[1]">
-        <td>{{ getFullName(attendee.user) }}</td>
+      <tr *ngFor="let attendee of data[1]; index as i">
+        <td>{{ attendeeNames$[i] | async }}</td>
         <td>
           <p *ngFor="let time of attendee.time">{{ time }}</p>
         </td>

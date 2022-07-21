@@ -5,7 +5,9 @@
     [(ngModel)]="selectedMonth"
     (nzOnOpenChange)="onClose($event)"
   ></nz-date-picker>
-  <button nz-button nzType="text">Time in</button>
+  <button nz-button nzType="text" [disabled]="isTimedIn" (click)="timeIn()">
+    Time in
+  </button>
 </div>
 
 <!-- Time ins/outs -->
@@ -14,12 +16,13 @@
     <div class="container-fluid">
       <div class="row g-2 pt-2 pb-3">
         <div
-          *ngFor="let data of timeInOutData.reverse(); let i = index"
+          *ngFor="let data of timeInOutData; index as i"
           class="col-12 col-md-6"
         >
           <app-time-in-out
             [timeInOutData]="data"
             [date]="dates[dates.length - 1 - i]"
+            (timed)="timeOut($event)"
           ></app-time-in-out>
         </div>
       </div>

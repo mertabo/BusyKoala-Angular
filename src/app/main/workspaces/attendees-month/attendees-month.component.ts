@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { User } from 'src/app/auth/user';
 
@@ -11,12 +11,17 @@ import { User } from 'src/app/auth/user';
 })
 export class AttendeesMonthComponent implements OnInit {
   @Input() data: any;
+  attendeeNames$: Observable<string>[] = [];
 
-  getFullName(user: string) {
-    return this.authService.getUser(user).pipe(tap((data) => data.fullName));
+  getFullName(user: string): Observable<string> {
+    return this.authService.getUser(user).pipe(map((data) => data.fullName));
   }
 
   constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.data[1].forEach((el: any) => {
+      this.attendeeNames$.push(this.getFullName(el.user));
+    });
+  }
 }
