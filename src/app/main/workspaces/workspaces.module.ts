@@ -11,6 +11,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 import { WorkspacesRoutingModule } from './workspaces-routing.module';
 
@@ -49,6 +50,7 @@ import { WorkspacesListComponent } from './workspaces-list/workspaces-list.compo
     NzInputModule,
     NzCheckboxModule,
     NzRadioModule,
+    NzNotificationModule,
   ],
 })
 export class WorkspacesModule {}

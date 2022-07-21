@@ -4,17 +4,25 @@
     <nz-button-group class="me-2">
       <nz-radio-group [(ngModel)]="buttonView">
         <label nz-radio-button nzValue="today">Today</label>
-        <label nz-radio-button nzValue="month">Month</label>
+        <label nz-radio-button nzValue="month" (click)="getMonth()"
+          >Month</label
+        >
       </nz-radio-group>
     </nz-button-group>
     <nz-date-picker
       nzMode="month"
       *ngIf="buttonView === 'month'"
+      [(ngModel)]="month"
+      (nzOnOpenChange)="onClose($event)"
     ></nz-date-picker>
   </div>
   <div>
-    <button nz-button nzType="text" class="me-2">Invite link</button>
-    <button nz-button nzType="text">Start session</button>
+    <button nz-button nzType="text" class="me-2" (click)="showInviteLink()">
+      Invite link
+    </button>
+    <button nz-button nzType="text" (click)="updateSession()">
+      {{ ongoing + " session" }}
+    </button>
   </div>
 </div>
 
@@ -38,8 +46,17 @@
 <div *ngIf="buttonView === 'month'" class="scrollable-container" id="month">
   <div class="scrollable-content">
     <div class="p-2">
-      <div *ngFor="let e of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
-        <app-attendees-month></app-attendees-month>
+      <div *ngFor="let data of attendeesMonth | keyvalue">
+        <app-attendees-month
+          [data]="[
+            MONTHS[month.getMonth()] +
+              ' ' +
+              data.key +
+              ', ' +
+              month.getFullYear(),
+            data.value
+          ]"
+        ></app-attendees-month>
       </div>
     </div>
   </div>

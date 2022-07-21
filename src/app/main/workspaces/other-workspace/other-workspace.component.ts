@@ -21,10 +21,7 @@ export class OtherWorkspaceComponent implements OnInit {
     this.workspacesService.getWorkspace(id).subscribe((data: Workspace) => {
       this.workspace = data;
       if (data) {
-        this.getTimeInOutData(
-          this.selectedMonth.getFullYear().toString(),
-          this.selectedMonth.getMonth().toString()
-        );
+        this.getTimeInOutData();
       }
     });
   }
@@ -32,25 +29,25 @@ export class OtherWorkspaceComponent implements OnInit {
   onClose(isOpen: boolean) {
     if (
       isOpen ||
+      !this.prevSelectedMonth ||
+      !this.selectedMonth ||
       (this.prevSelectedMonth.getFullYear() ===
         this.selectedMonth.getFullYear() &&
         this.prevSelectedMonth.getMonth() === this.selectedMonth.getMonth())
     )
       return;
 
-    this.getTimeInOutData(
-      this.selectedMonth.getFullYear().toString(),
-      this.selectedMonth.getMonth().toString()
-    );
-
+    this.getTimeInOutData();
     this.prevSelectedMonth = this.selectedMonth;
   }
 
-  getTimeInOutData(year: string, month: string): void {
+  getTimeInOutData(): void {
     this.timeInOutData = [];
     const attendance = this.workspace?.attendance;
 
     if (attendance) {
+      const year = this.selectedMonth.getFullYear();
+      const month = this.selectedMonth.getMonth();
       const data = attendance[year]?.[month];
 
       if (!data) return;

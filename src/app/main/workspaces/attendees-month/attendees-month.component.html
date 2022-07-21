@@ -1,7 +1,7 @@
 <nz-card nzHoverable [nzTitle]="titleTemplate" class="mb-3">
   <p>
     <span class="text-secondary">Number of attendees: </span
-    ><b class="fw-bold">21</b>
+    ><b class="fw-bold">{{ data[1].length }}</b>
   </p>
   <table class="table table-hover mt-3">
     <thead>
@@ -13,20 +13,12 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <td>Larry the Birdddddddddddddddddddddddddd</td>
-        <td>@twitter</td>
-        <td>@twitter</td>
+      <tr *ngFor="let attendee of data[1]">
+        <td>{{ attendee.user }}</td>
+        <td>
+          <p *ngFor="let time of attendee.time">{{ time }}</p>
+        </td>
+        <td>{{ attendee.duration }}</td>
       </tr>
 
       <tr>
@@ -37,5 +29,5 @@
 </nz-card>
 
 <ng-template #titleTemplate>
-  <h6>Date</h6>
+  <h6>{{ data[0] }}</h6>
 </ng-template>

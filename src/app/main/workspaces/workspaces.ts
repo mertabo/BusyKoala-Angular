@@ -1,6 +1,7 @@
 export interface Workspace {
   id: string;
-  ongoing: boolean;
+  ongoing: string;
+  code: string;
   name: string;
   owner: string;
   when: string;
