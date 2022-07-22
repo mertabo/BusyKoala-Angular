@@ -1,2 +1,17 @@
-<app-own-workspace *ngIf="ownWorkspace"></app-own-workspace>
-<app-other-workspace *ngIf="!ownWorkspace"></app-other-workspace>
+<div class="d-flex justify-content-center">
+  <nz-spin
+    nzSimple
+    [nzSpinning]="!workspace"
+    [nzSize]="'large'"
+    [class]="workspace ? 'd-none' : ''"
+  ></nz-spin>
+</div>
+
+<app-own-workspace
+  *ngIf="ownWorkspace && workspace"
+  [workspace]="workspace"
+></app-own-workspace>
+<app-other-workspace
+  *ngIf="!ownWorkspace && workspace"
+  [workspace]="workspace"
+></app-other-workspace>

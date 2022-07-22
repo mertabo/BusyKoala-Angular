@@ -1,8 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import cloneDeep from 'lodash/cloneDeep';
+import { Subscription } from 'rxjs';
 import { militaryToStandardTimeFormat } from 'src/app/shared/utils/utils';
-import { LOGGEDIN_USER, MONTHS } from '../../../shared/constants/constants';
-import { Workspace } from '../workspaces';
+import {
+  LOGGEDIN_USER,
+  MONTHS,
+  TIME_SEPARATOR,
+} from '../../../shared/constants/constants';
+import { UserTimeData, Workspace } from '../workspaces';
 import { WorkspacesService } from '../workspaces.service';
 
 @Component({
@@ -10,23 +16,82 @@ import { WorkspacesService } from '../workspaces.service';
   templateUrl: './other-workspace.component.html',
   styleUrls: ['./other-workspace.component.css'],
 })
-export class OtherWorkspaceComponent implements OnInit {
+export class OtherWorkspaceComponent implements OnInit, OnDestroy {
+  @Input() workspace!: Workspace;
+  localWorkspace!: Workspace;
+  hasWorkspaceDataLoaded = false;
   selectedMonth = new Date();
   prevSelectedMonth = new Date();
-  workspace?: Workspace;
-  timeInOutData: any[] = [];
-  dates: string[] = [];
+  timeInOutData: UserTimeData[] = [];
+  dates: string[] = []; // dates (in string format) of the cards
   isTimedIn: boolean = false;
 
-  getWorkspace(id: string): void {
-    this.workspacesService.getWorkspace(id).subscribe((data: Workspace) => {
-      this.workspace = data;
-      if (data) {
-        this.getTimeInOutData();
-      }
-    });
+  // subscriptions
+  timeInSubscription?: Subscription;
+  timeOutSubscription?: Subscription;
+
+  /**
+   * Get logged in user's time in/out date in a workspace.
+   */
+  getTimeInOutData(): void {
+    this.hasWorkspaceDataLoaded = false;
+
+    this.timeInOutData = [];
+    const attendance = this.localWorkspace.attendance;
+
+    if (attendance) {
+      const year = this.selectedMonth.getFullYear();
+      const month = this.selectedMonth.getMonth();
+      const monthlyData = attendance[year]?.[month];
+
+      if (!monthlyData) return;
+
+      Object.entries(monthlyData).forEach(([date, value]) => {
+        const attendees: UserTimeData[] = value;
+
+        // get data that belongs to the logged in user
+        const filteredDates = attendees.filter(
+          (attendee: UserTimeData) => attendee.user === LOGGEDIN_USER
+        )[0];
+
+        if (filteredDates) {
+          this.timeInOutData.push(filteredDates);
+
+          // get date
+          const dateWithUserTime = `${MONTHS[Number(month)]} ${date}, ${year}`;
+          this.dates.push(dateWithUserTime);
+        }
+      });
+    }
+
+    this.checkIfCurrentlyTimedIn();
+    this.hasWorkspaceDataLoaded = true;
   }
 
+  /**
+   * Checks if user is currently timed in.
+   */
+  checkIfCurrentlyTimedIn(): void {
+    const timeInOutDataLength = this.timeInOutData.length;
+
+    if (timeInOutDataLength < 1) return;
+
+    // checks the latest data in timeInOutData
+    if (
+      this.timeInOutData[timeInOutDataLength - 1].time[
+        this.timeInOutData[timeInOutDataLength - 1].time.length - 1
+      ].split(TIME_SEPARATOR).length < 2
+    ) {
+      this.isTimedIn = true;
+    }
+  }
+
+  /**
+   * Handles changes on date-picker.
+   * Get logged in user's time in/out date in a workspace.
+   *
+   * @param isOpen: boolean - true if open, false if not open
+   */
   onClose(isOpen: boolean) {
     if (
       isOpen ||
@@ -42,48 +107,9 @@ export class OtherWorkspaceComponent implements OnInit {
     this.prevSelectedMonth = this.selectedMonth;
   }
 
-  getTimeInOutData(): void {
-    this.timeInOutData = [];
-    const attendance = this.workspace?.attendance;
-
-    if (attendance) {
-      const year = this.selectedMonth.getFullYear();
-      const month = this.selectedMonth.getMonth();
-      const data = attendance[year]?.[month];
-
-      if (!data) return;
-
-      Object.entries(data).forEach(([key, value]) => {
-        const dates: any = value;
-        const filteredDates = dates.filter(
-          (dateData: any) => dateData.user === LOGGEDIN_USER
-        )[0];
-
-        if (filteredDates) {
-          this.timeInOutData.push(filteredDates);
-
-          // get date
-          const date = `${MONTHS[Number(month)]} ${key}, ${year}`;
-          this.dates.push(date);
-        }
-      });
-      // this.selectedMonth.setMonth(3);
-      // this.selectedMonth.setFullYear(2021);
-    }
-    this.timeInOutData.reverse();
-    this.checkIfCurrentlyTimedIn();
-  }
-
-  checkIfCurrentlyTimedIn(): void {
-    if (
-      this.timeInOutData[0].time[this.timeInOutData[0].time.length - 1].split(
-        ' - '
-      ).length < 2
-    ) {
-      this.isTimedIn = true;
-    }
-  }
-
+  /**
+   * Handles the action of timing in.
+   */
   timeIn(): void {
     this.isTimedIn = true;
     const now = new Date();
@@ -91,79 +117,99 @@ export class OtherWorkspaceComponent implements OnInit {
     const month = now.getMonth();
     const date = now.getDate();
 
-    const newTimeInData = {
+    const newTimeInData: UserTimeData = {
       user: LOGGEDIN_USER,
       time: [militaryToStandardTimeFormat(now)],
-      duration: '0mins',
+      duration: 0,
     };
 
-    if (!this.workspace!.attendance[year]) {
-      this.workspace!.attendance[year] = {
+    // do not manipulate original data in case of failed process
+    const tempLocalWorkspace = cloneDeep(this.localWorkspace);
+
+    // update the tempLocalWorkspace accordingly
+    if (!this.localWorkspace.attendance[year]) {
+      // year not found
+      tempLocalWorkspace.attendance[year] = {
         [month]: { [date]: [newTimeInData] },
       };
-    } else if (!this.workspace!.attendance[year][month]) {
-      this.workspace!.attendance[year][month] = { [date]: [newTimeInData] };
-    } else if (!this.workspace!.attendance[year][month][date]) {
-      this.workspace!.attendance[year][month][date] = [newTimeInData];
+    } else if (!this.localWorkspace.attendance[year][month]) {
+      // month not found
+      tempLocalWorkspace.attendance[year][month] = { [date]: [newTimeInData] };
+    } else if (!this.localWorkspace.attendance[year][month][date]) {
+      // date not found
+      tempLocalWorkspace.attendance[year][month][date] = [newTimeInData];
     } else {
-      const attendeeIndex = this.workspace!.attendance[year][month][
+      // existing data
+      const attendeeIndex = this.localWorkspace.attendance[year][month][
         date
-      ].findIndex((attendee: any) => attendee.user === LOGGEDIN_USER);
+      ].findIndex((attendee: UserTimeData) => attendee.user === LOGGEDIN_USER);
 
       // user has no time in data yet
       if (attendeeIndex < 0) {
-        this.workspace!.attendance[year][month][date].push(newTimeInData);
+        tempLocalWorkspace.attendance[year][month][date].push(newTimeInData);
       } else {
         // user already has time in data
-        this.workspace!.attendance[year][month][date][attendeeIndex].time.push(
-          newTimeInData.time[0]
-        );
-        this.workspace! = { ...this.workspace! };
+        tempLocalWorkspace.attendance[year][month][date][
+          attendeeIndex
+        ].time.push(newTimeInData.time[0]);
       }
     }
 
-    this.workspacesService
-      .updateWorkspace(this.workspace!)
+    // update the db and UI
+    this.timeInSubscription = this.workspacesService
+      .updateWorkspace(tempLocalWorkspace)
       .subscribe((updatedWorkspace) => {
-        this.workspace = updatedWorkspace;
-        // check if date already existing
-        const dateIndex = this.dates.indexOf(
-          `${MONTHS[Number(month)]} ${date}, ${year}`
-        );
-        if (dateIndex < 0) {
-          this.dates.push(`${MONTHS[Number(month)]} ${date}, ${year}`);
-          this.timeInOutData.unshift(newTimeInData);
-        } else {
-          this.timeInOutData[this.timeInOutData.length - 1].time.push(
-            newTimeInData.time[0]
+        if (updatedWorkspace.id) {
+          this.localWorkspace = updatedWorkspace;
+
+          const dateIndex = this.dates.indexOf(
+            `${MONTHS[Number(month)]} ${date}, ${year}`
           );
+          if (dateIndex < 0) {
+            this.dates.push(`${MONTHS[Number(month)]} ${date}, ${year}`);
+            this.timeInOutData.unshift(newTimeInData);
+          } else {
+            this.timeInOutData[this.timeInOutData.length - 1].time.push(
+              newTimeInData.time[0]
+            );
+          }
+        } else {
+          this.isTimedIn = false;
         }
       });
   }
 
-  timeOut(newData: any): void {
-    const date = newData.date;
-    const data = newData.tempData;
+  /**
+   * Handles the action of timing out.
+   * Triggered by time out from TimeInOutComponent.
+   */
+  timeOut(newData: { date: Date; updatedUserTimeData: UserTimeData }): void {
+    const userTimeDataDate = newData.date;
+    const updatedUserTimeData = newData.updatedUserTimeData;
 
-    if (!date || !data) return;
+    if (!userTimeDataDate || !updatedUserTimeData) return;
 
-    // passed data
-    const tempYear = date.getFullYear();
-    const tempMonth = date.getMonth();
-    const tempDate = date.getDate();
+    const year = userTimeDataDate.getFullYear();
+    const month = userTimeDataDate.getMonth();
+    const date = userTimeDataDate.getDate();
 
     // find attendee data to be updated
-    const attendeeIndex = this.workspace!.attendance[tempYear][tempMonth][
-      tempDate
-    ].findIndex((attendee: any) => attendee.user === data.user);
+    const attendeeIndex = this.localWorkspace.attendance[year][month][
+      date
+    ].findIndex(
+      (attendee: UserTimeData) => attendee.user === updatedUserTimeData.user
+    );
 
     // update data of attendee
-    this.workspace!.attendance[tempYear][tempMonth][tempDate][attendeeIndex] =
-      data;
-    this.workspacesService
-      .updateWorkspace(this.workspace!)
+    this.localWorkspace.attendance[year][month][date][attendeeIndex] =
+      updatedUserTimeData;
+    this.timeOutSubscription = this.workspacesService
+      .updateWorkspace(this.localWorkspace)
       .subscribe((updatedWorkspace) => {
-        this.workspace = updatedWorkspace;
+        if (updatedWorkspace.id) {
+          this.localWorkspace = updatedWorkspace;
+          this.getTimeInOutData();
+        }
       });
 
     this.isTimedIn = false;
@@ -175,7 +221,12 @@ export class OtherWorkspaceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    let selectedWorkspaceID = this.route.snapshot.paramMap.get('id')!;
-    this.getWorkspace(selectedWorkspaceID);
+    this.localWorkspace = cloneDeep(this.workspace);
+    this.getTimeInOutData();
+  }
+
+  ngOnDestroy(): void {
+    this.timeInSubscription?.unsubscribe();
+    this.timeOutSubscription?.unsubscribe();
   }
 }

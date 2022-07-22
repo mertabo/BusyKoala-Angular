@@ -12,15 +12,23 @@
 
 <!-- Time ins/outs -->
 <div class="scrollable-container">
+  <div class="d-flex justify-content-center">
+    <nz-spin
+      nzSimple
+      [nzSpinning]="!hasWorkspaceDataLoaded"
+      [nzSize]="'large'"
+      [class]="hasWorkspaceDataLoaded ? 'd-none' : ''"
+    ></nz-spin>
+  </div>
   <div class="scrollable-content">
     <div class="container-fluid">
       <div class="row g-2 pt-2 pb-3">
         <div
-          *ngFor="let data of timeInOutData; index as i"
+          *ngFor="let userTimeData of timeInOutData.reverse(); index as i"
           class="col-12 col-md-6"
         >
           <app-time-in-out
-            [timeInOutData]="data"
+            [timeInOutData]="userTimeData"
             [date]="dates[dates.length - 1 - i]"
             (timed)="timeOut($event)"
           ></app-time-in-out>

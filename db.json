@@ -4,103 +4,69 @@
       "id": "ericka",
       "fullName": "Ericka Tabo",
       "password": "password123",
-      "workspaces": [
-        1,
-        2
-      ]
+      "workspaces": [1, 2]
     },
     {
       "id": "millie",
       "fullName": "Millie Bobby Brown",
       "password": "password123",
-      "workspaces": [
-        1,
-        2
-      ]
+      "workspaces": [1, 2]
     },
     {
       "id": "taylor",
       "fullName": "Taylor Swift",
       "password": "password123",
-      "workspaces": [
-        1,
-        2
-      ]
+      "workspaces": [1, 2]
     },
     {
       "id": "steve",
       "fullName": "Joe Keery",
       "password": "password123",
-      "workspaces": [
-        1,
-        2
-      ]
+      "workspaces": [1, 2]
     },
     {
       "id": "dusty-bun",
       "fullName": "Gaten Matarazzo",
       "password": "password123",
-      "workspaces": [
-        1,
-        2
-      ]
+      "workspaces": [1, 2]
     }
   ],
   "workspaces": [
     {
       "id": "1",
       "ongoing": "true",
-      "code": "SnkJDIOE",
+      "inviteCode": "SnkJDIOE",
       "name": "Exist Software Labs, Inc.",
       "owner": "exist",
-      "when": "Mon-Fri",
-      "members": [
-        "ericka",
-        "millie",
-        "taylor",
-        "steve",
-        "dusty-bun"
-      ],
+      "schedule": "Mon-Fri",
       "attendance": {
         "2022": {
           "5": {
             "3": [
               {
                 "user": "millie",
-                "time": [
-                  "9:05 AM - 10:30 AM"
-                ],
-                "duration": "1hr 25mins"
+                "time": ["9:05 AM - 10:30 AM"],
+                "duration": 232425
               },
               {
                 "user": "taylor",
-                "time": [
-                  "9:04 AM - 10:04 AM"
-                ],
-                "duration": "1hr"
+                "time": ["9:04 AM - 10:04 AM"],
+                "duration": 2326354
               },
               {
                 "user": "steve",
-                "time": [
-                  "9:02 AM - 9:48 AM",
-                  "10:00 AM - 10:30 AM"
-                ],
-                "duration": "1hr 16mins"
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
+                "duration": 1213
               },
               {
                 "user": "dusty-bun",
-                "time": [
-                  "8:59 AM - 10:30 AM"
-                ],
-                "duration": "1hr 31mins"
+                "time": ["8:59 AM - 10:30 AM"],
+                "duration": 456456
               },
               {
                 "user": "ericka",
-                "time": [
-                  "9:02 AM - 9:48 AM",
-                  "10:00 AM - 10:30 AM"
-                ],
-                "duration": "1hr 16mins"
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
+                "duration": 24864
               }
             ]
           },
@@ -108,148 +74,133 @@
             "1": [
               {
                 "user": "millie",
-                "time": [
-                  "9:05 AM - 10:30 AM"
-                ],
-                "duration": "1hr 25mins"
+                "time": ["9:05 AM - 10:30 AM"],
+                "duration": 4348
               },
               {
                 "user": "taylor",
-                "time": [
-                  "9:04 AM - 10:04 AM"
-                ],
-                "duration": "1hr"
+                "time": ["9:04 AM - 10:04 AM"],
+                "duration": 2324
               },
               {
                 "user": "steve",
-                "time": [
-                  "9:02 AM - 9:48 AM",
-                  "10:00 AM - 10:30 AM"
-                ],
-                "duration": "1hr 16mins"
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
+                "duration": 45352
               },
               {
                 "user": "dusty-bun",
-                "time": [
-                  "8:59 AM - 10:30 AM"
-                ],
-                "duration": "1hr 31mins"
+                "time": ["8:59 AM - 10:30 AM"],
+                "duration": 5386
               }
             ],
             "2": [
               {
                 "user": "millie",
-                "time": [
-                  "9:05 AM - 10:30 AM"
-                ],
-                "duration": "1hr 25mins"
+                "time": ["9:05 AM - 10:30 AM"],
+                "duration": 453
               },
               {
                 "user": "taylor",
-                "time": [
-                  "9:04 AM - 10:04 AM"
-                ],
-                "duration": "1hr"
+                "time": ["9:04 AM - 10:04 AM"],
+                "duration": 2324
               },
               {
                 "user": "steve",
-                "time": [
-                  "9:02 AM - 9:48 AM",
-                  "10:00 AM - 10:30 AM"
-                ],
-                "duration": "1hr 16mins"
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
+                "duration": 453
               },
               {
                 "user": "dusty-bun",
-                "time": [
-                  "8:59 AM - 10:30 AM"
-                ],
-                "duration": "1hr 31mins"
+                "time": ["8:59 AM - 10:30 AM"],
+                "duration": 54566
               },
               {
                 "user": "ericka",
-                "time": [
-                  "9:02 AM - 9:48 AM",
-                  "10:00 AM - 10:30 AM"
-                ],
-                "duration": "1hr 16mins"
+                "time": ["8:50 AM - 4:55 PM"],
+                "duration": 23535
               }
             ],
             "3": [
               {
                 "user": "millie",
-                "time": [
-                  "9:05 AM - 10:30 AM"
-                ],
-                "duration": "1hr 25mins"
+                "time": ["9:05 AM - 10:30 AM"],
+                "duration": 54531
               },
               {
                 "user": "taylor",
-                "time": [
-                  "9:04 AM - 10:04 AM"
-                ],
-                "duration": "1hr"
+                "time": ["9:04 AM - 10:04 AM"],
+                "duration": 2324
               },
               {
                 "user": "steve",
-                "time": [
-                  "9:02 AM - 9:48 AM",
-                  "10:00 AM - 10:30 AM"
-                ],
-                "duration": "1hr 16mins"
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
+                "duration": 215313
               },
               {
                 "user": "dusty-bun",
-                "time": [
-                  "8:59 AM - 10:30 AM"
-                ],
-                "duration": "1hr 31mins"
+                "time": ["8:59 AM - 10:30 AM"],
+                "duration": 54566
               },
               {
                 "user": "ericka",
-                "time": [
-                  "8:59 AM - 10:30 AM",
-                  "10:46 AM - 11:00 AM"
-                ],
-                "duration": "1hr 45mins"
+                "time": ["8:59 AM - 10:30 AM", "10:46 AM - 11:00 AM"],
+                "duration": 315
               }
             ],
             "8": [
               {
                 "user": "millie",
-                "time": [
-                  "9:05 AM - 10:30 AM"
-                ],
-                "duration": "1hr 25mins"
+                "time": ["9:05 AM - 10:30 AM"],
+                "duration": 54531
               },
               {
                 "user": "taylor",
-                "time": [
-                  "9:04 AM - 10:04 AM"
-                ],
-                "duration": "1hr"
+                "time": ["9:04 AM - 10:04 AM"],
+                "duration": 2324
               },
               {
                 "user": "steve",
-                "time": [
-                  "9:02 AM - 9:48 AM",
-                  "10:00 AM - 10:30 AM"
-                ],
-                "duration": "1hr 16mins"
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
+                "duration": 215313
               },
               {
                 "user": "dusty-bun",
-                "time": [
-                  "8:59 AM - 10:30 AM"
-                ],
-                "duration": "1hr 31mins"
+                "time": ["8:59 AM - 10:30 AM"],
+                "duration": 54566
+              },
+              {
+                "user": "ericka",
+                "time": ["8:50 AM - 7:00 PM"],
+                "duration": 23535
+              }
+            ],
+            "21": [
+              {
+                "user": "millie",
+                "time": ["6:48 PM"],
+                "duration": 253
               },
               {
                 "user": "ericka",
                 "time": [
-                  "8:50 AM"
+                  "7:52 PM - 7:52 PM",
+                  "7:52 PM - 11:49 PM",
+                  "11:49 PM - 11:49 PM",
+                  "11:51 PM - 11:55 PM",
+                  "11:55 PM - 1:04 AM"
                 ],
-                "duration": "0mins"
+                "duration": 153
+              }
+            ],
+            "22": [
+              {
+                "user": "ericka",
+                "time": [
+                  "1:11 AM - 1:12 AM",
+                  "1:13 AM - 1:13 AM",
+                  "9:29 PM - 9:30 PM"
+                ],
+                "duration": 47
               }
             ]
           }
@@ -258,49 +209,71 @@
     },
     {
       "id": "2",
-      "ongoing": "true",
-      "code": "fdsnOiwD",
+      "ongoing": "false",
+      "inviteCode": "fdsnOiwD",
       "name": "My Session",
       "owner": "ericka",
-      "when": "Tue, Thu",
-      "members": [
-        "millie",
-        "taylor",
-        "steve",
-        "dusty-bun"
-      ],
+      "schedule": "Tue, Thu",
       "attendance": {
         "2022": {
           "6": {
             "31": [
               {
                 "user": "millie",
-                "time": [
-                  "9:05 AM - 10:30 AM"
-                ],
-                "duration": "1hr 25mins"
+                "time": ["9:05 AM - 10:30 AM"],
+                "duration": 54531
               },
               {
                 "user": "taylor",
-                "time": [
-                  "9:04 AM - 10:04 AM"
-                ],
-                "duration": "1hr"
+                "time": ["9:04 AM - 10:04 AM"],
+                "duration": 2324
               },
               {
                 "user": "steve",
-                "time": [
-                  "9:02 AM - 9:48 AM",
-                  "10:00 AM - 10:30 AM"
-                ],
-                "duration": "1hr 16mins"
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
+                "duration": 215313
               },
               {
                 "user": "dusty-bun",
-                "time": [
-                  "8:59 AM - 10:30 AM"
-                ],
-                "duration": "1hr 31mins"
+                "time": ["8:59 AM - 10:30 AM"],
+                "duration": 54566
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "3",
+      "ongoing": "false",
+      "code": "fdsnOiwD",
+      "name": "Not My Session",
+      "owner": "millie",
+      "when": "Tue, Thu",
+      "members": ["taylor", "steve", "dusty-bun"],
+      "attendance": {
+        "2022": {
+          "6": {
+            "31": [
+              {
+                "user": "millie",
+                "time": ["9:05 AM - 10:30 AM"],
+                "duration": 54531
+              },
+              {
+                "user": "taylor",
+                "time": ["9:04 AM - 10:04 AM"],
+                "duration": 2324
+              },
+              {
+                "user": "steve",
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
+                "duration": 215313
+              },
+              {
+                "user": "dusty-bun",
+                "time": ["8:59 AM - 10:30 AM"],
+                "duration": 54566
               }
             ]
           }
@@ -313,25 +286,39 @@
       "id": "ericka",
       "events": {
         "2022": {
+          "5": {
+            "27": ["dfgs"]
+          },
           "6": {
-            "8": [
-              "Sesh (10AM @ Exist Software Labs, Inc.)"
+            "1": ["dfg", "sdfg"],
+            "2": ["fdg", "fdh"],
+            "3": ["sdfsfd", "hey"],
+            "4": ["ss", "dfgdfg"],
+            "5": ["fdg", "fghfgh", "dfgdf", "fdssgf"],
+            "6": ["dfgg", "try"],
+            "7": ["sdf"],
+            "8": ["Sesh (10AM @ Exist Software Labs, Inc.)"],
+            "9": ["gdf"],
+            "10": ["fd"],
+            "16": ["dfg", "fdfg"],
+            "18": ["Birthday"],
+            "19": ["Gala", "Swimming"],
+            "22": [
+              "try",
+              "dfg (@ fgd)",
+              "dg",
+              "dfg",
+              "gfh",
+              "dfgdf",
+              "gh (5:34 PM @ ghjhj)",
+              "sdfs"
             ],
-            "18": [
-              "Birthday"
-            ],
-            "19": [
-              "Gala",
-              "Swimming"
-            ]
+            "23": [""]
           },
           "7": {
-            "7": [
-              "Event (@Somewhere)"
-            ],
-            "31": [
-              "Yay"
-            ]
+            "7": ["Event (@Somewhere)"],
+            "22": ["hello"],
+            "31": ["Yay"]
           }
         }
       }

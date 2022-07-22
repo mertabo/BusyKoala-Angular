@@ -1,7 +1,16 @@
-<nz-card nzHoverable [nzTitle]="titleTemplate" class="mb-3">
+<nz-card
+  *ngIf="monthlySummary"
+  nzHoverable
+  [nzTitle]="titleTemplate"
+  class="mb-3"
+>
+  <ng-template #titleTemplate>
+    <h6>{{ monthlySummary.date }}</h6>
+  </ng-template>
+
   <p>
     <span class="text-secondary">Number of attendees: </span
-    ><b class="fw-bold">{{ data[1].length }}</b>
+    ><b class="fw-bold">{{ monthlySummary.attendees.length }}</b>
   </p>
   <table class="table table-hover mt-3">
     <thead>
@@ -13,12 +22,12 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let attendee of data[1]; index as i">
+      <tr *ngFor="let attendee of monthlySummary.attendees; index as i">
         <td>{{ attendeeNames$[i] | async }}</td>
         <td>
           <p *ngFor="let time of attendee.time">{{ time }}</p>
         </td>
-        <td>{{ attendee.duration }}</td>
+        <td>{{ attendeeDurations[i] }}</td>
       </tr>
 
       <tr>
@@ -27,7 +36,3 @@
     </tbody>
   </table>
 </nz-card>
-
-<ng-template #titleTemplate>
-  <h6>{{ data[0] }}</h6>
-</ng-template>

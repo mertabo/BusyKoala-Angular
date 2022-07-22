@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Calendar } from './calendar';
+import { LOGGEDIN_USER } from 'src/app/shared/constants/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,7 @@ export class CalendarService {
    */
   getCalendar(): Observable<Calendar> {
     return this.http
-      .get<Calendar>(`${this.calendarUrl}/ericka`)
+      .get<Calendar>(`${this.calendarUrl}/${LOGGEDIN_USER}`)
       .pipe(catchError(this.handleError<any>({ id: '', events: {} })));
   }
 

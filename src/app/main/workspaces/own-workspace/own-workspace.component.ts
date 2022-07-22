@@ -1,77 +1,105 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MONTHS } from '../../../shared/constants/constants';
-import { Workspace } from '../workspaces';
+import {
+  AttendanceMonthlySummary,
+  UserTimeData,
+  Workspace,
+} from '../workspaces';
 import { WorkspacesService } from '../workspaces.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { Subscription } from 'rxjs';
+import { MONTHS } from 'src/app/shared/constants/constants';
 
 @Component({
   selector: 'app-own-workspace',
   templateUrl: './own-workspace.component.html',
   styleUrls: ['./own-workspace.component.css'],
 })
-export class OwnWorkspaceComponent implements OnInit {
+export class OwnWorkspaceComponent implements OnInit, OnDestroy {
+  @Input() workspace!: Workspace;
+  hasWorkspaceDataLoaded = false;
+  ongoing = '';
   buttonView = 'today';
   today = new Date();
-  month = new Date();
-  prevMonth = new Date();
-  workspace?: Workspace;
-  attendeesToday: any[] = [];
-  attendeesMonth?: any;
-  MONTHS = MONTHS;
-  ongoing = '';
+  selectedDate = new Date();
+  prevSelectedDate = new Date();
+  attendeesToday: UserTimeData[] = [];
+  attendeesMonth: AttendanceMonthlySummary[] = [];
 
-  getWorkspace(id: string): void {
-    this.workspacesService.getWorkspace(id).subscribe((data: Workspace) => {
-      this.workspace = data;
-      if (data) {
-        this.ongoing = data.ongoing === 'true' ? 'End' : 'Start';
-        this.getToday();
-      }
-    });
-  }
+  // subscriptions
+  updateSessionSubscription?: Subscription;
 
+  /**
+   * Get attendees today.
+   */
   getToday(): void {
-    const attendance = this.workspace?.attendance;
+    this.hasWorkspaceDataLoaded = false;
+
+    const attendance = this.workspace.attendance;
 
     if (attendance) {
-      const data =
+      const attendanceToday =
         attendance[this.today.getFullYear()]?.[this.today.getMonth()]?.['31'];
 
-      if (data) {
-        this.attendeesToday = data;
+      if (attendanceToday) {
+        this.attendeesToday = attendanceToday;
       }
     }
+
+    this.hasWorkspaceDataLoaded = true;
   }
 
+  /**
+   * Handles the changes in date-picker.
+   */
   onClose(isOpen: boolean): void {
     if (
       isOpen ||
-      !this.prevMonth ||
-      !this.month ||
-      (this.prevMonth.getFullYear() === this.month.getFullYear() &&
-        this.prevMonth.getMonth() === this.month.getMonth())
+      !this.prevSelectedDate ||
+      !this.selectedDate ||
+      (this.prevSelectedDate.getFullYear() ===
+        this.selectedDate.getFullYear() &&
+        this.prevSelectedDate.getMonth() === this.selectedDate.getMonth())
     )
       return;
 
-    this.getMonth();
-    this.prevMonth = this.month;
+    this.getMonthSummary();
+    this.prevSelectedDate = this.selectedDate;
   }
 
-  getMonth(): void {
-    this.attendeesMonth = {};
+  /**
+   * Get summary of attendees of the month.
+   */
+  getMonthSummary(): void {
+    if (!this.selectedDate) return;
 
-    const year = this.month.getFullYear();
-    const month = this.month.getMonth();
-    const data = this.workspace?.attendance[year]?.[month];
+    this.hasWorkspaceDataLoaded = false;
 
-    if (!data) return;
+    this.attendeesMonth = [];
 
-    this.attendeesMonth = data;
+    const year = this.selectedDate.getFullYear();
+    const month = this.selectedDate.getMonth();
+    const attendees = this.workspace!.attendance[year]?.[month];
+
+    if (attendees) {
+      Object.entries(attendees).forEach(([date, attendees]) => {
+        this.attendeesMonth.push({
+          date: `${
+            MONTHS[this.selectedDate.getMonth()]
+          } ${date}, ${this.selectedDate.getFullYear()}`,
+          attendees,
+        });
+      });
+    }
+
+    this.hasWorkspaceDataLoaded = true;
   }
 
+  /**
+   * Shows a notification about the invite link and copies link to clipboard.
+   */
   showInviteLink(): void {
-    const link = this.workspace!.code;
+    const link = this.workspace!.inviteCode;
 
     navigator.clipboard.writeText(`https://busykoala.com/invite?code=${link}`);
 
@@ -82,10 +110,13 @@ export class OwnWorkspaceComponent implements OnInit {
     );
   }
 
+  /**
+   * Updates the 'ongoing' property of a Workspace.
+   */
   updateSession(): void {
     this.workspace!.ongoing = this.ongoing === 'Start' ? 'true' : 'false';
 
-    this.workspacesService
+    this.updateSessionSubscription = this.workspacesService
       .updateWorkspace(this.workspace!)
       .subscribe((data) => {
         this.workspace = data;
@@ -94,6 +125,9 @@ export class OwnWorkspaceComponent implements OnInit {
       });
   }
 
+  /**
+   * Shows notification whether the session started or ended.
+   */
   showSessionUpdate(): void {
     this.notification.success(
       `Session ${this.ongoing.toLowerCase()}ed`,
@@ -111,7 +145,11 @@ export class OwnWorkspaceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    let selectedWorkspaceID = this.route.snapshot.paramMap.get('id')!;
-    this.getWorkspace(selectedWorkspaceID);
+    this.ongoing = this.workspace.ongoing === 'true' ? 'End' : 'Start';
+    this.getToday();
+  }
+
+  ngOnDestroy(): void {
+    this.updateSessionSubscription?.unsubscribe();
   }
 }

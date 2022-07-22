@@ -1,4 +1,5 @@
-import { CODE_LENGTH } from '../constants/constants';
+import { formatDuration, intervalToDuration } from 'date-fns';
+import { AGE_SUFFIX, CODE_LENGTH } from '../constants/constants';
 
 /**
  * Transforms 24hr format of time (Date object) into 12hr format (HH:MM M)
@@ -16,7 +17,7 @@ export function militaryToStandardTimeFormat(date: Date): string {
   if (hours == 12) {
     // 00:MM
     time += `12:${minutes} AM`;
-  } else if (hours <= 12) {
+  } else if (hours < 12) {
     // <= 12:MM
     time += `${hours}:${minutes} AM`;
   } else {
@@ -25,6 +26,28 @@ export function militaryToStandardTimeFormat(date: Date): string {
   }
 
   return time;
+}
+
+/**
+ * Transforms seconds to duration format (X hr, X min, X sec)
+ *
+ * @param seconds: number - seconds to be converted
+ * @return durationString: string - the formatted time
+ */
+export function secondsToDurationString(seconds: number): string {
+  let durationString = formatDuration(
+    intervalToDuration({ start: 0, end: seconds * 1000 })
+  );
+
+  // AGE_SUFFIX = ['y', 'm', 'd', 'h', 'm', 's'];
+  durationString = durationString.replace(/ years?/, AGE_SUFFIX[0]);
+  durationString = durationString.replace(/ months?/, AGE_SUFFIX[1]);
+  durationString = durationString.replace(/ days?/, AGE_SUFFIX[2]);
+  durationString = durationString.replace(/ hours?/, AGE_SUFFIX[3]);
+  durationString = durationString.replace(/ minutes?/, AGE_SUFFIX[4]);
+  durationString = durationString.replace(/ seconds?/, AGE_SUFFIX[5]);
+
+  return durationString;
 }
 
 /**

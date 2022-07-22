@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { Event } from '../calendar';
+import { CalendarEvent } from '../calendar';
 
 @Component({
   selector: 'app-create-event-form',
@@ -46,7 +46,7 @@ export class CreateEventFormComponent implements OnInit, OnChanges {
    */
   handleFocusOut(formControlName: string): void {
     const formControl = this.createEventForm.controls[formControlName];
-    if (formControl.invalid) this.markAsInvalid(formControl);
+    if (formControl?.invalid) this.markAsInvalid(formControl);
   }
 
   /**
@@ -85,7 +85,7 @@ export class CreateEventFormComponent implements OnInit, OnChanges {
         newEventDetails = `${newEventDetails})`;
       }
 
-      const newEvent: Event = {
+      const newEvent: CalendarEvent = {
         date: dateControl.value,
         event: newEventDetails,
       };

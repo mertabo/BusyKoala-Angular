@@ -59,11 +59,10 @@ export class AddWorkspaceModalComponent implements OnInit {
       const newWorkspace: Workspace = {
         id: '3',
         ongoing: 'false',
-        code: generateRandomCode(),
+        inviteCode: generateRandomCode(),
         name: titleControl.value,
         owner: LOGGEDIN_USER,
-        when: schedule,
-        members: [],
+        schedule,
         attendance: {},
       };
 

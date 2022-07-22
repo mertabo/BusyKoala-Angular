@@ -51,12 +51,11 @@
             nzSimple
             [nzSpinning]="!hasCalendarLoaded"
             [nzSize]="'large'"
-            [class]="'text-center my-3 ' + (hasCalendarLoaded ? 'd-none' : '')"
+            [class]="hasCalendarLoaded ? 'd-none' : ''"
           ></nz-spin>
           <nz-calendar
-            [class]="hasCalendarLoaded ? '' : 'd-none'"
             [(ngModel)]="selectedDate"
-            (nzSelectChange)="selectChange($event)"
+            (nzSelectChange)="selectChange()"
           >
             <ul *nzDateCell="let date">
               <ng-container [ngSwitch]="date.getDate()">

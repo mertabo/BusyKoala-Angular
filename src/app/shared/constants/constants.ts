@@ -14,5 +14,5 @@ export const MONTHS = [
   'Nov',
   'Dev',
 ];
-export const AGE_SUFFIX = ['yr', 'mo', 'day', 'hr', 'min'];
+export const AGE_SUFFIX = ['y', 'm', 'd', 'h', 'm', 's'];
 export const TIME_SEPARATOR = ' - ';

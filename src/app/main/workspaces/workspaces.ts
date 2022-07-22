@@ -1,10 +1,26 @@
+export interface AttendanceMonthlySummary {
+  date: string;
+  attendees: UserTimeData[];
+}
+
+export interface UserTimeData {
+  user: string;
+  time: string[];
+  duration: number;
+}
+
 export interface Workspace {
   id: string;
   ongoing: string;
-  code: string;
+  inviteCode: string;
   name: string;
   owner: string;
-  when: string;
-  members: string[];
-  attendance: any;
+  schedule: string;
+  attendance: {
+    [year: number]: {
+      [month: number]: {
+        [date: number]: UserTimeData[];
+      };
+    };
+  };
 }

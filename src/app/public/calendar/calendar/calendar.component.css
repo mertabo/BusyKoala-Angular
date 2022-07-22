@@ -12,3 +12,8 @@ nz-badge {
   text-overflow: ellipsis;
   font-size: 12px;
 }
+nz-spin {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+}

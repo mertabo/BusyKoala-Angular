@@ -15,6 +15,14 @@
 
 <!-- Workspaces -->
 <div class="scrollable-container" id="workspaces-container">
+  <div class="d-flex justify-content-center">
+    <nz-spin
+      nzSimple
+      [nzSpinning]="!hasWorkspaceLoaded"
+      [nzSize]="'large'"
+      [class]="hasWorkspaceLoaded ? 'd-none' : ''"
+    ></nz-spin>
+  </div>
   <div class="scrollable-content">
     <a
       *ngFor="let workspace of workspaces"
@@ -27,8 +35,17 @@
         [class.active]="selectedWorkspaceID === workspace.id"
       >
         <div class="card-body">
-          <h5 class="card-title">{{ workspace.name }}</h5>
-          <p class="card-subtitle mb-2 text-secondary">{{ workspace.when }}</p>
+          <h5 class="card-title">
+            {{ workspace.name }}
+            <span
+              *ngIf="workspace.owner === LOGGEDIN_USER"
+              class="badge bg-info"
+              >Own</span
+            >
+          </h5>
+          <p class="card-subtitle mb-2 text-secondary">
+            {{ workspace.schedule }}
+          </p>
         </div>
       </div>
     </a>

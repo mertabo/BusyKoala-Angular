@@ -1,25 +1,41 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { User } from 'src/app/auth/user';
+import { secondsToDurationString } from 'src/app/shared/utils/utils';
 
 @Component({
   selector: 'app-attendees-today',
   templateUrl: './attendees-today.component.html',
   styleUrls: ['./attendees-today.component.css'],
 })
-export class AttendeesTodayComponent implements OnInit {
+export class AttendeesTodayComponent implements OnInit, OnDestroy {
   @Input() attendee: any;
   name?: string;
+  duration: string = '';
 
-  getUser(): void {
-    this.authService.getUser(this.attendee.user).subscribe((data: User) => {
-      this.name = data.fullName;
-    });
+  // subscriptions
+  getFullNameSubscription!: Subscription;
+
+  /**
+   * Get the full name of the user.
+   */
+  getFullName(): void {
+    this.getFullNameSubscription = this.authService
+      .getUser(this.attendee.user)
+      .subscribe((data: User) => {
+        this.name = data.fullName;
+      });
   }
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.getUser();
+    this.getFullName();
+    this.duration = secondsToDurationString(this.attendee.duration);
+  }
+
+  ngOnDestroy(): void {
+    this.getFullNameSubscription.unsubscribe();
   }
 }

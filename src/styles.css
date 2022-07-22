@@ -267,6 +267,21 @@ aside {
 }
 /*
   ===============
+  LOADING INDICATOR
+  ===============
+*/
+nz-spin {
+  background-color: white;
+  box-shadow: #959da533 0px 8px 24px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  line-height: 45px;
+  height: 45px;
+  width: 45px;
+}
+/*
+  ===============
   WORKSPACES
   ===============
 */
@@ -278,7 +293,6 @@ button[nzType="text"] {
 }
 h6 {
   font-weight: 700;
-  color: #58abdd;
 }
 table {
   table-layout: fixed;
