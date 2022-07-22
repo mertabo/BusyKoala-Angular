@@ -1,3 +1,5 @@
+export const LOGGEDIN_USER = 'ericka';
+export const CODE_LENGTH = 8; // for the workspace code
 export const MONTHS = [
   'Jan',
   'Feb',
@@ -12,7 +14,5 @@ export const MONTHS = [
   'Nov',
   'Dev',
 ];
-
 export const AGE_SUFFIX = ['yr', 'mo', 'day', 'hr', 'min'];
-
 export const TIME_SEPARATOR = ' - ';

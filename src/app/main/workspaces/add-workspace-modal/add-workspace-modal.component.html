@@ -21,37 +21,54 @@
         <!-- Form -->
         <div class="scrollable-container" id="create-event-form-container">
           <div class="scrollable-content">
-            <form nz-form [nzLayout]="'vertical'">
+            <form
+              nz-form
+              [formGroup]="createWorkspaceForm"
+              [nzLayout]="'vertical'"
+            >
               <!-- Title field -->
               <nz-form-item>
-                <nz-form-label nzFor="title">Title:</nz-form-label>
-                <nz-form-control>
-                  <input nz-input placeholder="Input title" />
+                <nz-form-label nzRequired nzFor="title">Title:</nz-form-label>
+                <nz-form-control nzErrorTip="Please input the title!">
+                  <input
+                    nz-input
+                    formControlName="title"
+                    placeholder="Input title"
+                    (focusout)="handleFocusOut('title')"
+                  />
                 </nz-form-control>
               </nz-form-item>
 
-              <nz-form-item>
-                <nz-form-label nzFor="during">Schedule:</nz-form-label>
-                <nz-form-control>
-                  <nz-checkbox-group
-                    class="col"
-                    [(ngModel)]="daysOptions"
-                    name="daysOptions"
-                  ></nz-checkbox-group>
-                </nz-form-control>
-              </nz-form-item>
+              <!-- Schedule checkbox -->
+              <nz-form-item formGroupName="schedule">
+                <nz-form-label>Schedule:</nz-form-label>
 
-              <nz-form-item>
-                <nz-form-label nzFor="inviteLink"
-                  >Or use an invite link:</nz-form-label
-                >
                 <nz-form-control>
-                  <nz-form-control>
-                    <input
-                      nz-input
-                      placeholder="https://busykoala.com/invite/workspace/code"
-                    />
-                  </nz-form-control>
+                  <label nz-checkbox formControlName="Sun">Sunday</label>
+                </nz-form-control>
+
+                <nz-form-control>
+                  <label nz-checkbox formControlName="Mon">Monday</label>
+                </nz-form-control>
+
+                <nz-form-control>
+                  <label nz-checkbox formControlName="Tue">Tuesday</label>
+                </nz-form-control>
+
+                <nz-form-control>
+                  <label nz-checkbox formControlName="Wed">Wednesday</label>
+                </nz-form-control>
+
+                <nz-form-control>
+                  <label nz-checkbox formControlName="Thu">Thursday</label>
+                </nz-form-control>
+
+                <nz-form-control>
+                  <label nz-checkbox formControlName="Fri">Friday</label>
+                </nz-form-control>
+
+                <nz-form-control>
+                  <label nz-checkbox formControlName="Sat">Saturday</label>
                 </nz-form-control>
               </nz-form-item>
             </form>
@@ -62,7 +79,9 @@
         <button type="button" class="btn btn-text" data-bs-dismiss="modal">
           Close
         </button>
-        <button type="button" class="btn btn-cta">Save changes</button>
+        <button type="button" class="btn btn-cta" (click)="createWorkspace()">
+          Create
+        </button>
       </div>
     </div>
   </div>

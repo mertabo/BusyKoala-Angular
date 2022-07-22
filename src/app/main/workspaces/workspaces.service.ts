@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Workspace } from './workspaces';
-import { INVITE_LINK_LENGTH } from '../constants/workspace';
 
 @Injectable({
   providedIn: 'root',

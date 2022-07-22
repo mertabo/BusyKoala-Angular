@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { intervalToDuration } from 'date-fns';
-import { militaryToStandardTimeFormat } from 'src/app/shared/utils/date';
-import { AGE_SUFFIX, TIME_SEPARATOR } from '../../constants/calendar';
+import { militaryToStandardTimeFormat } from 'src/app/shared/utils/utils';
+import {
+  AGE_SUFFIX,
+  TIME_SEPARATOR,
+} from '../../../shared/constants/constants';
 
 @Component({
   selector: 'app-time-in-out',
@@ -27,33 +30,52 @@ export class TimeInOutComponent implements OnInit {
   }
 
   timeOut(): void {
-    const date = new Date(
+    const timeIn = new Date(
       this.date + ' ' + this.times[this.times.length - 1][0]
     );
-    const now = new Date();
+    const timeOut = new Date();
 
     // get time out
-    let time = militaryToStandardTimeFormat(now);
+    let newDuration = '';
+    let time = militaryToStandardTimeFormat(timeOut);
 
     // get duration
-    let duration = '';
-    const durationObj = intervalToDuration({
-      start: new Date(
-        `${this.date} ${this.timeInOutData.time[0].split(TIME_SEPARATOR)[0]}`
-      ),
-      end: now,
-    });
+    // let newDurationObj = intervalToDuration({
+    //   start: timeIn,
+    //   end: timeOut,
+    // });
 
-    const durationArr = Object.values(durationObj);
+    // const durationArr = Object.values(newDurationObj);
+
+    // for (let i = 0; i < AGE_SUFFIX.length; i++) {
+    //   if (durationArr[i])
+    //     newDuration += `${durationArr[i]}${AGE_SUFFIX[i]}${
+    //       durationArr[i] > 1 ? 's' : ''
+    //     } `;
+    // }
+
+    const newDurationDiff = [
+      timeOut.getFullYear() - timeIn.getFullYear(),
+      timeOut.getMonth() - timeIn.getMonth(),
+      timeOut.getDate() - timeIn.getDate(),
+      timeOut.getHours() - timeIn.getHours(),
+      timeOut.getMinutes() - timeIn.getMinutes(),
+    ];
 
     for (let i = 0; i < AGE_SUFFIX.length; i++) {
-      if (durationArr[i])
-        duration += `${durationArr[i]}${AGE_SUFFIX[i]}${
-          durationArr[i] > 1 ? 's' : ''
+      if (newDurationDiff[i])
+        newDuration += `${newDurationDiff[i]} ${AGE_SUFFIX[i]}${
+          newDurationDiff[i] > 1 ? 's' : ''
         } `;
     }
-    duration = duration.trim();
-    if (!duration) duration = '0mins';
+
+    newDuration = newDuration.trim();
+    if (!newDuration) newDuration = '0 mins';
+
+    // add current duration and new duration
+    let currentDurationDiff = this.timeInOutData.duration.split(' ');
+
+    console.log(newDuration);
 
     let tempTime = this.timeInOutData.time;
     tempTime[tempTime.length - 1] += ` - ${time}`;
@@ -61,12 +83,12 @@ export class TimeInOutComponent implements OnInit {
     const tempData = {
       ...this.timeInOutData,
       time: [...tempTime],
-      duration,
+      duration: newDuration,
     };
 
     this.currentlyTimedIn = false;
     this.times[this.times.length - 1][1] = time;
-    this.timed.emit({ date, tempData });
+    this.timed.emit({ date: timeIn, tempData });
   }
 
   constructor() {}

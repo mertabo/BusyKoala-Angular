@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { militaryToStandardTimeFormat } from 'src/app/shared/utils/date';
-import { LOGGEDIN_USER } from '../../constants/auth';
-import { MONTHS } from '../../constants/calendar';
+import { militaryToStandardTimeFormat } from 'src/app/shared/utils/utils';
+import { LOGGEDIN_USER, MONTHS } from '../../../shared/constants/constants';
 import { Workspace } from '../workspaces';
 import { WorkspacesService } from '../workspaces.service';
 
@@ -119,6 +118,7 @@ export class OtherWorkspaceComponent implements OnInit {
         this.workspace!.attendance[year][month][date][attendeeIndex].time.push(
           newTimeInData.time[0]
         );
+        this.workspace! = { ...this.workspace! };
       }
     }
 

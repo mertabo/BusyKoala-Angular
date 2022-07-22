@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LOGGEDIN_USER } from '../../constants/auth';
+import { LOGGEDIN_USER } from 'src/app/shared/constants/constants';
 import { Workspace } from '../workspaces';
 import { WorkspacesService } from '../workspaces.service';
 
