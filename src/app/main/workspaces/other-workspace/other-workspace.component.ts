@@ -44,24 +44,26 @@ export class OtherWorkspaceComponent implements OnInit, OnDestroy {
       const month = this.selectedMonth.getMonth();
       const monthlyData = attendance[year]?.[month];
 
-      if (!monthlyData) return;
+      if (monthlyData) {
+        Object.entries(monthlyData).forEach(([date, value]) => {
+          const attendees: UserTimeData[] = value;
 
-      Object.entries(monthlyData).forEach(([date, value]) => {
-        const attendees: UserTimeData[] = value;
+          // get data that belongs to the logged in user
+          const filteredDates = attendees.filter(
+            (attendee: UserTimeData) => attendee.user === LOGGEDIN_USER
+          )[0];
 
-        // get data that belongs to the logged in user
-        const filteredDates = attendees.filter(
-          (attendee: UserTimeData) => attendee.user === LOGGEDIN_USER
-        )[0];
+          if (filteredDates) {
+            this.timeInOutData.push(filteredDates);
 
-        if (filteredDates) {
-          this.timeInOutData.push(filteredDates);
-
-          // get date
-          const dateWithUserTime = `${MONTHS[Number(month)]} ${date}, ${year}`;
-          this.dates.push(dateWithUserTime);
-        }
-      });
+            // get date
+            const dateWithUserTime = `${
+              MONTHS[Number(month)]
+            } ${date}, ${year}`;
+            this.dates.push(dateWithUserTime);
+          }
+        });
+      }
     }
 
     this.checkIfCurrentlyTimedIn();
