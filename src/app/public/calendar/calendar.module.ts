@@ -9,6 +9,9 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { NzCalendarModule } from 'ng-zorro-antd/calendar';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 import { CalendarRoutingModule } from './calendar-routing.module';
 
@@ -29,6 +32,9 @@ import { CreateEventFormComponent } from './create-event-form/create-event-form.
     NzCalendarModule,
     NzBadgeModule,
     NzPopoverModule,
+    NzNotificationModule,
+    NzButtonModule,
+    NzSpinModule,
   ],
   exports: [],
 })

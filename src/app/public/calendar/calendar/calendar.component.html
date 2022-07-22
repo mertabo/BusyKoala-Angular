@@ -24,6 +24,8 @@
     >
       <div class="offcanvas-body">
         <app-create-event-form
+          [successfulRequest]="successfulRequest"
+          [isProcessingRequest]="isProcessingRequest"
           (submitted)="onSubmitted($event)"
         ></app-create-event-form>
       </div>
@@ -35,6 +37,8 @@
     -->
     <aside class="container-content d-none d-lg-inline">
       <app-create-event-form
+        [successfulRequest]="successfulRequest"
+        [isProcessingRequest]="isProcessingRequest"
         (submitted)="onSubmitted($event)"
       ></app-create-event-form>
     </aside>
@@ -43,21 +47,28 @@
     <section id="calendar" class="info-container-wsc">
       <div class="scrollable-container">
         <div class="scrollable-content">
+          <nz-spin
+            nzSimple
+            [nzSpinning]="!hasCalendarLoaded"
+            [nzSize]="'large'"
+            [class]="'text-center my-3 ' + (hasCalendarLoaded ? 'd-none' : '')"
+          ></nz-spin>
           <nz-calendar
+            [class]="hasCalendarLoaded ? '' : 'd-none'"
             [(ngModel)]="selectedDate"
             (nzSelectChange)="selectChange($event)"
           >
-            <ul *nzDateCell="let date" class="events">
+            <ul *nzDateCell="let date">
               <ng-container [ngSwitch]="date.getDate()">
-                <ng-container *ngFor="let eventDate of events | keyvalue">
+                <ng-container *ngFor="let eventData of events | keyvalue">
                   <ng-container
                     *ngIf="selectedDate.getMonth() === date.getMonth()"
                   >
-                    <ng-container *ngSwitchCase="eventDate.key">
+                    <ng-container *ngSwitchCase="eventData.key">
                       <li
                         nz-popover
-                        *ngFor="let event of eventDate.value"
-                        [nzPopoverTitle]="formatEventDate(date)"
+                        *ngFor="let event of eventData.value"
+                        [nzPopoverTitle]="popoverDateTemplate"
                         [nzPopoverContent]="event"
                       >
                         <nz-badge nzStatus="cyan" [nzText]="event"></nz-badge>
@@ -65,6 +76,10 @@
                     </ng-container>
                   </ng-container>
                 </ng-container>
+
+                <ng-template #popoverDateTemplate>
+                  <h6>{{ date | date }}</h6>
+                </ng-template>
               </ng-container>
             </ul>
           </nz-calendar>

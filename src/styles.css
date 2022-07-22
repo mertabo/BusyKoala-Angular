@@ -207,10 +207,15 @@ a.active {
   text-transform: uppercase;
   padding: 0.8em 1.5em;
 }
-.btn-cta:hover {
+.btn-cta:hover,
+.btn-cta:focus {
   color: white;
   border: 1px solid #488fbb;
   background-color: #488fbb;
+}
+.btn-cta:disabled {
+  color: white;
+  background-color: #6cafda;
 }
 .btn-text {
   color: #58abdd;

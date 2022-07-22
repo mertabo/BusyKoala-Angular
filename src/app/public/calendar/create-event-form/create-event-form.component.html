@@ -61,4 +61,12 @@
 </div>
 
 <!-- Submit button -->
-<button class="btn btn-cta w-100" (click)="submitForm()">Add event</button>
+<button
+  nz-button
+  [nzLoading]="isProcessingRequest"
+  [disabled]="isProcessingRequest"
+  class="btn btn-cta w-100 h-auto"
+  (click)="submitForm()"
+>
+  Add event
+</button>
