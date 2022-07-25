@@ -24,3 +24,8 @@ export interface Workspace {
     };
   };
 }
+
+// just for dummy workspace id only
+export interface WorkspacesTotal {
+  total: number;
+}

@@ -1,17 +1,28 @@
 <!-- Search bar -->
-<form class="d-flex">
+<div class="d-flex">
   <input
     type="text"
     class="form-control rounded-pill me-4 me-lg-0"
-    placeholder="Search"
+    placeholder="Search a workspace name"
+    name="searchField"
+    [(ngModel)]="searchFor"
+    (input)="filterSuggestions()"
+    (keyup.enter)="search()"
+    [nzAutocomplete]="searchAutoComplete"
   />
+  <nz-autocomplete
+    [nzDataSource]="filteredSearchOptions"
+    (selectionChange)="handleSelection($event)"
+    nzDefaultActiveFirstOption="false"
+    #searchAutoComplete
+  ></nz-autocomplete>
   <button
     type="button"
     class="btn-close text-reset p-0 d-lg-none"
     data-bs-dismiss="offcanvas"
     aria-label="Close"
   ></button>
-</form>
+</div>
 
 <!-- Workspaces -->
 <div class="scrollable-container" id="workspaces-container">
@@ -25,7 +36,7 @@
   </div>
   <div class="scrollable-content">
     <a
-      *ngFor="let workspace of workspaces"
+      *ngFor="let workspace of searchedWorkspaces"
       class="btn border-0 p-0 m-1"
       [routerLink]="'/workspaces/' + workspace.id"
       (click)="selectWorkspace(workspace.id)"

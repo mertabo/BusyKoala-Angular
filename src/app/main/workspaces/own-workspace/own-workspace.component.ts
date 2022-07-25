@@ -1,5 +1,12 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {
+  Component,
+  DoCheck,
+  Input,
+  KeyValueDiffer,
+  KeyValueDiffers,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import {
   AttendanceMonthlySummary,
   UserTimeData,
@@ -15,7 +22,7 @@ import { MONTHS } from 'src/app/shared/constants/constants';
   templateUrl: './own-workspace.component.html',
   styleUrls: ['./own-workspace.component.css'],
 })
-export class OwnWorkspaceComponent implements OnInit, OnDestroy {
+export class OwnWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
   @Input() workspace!: Workspace;
   hasWorkspaceDataLoaded = false;
   ongoing = '';
@@ -25,6 +32,7 @@ export class OwnWorkspaceComponent implements OnInit, OnDestroy {
   prevSelectedDate = new Date();
   attendeesToday: UserTimeData[] = [];
   attendeesMonth: AttendanceMonthlySummary[] = [];
+  private workspaceDiffer!: KeyValueDiffer<string, any>;
 
   // subscriptions
   updateSessionSubscription?: Subscription;
@@ -34,6 +42,7 @@ export class OwnWorkspaceComponent implements OnInit, OnDestroy {
    */
   getToday(): void {
     this.hasWorkspaceDataLoaded = false;
+    this.attendeesToday = [];
 
     const attendance = this.workspace.attendance;
 
@@ -79,7 +88,7 @@ export class OwnWorkspaceComponent implements OnInit, OnDestroy {
 
     const year = this.selectedDate.getFullYear();
     const month = this.selectedDate.getMonth();
-    const attendees = this.workspace!.attendance[year]?.[month];
+    const attendees = this.workspace.attendance[year]?.[month];
 
     if (attendees) {
       Object.entries(attendees).forEach(([date, attendees]) => {
@@ -99,7 +108,7 @@ export class OwnWorkspaceComponent implements OnInit, OnDestroy {
    * Shows a notification about the invite link and copies link to clipboard.
    */
   showInviteLink(): void {
-    const link = this.workspace!.inviteCode;
+    const link = this.workspace.inviteCode;
 
     navigator.clipboard.writeText(`https://busykoala.com/invite?code=${link}`);
 
@@ -114,14 +123,16 @@ export class OwnWorkspaceComponent implements OnInit, OnDestroy {
    * Updates the 'ongoing' property of a Workspace.
    */
   updateSession(): void {
-    this.workspace!.ongoing = this.ongoing === 'Start' ? 'true' : 'false';
+    this.workspace.ongoing = this.ongoing === 'Start' ? 'true' : 'false';
 
     this.updateSessionSubscription = this.workspacesService
-      .updateWorkspace(this.workspace!)
-      .subscribe((data) => {
-        this.workspace = data;
-        this.showSessionUpdate();
-        this.ongoing = data.ongoing === 'true' ? 'End' : 'Start';
+      .updateWorkspace(this.workspace)
+      .subscribe((updatedWorkspace) => {
+        if (updatedWorkspace.id) {
+          this.workspace = updatedWorkspace;
+          this.showSessionUpdate();
+          this.ongoing = updatedWorkspace.ongoing === 'true' ? 'End' : 'Start';
+        }
       });
   }
 
@@ -139,14 +150,25 @@ export class OwnWorkspaceComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private route: ActivatedRoute,
+    private differs: KeyValueDiffers,
     private workspacesService: WorkspacesService,
     private notification: NzNotificationService
   ) {}
 
   ngOnInit(): void {
+    this.workspaceDiffer = this.differs.find(this.workspace).create();
     this.ongoing = this.workspace.ongoing === 'true' ? 'End' : 'Start';
     this.getToday();
+  }
+
+  // watch for change in selected workspace
+  ngDoCheck(): void {
+    const changes = this.workspaceDiffer.diff(this.workspace);
+
+    if (changes) {
+      this.ongoing = this.workspace.ongoing === 'true' ? 'End' : 'Start';
+      this.getToday();
+    }
   }
 
   ngOnDestroy(): void {

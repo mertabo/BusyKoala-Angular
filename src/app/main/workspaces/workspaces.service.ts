@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Workspace } from './workspaces';
+import { Workspace, WorkspacesTotal } from './workspaces';
 import { LOGGEDIN_USER } from 'src/app/shared/constants/constants';
 
 @Injectable({
@@ -23,7 +23,7 @@ export class WorkspacesService {
    */
   getWorkspaces(): Observable<Workspace[]> {
     return this.http
-      .get<any>(`${this.workspacesUrl}?q=${LOGGEDIN_USER}`)
+      .get<Workspace[]>(`${this.workspacesUrl}?q=${LOGGEDIN_USER}`)
       .pipe(catchError(this.handleError<any>([])));
   }
 
@@ -35,7 +35,7 @@ export class WorkspacesService {
    */
   getWorkspace(id: string): Observable<Workspace> {
     return this.http
-      .get<any>(`${this.workspacesUrl}/${id}`)
+      .get<Observable<Workspace>>(`${this.workspacesUrl}/${id}`)
       .pipe(catchError(this.handleError<any>({ id: '' })));
   }
 
@@ -47,9 +47,52 @@ export class WorkspacesService {
    */
   updateWorkspace(updatedWorkspace: Workspace): Observable<Workspace> {
     return this.http
-      .put<any>(
+      .put<Observable<Workspace>>(
         `${this.workspacesUrl}/${updatedWorkspace.id}`,
         updatedWorkspace,
+        this.httpOptions
+      )
+      .pipe(catchError(this.handleError<any>({ id: '' })));
+  }
+
+  /**
+   * Get the total number of workspaces.
+   * For dummy workspace id.
+   */
+  getWorkspacesTotal(): Observable<WorkspacesTotal> {
+    return this.http
+      .get<Observable<WorkspacesTotal>>(`${this.workspacesUrl}Total`)
+      .pipe(catchError(this.handleError<any>({ total: 23 })));
+  }
+
+  /**
+   * Update the total number of workspaces.
+   * Called when creation of a new workspace is successful.
+   *
+   * @param updatedWorkspacesTotal: WorkspacesTotal - the updated WorkspacesTotal
+   */
+  updateWorkspacesTotal(
+    updatedWorkspacesTotal: WorkspacesTotal
+  ): Observable<WorkspacesTotal> {
+    return this.http
+      .put<Observable<WorkspacesTotal>>(
+        `${this.workspacesUrl}Total`,
+        updatedWorkspacesTotal,
+        this.httpOptions
+      )
+      .pipe(catchError(this.handleError<any>({ total: 0 })));
+  }
+
+  /**
+   * Create a new workspace.
+   *
+   * @param newWorkspace: Workspace - the new workspace to be added
+   */
+  createWorkspace(newWorkspace: Workspace): Observable<Workspace> {
+    return this.http
+      .post<Observable<Workspace>>(
+        this.workspacesUrl,
+        newWorkspace,
         this.httpOptions
       )
       .pipe(catchError(this.handleError<any>({ id: '' })));

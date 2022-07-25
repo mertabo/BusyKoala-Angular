@@ -13,3 +13,7 @@ a .card:hover {
 a.m-1 {
   width: calc(100% - 8px);
 }
+/* https://github.com/angular/components/issues/5540 */
+::ng-deep .cdk-overlay-container {
+  z-index: 9999 !important;
+}

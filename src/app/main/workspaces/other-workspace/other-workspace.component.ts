@@ -1,5 +1,12 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {
+  Component,
+  DoCheck,
+  Input,
+  KeyValueDiffer,
+  KeyValueDiffers,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import cloneDeep from 'lodash/cloneDeep';
 import { Subscription } from 'rxjs';
 import { militaryToStandardTimeFormat } from 'src/app/shared/utils/utils';
@@ -16,7 +23,7 @@ import { WorkspacesService } from '../workspaces.service';
   templateUrl: './other-workspace.component.html',
   styleUrls: ['./other-workspace.component.css'],
 })
-export class OtherWorkspaceComponent implements OnInit, OnDestroy {
+export class OtherWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
   @Input() workspace!: Workspace;
   localWorkspace!: Workspace;
   hasWorkspaceDataLoaded = false;
@@ -25,6 +32,7 @@ export class OtherWorkspaceComponent implements OnInit, OnDestroy {
   timeInOutData: UserTimeData[] = [];
   dates: string[] = []; // dates (in string format) of the cards
   isTimedIn: boolean = false;
+  private workspaceDiffer!: KeyValueDiffer<string, any>;
 
   // subscriptions
   timeInSubscription?: Subscription;
@@ -54,13 +62,13 @@ export class OtherWorkspaceComponent implements OnInit, OnDestroy {
           )[0];
 
           if (filteredDates) {
-            this.timeInOutData.push(filteredDates);
+            this.timeInOutData.unshift(filteredDates);
 
             // get date
             const dateWithUserTime = `${
               MONTHS[Number(month)]
             } ${date}, ${year}`;
-            this.dates.push(dateWithUserTime);
+            this.dates.unshift(dateWithUserTime);
           }
         });
       }
@@ -80,9 +88,9 @@ export class OtherWorkspaceComponent implements OnInit, OnDestroy {
 
     // checks the latest data in timeInOutData
     if (
-      this.timeInOutData[timeInOutDataLength - 1].time[
-        this.timeInOutData[timeInOutDataLength - 1].time.length - 1
-      ].split(TIME_SEPARATOR).length < 2
+      this.timeInOutData[0].time[this.timeInOutData[0].time.length - 1].split(
+        TIME_SEPARATOR
+      ).length < 2
     ) {
       this.isTimedIn = true;
     }
@@ -168,12 +176,10 @@ export class OtherWorkspaceComponent implements OnInit, OnDestroy {
             `${MONTHS[Number(month)]} ${date}, ${year}`
           );
           if (dateIndex < 0) {
-            this.dates.push(`${MONTHS[Number(month)]} ${date}, ${year}`);
+            this.dates.unshift(`${MONTHS[Number(month)]} ${date}, ${year}`);
             this.timeInOutData.unshift(newTimeInData);
           } else {
-            this.timeInOutData[this.timeInOutData.length - 1].time.push(
-              newTimeInData.time[0]
-            );
+            this.timeInOutData[0].time.push(newTimeInData.time[0]);
           }
         } else {
           this.isTimedIn = false;
@@ -218,13 +224,24 @@ export class OtherWorkspaceComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private route: ActivatedRoute,
+    private differs: KeyValueDiffers,
     private workspacesService: WorkspacesService
   ) {}
 
   ngOnInit(): void {
+    this.workspaceDiffer = this.differs.find(this.workspace).create();
     this.localWorkspace = cloneDeep(this.workspace);
     this.getTimeInOutData();
+  }
+
+  ngDoCheck(): void {
+    // watch for change in selected workspace
+    const changes = this.workspaceDiffer.diff(this.workspace);
+
+    if (changes) {
+      this.localWorkspace = cloneDeep(this.workspace);
+      this.getTimeInOutData();
+    }
   }
 
   ngOnDestroy(): void {

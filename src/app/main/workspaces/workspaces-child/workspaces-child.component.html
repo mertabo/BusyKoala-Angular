@@ -1,12 +1,3 @@
-<div class="d-flex justify-content-center">
-  <nz-spin
-    nzSimple
-    [nzSpinning]="!workspace"
-    [nzSize]="'large'"
-    [class]="workspace ? 'd-none' : ''"
-  ></nz-spin>
-</div>
-
 <app-own-workspace
   *ngIf="ownWorkspace && workspace"
   [workspace]="workspace"

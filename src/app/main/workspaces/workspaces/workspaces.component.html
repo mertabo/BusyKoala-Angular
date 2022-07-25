@@ -23,7 +23,9 @@
       id="offCanvasCreateEventForm"
     >
       <div class="offcanvas-body">
-        <app-workspaces-list></app-workspaces-list>
+        <app-workspaces-list
+          [newWorkspaceAlert]="newWorkspaceAlert"
+        ></app-workspaces-list>
       </div>
     </aside>
 
@@ -32,11 +34,15 @@
       for screen sizes greater than 991px
     -->
     <aside class="container-content d-none d-lg-inline">
-      <app-workspaces-list></app-workspaces-list>
+      <app-workspaces-list
+        [newWorkspaceAlert]="newWorkspaceAlert"
+      ></app-workspaces-list>
     </aside>
 
     <!-- Add workspace modal toggled by app-workspaces-list -->
-    <app-add-workspace-modal></app-add-workspace-modal>
+    <app-add-workspace-modal
+      (updateWorkspacesList)="updateWorkspacesList($event)"
+    ></app-add-workspace-modal>
 
     <!-- Workspace information -->
     <section class="info-container-wsc container-content">
