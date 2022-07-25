@@ -3,13 +3,15 @@
     <h6>{{ name }}</h6>
   </ng-template>
 
-  <p>
-    <span class="text-secondary">Duration: </span
-    ><b class="fw-bold">{{ duration }}</b>
-  </p>
+  <div class="table-wrapper">
+    <p>
+      <span class="text-secondary">Duration: </span
+      ><b class="fw-bold">{{ duration }}</b>
+    </p>
 
-  <p class="text-secondary pt-3">Time in - Time out:</p>
-  <p *ngFor="let time of attendee.time">
-    <b class="fw-bold">{{ time }}</b>
-  </p>
+    <p class="text-secondary pt-3">Time in - Time out:</p>
+    <p *ngFor="let time of attendee.time">
+      <b class="fw-bold">{{ time }}</b>
+    </p>
+  </div>
 </nz-card>

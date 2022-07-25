@@ -4,46 +4,31 @@
       "id": "ericka",
       "fullName": "Ericka Tabo",
       "password": "password123",
-      "workspaces": [
-        1,
-        2
-      ]
+      "workspaces": [1, 2]
     },
     {
       "id": "millie",
       "fullName": "Millie Bobby Brown",
       "password": "password123",
-      "workspaces": [
-        1,
-        2
-      ]
+      "workspaces": [1, 2]
     },
     {
       "id": "taylor",
       "fullName": "Taylor Swift",
       "password": "password123",
-      "workspaces": [
-        1,
-        2
-      ]
+      "workspaces": [1, 2]
     },
     {
       "id": "steve",
       "fullName": "Joe Keery",
       "password": "password123",
-      "workspaces": [
-        1,
-        2
-      ]
+      "workspaces": [1, 2]
     },
     {
       "id": "dusty-bun",
       "fullName": "Gaten Matarazzo",
       "password": "password123",
-      "workspaces": [
-        1,
-        2
-      ]
+      "workspaces": [1, 2]
     }
   ],
   "workspaces": [
@@ -60,39 +45,27 @@
             "3": [
               {
                 "user": "millie",
-                "time": [
-                  "9:05 AM - 10:30 AM"
-                ],
+                "time": ["9:05 AM - 10:30 AM"],
                 "duration": 232425
               },
               {
                 "user": "taylor",
-                "time": [
-                  "9:04 AM - 10:04 AM"
-                ],
+                "time": ["9:04 AM - 10:04 AM"],
                 "duration": 2326354
               },
               {
                 "user": "steve",
-                "time": [
-                  "9:02 AM - 9:48 AM",
-                  "10:00 AM - 10:30 AM"
-                ],
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
                 "duration": 1213
               },
               {
                 "user": "dusty-bun",
-                "time": [
-                  "8:59 AM - 10:30 AM"
-                ],
+                "time": ["8:59 AM - 10:30 AM"],
                 "duration": 456456
               },
               {
                 "user": "ericka",
-                "time": [
-                  "9:02 AM - 9:48 AM",
-                  "10:00 AM - 10:30 AM"
-                ],
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
                 "duration": 24864
               }
             ]
@@ -101,155 +74,110 @@
             "1": [
               {
                 "user": "millie",
-                "time": [
-                  "9:05 AM - 10:30 AM"
-                ],
+                "time": ["9:05 AM - 10:30 AM"],
                 "duration": 4348
               },
               {
                 "user": "taylor",
-                "time": [
-                  "9:04 AM - 10:04 AM"
-                ],
+                "time": ["9:04 AM - 10:04 AM"],
                 "duration": 2324
               },
               {
                 "user": "steve",
-                "time": [
-                  "9:02 AM - 9:48 AM",
-                  "10:00 AM - 10:30 AM"
-                ],
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
                 "duration": 45352
               },
               {
                 "user": "dusty-bun",
-                "time": [
-                  "8:59 AM - 10:30 AM"
-                ],
+                "time": ["8:59 AM - 10:30 AM"],
                 "duration": 5386
               }
             ],
             "2": [
               {
                 "user": "millie",
-                "time": [
-                  "9:05 AM - 10:30 AM"
-                ],
+                "time": ["9:05 AM - 10:30 AM"],
                 "duration": 453
               },
               {
                 "user": "taylor",
-                "time": [
-                  "9:04 AM - 10:04 AM"
-                ],
+                "time": ["9:04 AM - 10:04 AM"],
                 "duration": 2324
               },
               {
                 "user": "steve",
-                "time": [
-                  "9:02 AM - 9:48 AM",
-                  "10:00 AM - 10:30 AM"
-                ],
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
                 "duration": 453
               },
               {
                 "user": "dusty-bun",
-                "time": [
-                  "8:59 AM - 10:30 AM"
-                ],
+                "time": ["8:59 AM - 10:30 AM"],
                 "duration": 54566
               },
               {
                 "user": "ericka",
-                "time": [
-                  "8:50 AM - 4:55 PM"
-                ],
+                "time": ["8:50 AM - 4:55 PM"],
                 "duration": 23535
               }
             ],
             "3": [
               {
                 "user": "millie",
-                "time": [
-                  "9:05 AM - 10:30 AM"
-                ],
+                "time": ["9:05 AM - 10:30 AM"],
                 "duration": 54531
               },
               {
                 "user": "taylor",
-                "time": [
-                  "9:04 AM - 10:04 AM"
-                ],
+                "time": ["9:04 AM - 10:04 AM"],
                 "duration": 2324
               },
               {
                 "user": "steve",
-                "time": [
-                  "9:02 AM - 9:48 AM",
-                  "10:00 AM - 10:30 AM"
-                ],
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
                 "duration": 215313
               },
               {
                 "user": "dusty-bun",
-                "time": [
-                  "8:59 AM - 10:30 AM"
-                ],
+                "time": ["8:59 AM - 10:30 AM"],
                 "duration": 54566
               },
               {
                 "user": "ericka",
-                "time": [
-                  "8:59 AM - 10:30 AM",
-                  "10:46 AM - 11:00 AM"
-                ],
+                "time": ["8:59 AM - 10:30 AM", "10:46 AM - 11:00 AM"],
                 "duration": 315
               }
             ],
             "8": [
               {
                 "user": "millie",
-                "time": [
-                  "9:05 AM - 10:30 AM"
-                ],
+                "time": ["9:05 AM - 10:30 AM"],
                 "duration": 54531
               },
               {
                 "user": "taylor",
-                "time": [
-                  "9:04 AM - 10:04 AM"
-                ],
+                "time": ["9:04 AM - 10:04 AM"],
                 "duration": 2324
               },
               {
                 "user": "steve",
-                "time": [
-                  "9:02 AM - 9:48 AM",
-                  "10:00 AM - 10:30 AM"
-                ],
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
                 "duration": 215313
               },
               {
                 "user": "dusty-bun",
-                "time": [
-                  "8:59 AM - 10:30 AM"
-                ],
+                "time": ["8:59 AM - 10:30 AM"],
                 "duration": 54566
               },
               {
                 "user": "ericka",
-                "time": [
-                  "8:50 AM - 7:00 PM"
-                ],
+                "time": ["8:50 AM - 7:00 PM"],
                 "duration": 23535
               }
             ],
             "21": [
               {
                 "user": "millie",
-                "time": [
-                  "6:48 PM"
-                ],
+                "time": ["6:48 PM"],
                 "duration": 253
               },
               {
@@ -278,10 +206,15 @@
             "23": [
               {
                 "user": "ericka",
-                "time": [
-                  "9:37 PM - 9:37 PM"
-                ],
+                "time": ["9:37 PM - 9:37 PM"],
                 "duration": 49
+              }
+            ],
+            "25": [
+              {
+                "user": "ericka",
+                "time": ["6:22 PM - 6:23 PM", "6:23 PM - 6:40 PM"],
+                "duration": 1093
               }
             ]
           }
@@ -301,31 +234,34 @@
             "31": [
               {
                 "user": "millie",
-                "time": [
-                  "9:05 AM - 10:30 AM"
-                ],
+                "time": ["9:05 AM - 10:30 AM"],
                 "duration": 54531
               },
               {
                 "user": "taylor",
-                "time": [
-                  "9:04 AM - 10:04 AM"
-                ],
+                "time": ["9:04 AM - 10:04 AM"],
                 "duration": 2324
               },
               {
                 "user": "steve",
                 "time": [
                   "9:02 AM - 9:48 AM",
+                  "10:00 AM - 10:30 AM",
+                  "9:02 AM - 9:48 AM",
+                  "10:00 AM - 10:30 AM",
+                  "10:00 AM - 10:30 AM",
+                  "10:00 AM - 10:30 AM",
+                  "10:00 AM - 10:30 AM",
+                  "10:00 AM - 10:30 AM",
+                  "10:00 AM - 10:30 AM",
+                  "10:00 AM - 10:30 AM",
                   "10:00 AM - 10:30 AM"
                 ],
                 "duration": 215313
               },
               {
                 "user": "dusty-bun",
-                "time": [
-                  "8:59 AM - 10:30 AM"
-                ],
+                "time": ["8:59 AM - 10:30 AM"],
                 "duration": 54566
               }
             ]
@@ -340,42 +276,29 @@
       "name": "Not My Session",
       "owner": "millie",
       "when": "Tue, Thu",
-      "members": [
-        "taylor",
-        "steve",
-        "dusty-bun"
-      ],
+      "members": ["taylor", "steve", "dusty-bun"],
       "attendance": {
         "2022": {
           "6": {
             "31": [
               {
                 "user": "millie",
-                "time": [
-                  "9:05 AM - 10:30 AM"
-                ],
+                "time": ["9:05 AM - 10:30 AM"],
                 "duration": 54531
               },
               {
                 "user": "taylor",
-                "time": [
-                  "9:04 AM - 10:04 AM"
-                ],
+                "time": ["9:04 AM - 10:04 AM"],
                 "duration": 2324
               },
               {
                 "user": "steve",
-                "time": [
-                  "9:02 AM - 9:48 AM",
-                  "10:00 AM - 10:30 AM"
-                ],
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
                 "duration": 215313
               },
               {
                 "user": "dusty-bun",
-                "time": [
-                  "8:59 AM - 10:30 AM"
-                ],
+                "time": ["8:59 AM - 10:30 AM"],
                 "duration": 54566
               }
             ]
@@ -396,33 +319,24 @@
             "24": [
               {
                 "user": "ericka",
-                "time": [
-                  "6:19 PM - 6:19 PM"
-                ],
+                "time": ["6:19 PM - 6:19 PM"],
                 "duration": 55
               }
             ],
             "31": [
               {
                 "user": "taylor",
-                "time": [
-                  "9:04 AM - 10:04 AM"
-                ],
+                "time": ["9:04 AM - 10:04 AM"],
                 "duration": 2324
               },
               {
                 "user": "steve",
-                "time": [
-                  "9:02 AM - 9:48 AM",
-                  "10:00 AM - 10:30 AM"
-                ],
+                "time": ["9:02 AM - 9:48 AM", "10:00 AM - 10:30 AM"],
                 "duration": 215313
               },
               {
                 "user": "ericka",
-                "time": [
-                  "8:59 AM - 10:30 AM"
-                ],
+                "time": ["8:59 AM - 10:30 AM"],
                 "duration": 54566
               }
             ]

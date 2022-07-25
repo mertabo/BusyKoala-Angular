@@ -12,27 +12,25 @@
     <span class="text-secondary">Number of attendees: </span
     ><b class="fw-bold">{{ monthlySummary.attendees.length }}</b>
   </p>
-  <table class="table table-hover mt-3">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Time in - Time out</th>
-        <th scope="col">Duration</th>
-      </tr>
-    </thead>
+  <div class="table-wrapper">
+    <table class="table table-hover mt-3">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Time in - Time out</th>
+          <th scope="col">Duration</th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <tr *ngFor="let attendee of monthlySummary.attendees; index as i">
-        <td>{{ attendeeNames$[i] | async }}</td>
-        <td>
-          <p *ngFor="let time of attendee.time">{{ time }}</p>
-        </td>
-        <td>{{ attendeeDurations[i] }}</td>
-      </tr>
-
-      <tr>
-        <td colspan="3" class="text-center text-secondary">See all...</td>
-      </tr>
-    </tbody>
-  </table>
+      <tbody>
+        <tr *ngFor="let attendee of monthlySummary.attendees; index as i">
+          <td>{{ attendeeNames$[i] | async }}</td>
+          <td>
+            <p *ngFor="let time of attendee.time">{{ time }}</p>
+          </td>
+          <td>{{ attendeeDurations[i] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </nz-card>

@@ -8,30 +8,28 @@
     <span class="text-secondary">Duration: </span
     ><b class="fw-bold">{{ duration }}</b>
   </p>
-  <table class="table table-hover mt-3">
-    <thead>
-      <tr>
-        <th scope="col">Time in</th>
-        <th scope="col">Time out</th>
-      </tr>
-    </thead>
+  <div class="table-wrapper">
+    <table class="table table-hover mt-3">
+      <thead>
+        <tr>
+          <th scope="col">Time started</th>
+          <th scope="col">Time ended</th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <tr *ngFor="let time of times">
-        <td>{{ time[0] }}</td>
-        <td>{{ time[1] }}</td>
-      </tr>
-
-      <tr>
-        <td colspan="2" class="text-center text-secondary">See all...</td>
-      </tr>
-    </tbody>
-  </table>
+      <tbody>
+        <tr *ngFor="let time of times">
+          <td>{{ time[0] }}</td>
+          <td>{{ time[1] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </nz-card>
 
 <ng-template #titleTemplate>
   <h6>{{ date }}</h6>
 </ng-template>
 <ng-template #actionTimeOut>
-  <span (click)="timeOut()">Time out</span>
+  <span (click)="timeOut()">Take a break</span>
 </ng-template>

@@ -297,6 +297,10 @@ h6 {
 table {
   table-layout: fixed;
 }
+.table-wrapper {
+  height: 250px;
+  overflow: auto;
+}
 th {
   font-weight: 700;
 }
