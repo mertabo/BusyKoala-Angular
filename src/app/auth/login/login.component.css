@@ -1,0 +1,55 @@
+.col-8 {
+  margin: 80px 0;
+}
+.fa-brands {
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-size: 20px;
+  padding: 1.2em;
+  margin: 4px;
+}
+.fa-facebook-f {
+  color: #3b5998;
+}
+.fa-twitter {
+  color: #1da1f2;
+}
+.fa-instagram {
+  /* https://stackoverflow.com/questions/37751375/instagram-new-logo-css-background */
+  background: radial-gradient(
+      circle farthest-corner at 35% 90%,
+      #fec564,
+      transparent 50%
+    ),
+    radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%),
+    radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%),
+    radial-gradient(
+      ellipse farthest-corner at 20% -50%,
+      #5258cf,
+      transparent 50%
+    ),
+    radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%),
+    radial-gradient(
+      ellipse farthest-corner at 60% -20%,
+      #893dc2,
+      transparent 50%
+    ),
+    radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent),
+    linear-gradient(
+      #6559ca,
+      #bc318f 30%,
+      #e33f5f 50%,
+      #f77638 70%,
+      #fec66d 100%
+    );
+  background-clip: text;
+  color: transparent;
+}
+a > i {
+  box-shadow: none;
+  transition: box-shadow 0.2s linear;
+}
+a:hover > i {
+  box-shadow: #63636333 0px 2px 8px 0px;
+  transition: box-shadow 0.2s linear;
+}

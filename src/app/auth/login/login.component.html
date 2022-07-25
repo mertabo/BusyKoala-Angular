@@ -1,4 +1,89 @@
 <div class="body-content">
-  <p>login works!</p>
-  <button (click)="login()">Login</button>
+  <div [class]="'container ' + (checkedIfLoggedIn ? '' : 'd-none')">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-8 col-md-6">
+        <h1 class="display-5 text-center">Welcome back!</h1>
+        <form
+          nz-form
+          [formGroup]="loginForm"
+          [nzLayout]="'vertical'"
+          class="py-5"
+        >
+          <!-- Username field -->
+          <nz-form-item>
+            <nz-form-label nzRequired nzFor="username">Username</nz-form-label>
+            <nz-form-control [nzErrorTip]="userErrorTpl">
+              <input
+                nz-input
+                formControlName="username"
+                placeholder="username"
+                (focusout)="handleFocusOut('username')"
+              />
+              <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')"
+                  >Please input your username!</ng-container
+                >
+                <ng-container *ngIf="control.hasError('userNotFound')"
+                  >Username does not exist!</ng-container
+                >
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+
+          <!-- Password field -->
+          <nz-form-item>
+            <nz-form-label nzRequired nzFor="password">Password</nz-form-label>
+            <nz-form-control [nzErrorTip]="passwordErrorTpl">
+              <input
+                nz-input
+                type="password"
+                formControlName="password"
+                placeholder="●●●●●●●●"
+                (focusout)="handleFocusOut('password')"
+              />
+              <ng-template #passwordErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')"
+                  >Please input your password!</ng-container
+                >
+                <ng-container *ngIf="control.hasError('incorrectPW')"
+                  >Incorrect password!</ng-container
+                >
+              </ng-template>
+            </nz-form-control>
+            <a class="text-end">Forgot password?</a>
+          </nz-form-item>
+
+          <button class="btn btn-cta mt-2 w-100" (click)="login()">
+            Login
+          </button>
+          <div class="fluid-container">
+            <div class="row my-4">
+              <div class="col">
+                <hr />
+              </div>
+              <div class="col-5 col-sm-4 col-lg-3 text-center">
+                <p class="text-secondary">Or login with</p>
+              </div>
+              <div class="col">
+                <hr />
+              </div>
+            </div>
+            <div class="d-flex justify-content-center">
+              <a class="">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+              <a class="">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+              <a class="">
+                <i class="fa-brands fa-twitter"></i>
+              </a>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
 </div>

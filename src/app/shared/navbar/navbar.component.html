@@ -73,7 +73,7 @@
         type="button"
         id="dropdownMenuButton"
         data-bs-toggle="dropdown"
-        data-initials="ET"
+        [attr.data-initials]="loggedInUserInitials"
         aria-expanded="false"
       ></button>
       <ul
