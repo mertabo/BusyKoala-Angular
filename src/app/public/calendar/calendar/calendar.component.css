@@ -5,15 +5,27 @@
   padding: 0 20px;
   margin-top: -15px;
 }
-nz-badge {
+nz-badge,
+#popoverEventTemplate h4 {
   overflow: hidden;
   white-space: nowrap;
   width: 100%;
   text-overflow: ellipsis;
+}
+nz-badge {
   font-size: 12px;
 }
 nz-spin {
   position: absolute;
   top: 80px;
   left: 50%;
+}
+.text-small {
+  font-size: 14px;
+}
+.fa {
+  color: #bdbdbd;
+}
+#popoverEventTemplate {
+  max-width: 250px !important;
 }

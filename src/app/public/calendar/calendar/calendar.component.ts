@@ -83,7 +83,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
    *
    * @param eventData: Event - new event to be created
    */
-  onSubmitted(eventData: CalendarEvent): void {
+  onSubmitted(eventData: { date: Date; event: CalendarEvent }): void {
     // only let user submit one request at a time
     this.successfulRequest = false;
     this.isProcessingRequest = true;

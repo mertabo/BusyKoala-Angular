@@ -1,6 +1,7 @@
 export interface CalendarEvent {
-  date: Date;
-  event: string;
+  title: string;
+  time: string;
+  workplace: string;
 }
 
 export interface Calendar {
@@ -8,7 +9,7 @@ export interface Calendar {
   events: {
     [year: number]: {
       [month: number]: {
-        [date: number]: string[];
+        [date: number]: CalendarEvent[];
       };
     };
   };

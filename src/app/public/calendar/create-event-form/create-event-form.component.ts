@@ -61,34 +61,22 @@ export class CreateEventFormComponent implements OnInit, OnChanges {
 
     if (this.createEventForm.valid) {
       // event name format: Title (Time @ Workplace)
-      let newEventDetails = titleControl.value;
+      const newEventDetails: CalendarEvent = {
+        title: titleControl.value,
+        time: '',
+        workplace: '',
+      };
 
-      if (timeControl.value || workplaceControl.value) {
-        newEventDetails = `${newEventDetails} (`;
+      if (timeControl.value)
+        newEventDetails.time = formatDate(timeControl.value, 'h:mm a', 'en-US');
+      if (workplaceControl.value)
+        newEventDetails.workplace = workplaceControl.value;
 
-        if (timeControl.value) {
-          newEventDetails = `${newEventDetails}${formatDate(
-            timeControl.value,
-            'h:mm a',
-            'en-US'
-          )}`;
-
-          if (workplaceControl.value) {
-            newEventDetails = `${newEventDetails} `;
-          }
-        }
-
-        if (workplaceControl.value) {
-          newEventDetails = `${newEventDetails}@ ${workplaceControl.value}`;
-        }
-
-        newEventDetails = `${newEventDetails})`;
-      }
-
-      const newEvent: CalendarEvent = {
+      const newEvent = {
         date: dateControl.value,
         event: newEventDetails,
       };
+
       this.submitted.emit(newEvent);
     } else {
       if (titleControl.invalid) this.markAsInvalid(titleControl);

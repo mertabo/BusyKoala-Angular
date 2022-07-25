@@ -445,84 +445,32 @@
       "id": "ericka",
       "events": {
         "2022": {
-          "5": {
-            "27": [
-              "dfgs"
-            ]
-          },
           "6": {
-            "1": [
-              "dfg",
-              "sdfg"
-            ],
-            "2": [
-              "fdg",
-              "fdh"
-            ],
-            "3": [
-              "sdfsfd",
-              "hey"
-            ],
-            "4": [
-              "ss",
-              "dfgdfg"
-            ],
             "5": [
-              "fdg",
-              "fghfgh",
-              "dfgdf",
-              "fdssgf"
-            ],
-            "6": [
-              "dfgg",
-              "try"
-            ],
-            "7": [
-              "sdf"
-            ],
-            "8": [
-              "Sesh (10AM @ Exist Software Labs, Inc.)"
-            ],
-            "9": [
-              "gdf"
-            ],
-            "10": [
-              "fd"
-            ],
-            "16": [
-              "dfg",
-              "fdfg"
-            ],
-            "18": [
-              "Birthday"
+              {
+                "title": "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest",
+                "time": "10:00 AM",
+                "workplace": "Test Session"
+              }
             ],
             "19": [
-              "Gala",
-              "Swimming"
+              {
+                "title": "again",
+                "time": "",
+                "workplace": "SF"
+              }
             ],
-            "22": [
-              "try",
-              "dfg (@ fgd)",
-              "dg",
-              "dfg",
-              "gfh",
-              "dfgdf",
-              "gh (5:34 PM @ ghjhj)",
-              "sdfs"
-            ],
-            "23": [
-              ""
-            ]
-          },
-          "7": {
-            "7": [
-              "Event (@Somewhere)"
-            ],
-            "22": [
-              "hello"
-            ],
-            "31": [
-              "Yay"
+            "25": [
+              {
+                "title": "test",
+                "time": "",
+                "workplace": ""
+              },
+              {
+                "title": "try",
+                "time": "6:13 PM",
+                "workplace": ""
+              }
             ]
           }
         }

@@ -68,17 +68,37 @@
                         nz-popover
                         *ngFor="let event of eventData.value"
                         [nzPopoverTitle]="popoverDateTemplate"
-                        [nzPopoverContent]="event"
+                        [nzPopoverContent]="popoverEventTemplate"
                       >
-                        <nz-badge nzStatus="cyan" [nzText]="event"></nz-badge>
+                        <!-- popover -->
+                        <ng-template #popoverDateTemplate>
+                          <p>{{ date | date }}</p>
+                        </ng-template>
+                        <ng-template #popoverEventTemplate>
+                          <div id="popoverEventTemplate">
+                            <h4 class="fs-4 mb-2">
+                              {{ event.title }}
+                            </h4>
+                            <p class="text-small my-1">
+                              <i class="fa fa-clock col-2"></i>
+                              {{ event.time ? event.time : "--" }}
+                            </p>
+                            <p class="text-small my-1">
+                              <i class="fa fa-location-dot col-2"></i>
+                              {{ event.workplace ? event.workplace : "--" }}
+                            </p>
+                          </div>
+                        </ng-template>
+
+                        <!-- badge -->
+                        <nz-badge
+                          nzStatus="cyan"
+                          [nzText]="event.title"
+                        ></nz-badge>
                       </li>
                     </ng-container>
                   </ng-container>
                 </ng-container>
-
-                <ng-template #popoverDateTemplate>
-                  <h6>{{ date | date }}</h6>
-                </ng-template>
               </ng-container>
             </ul>
           </nz-calendar>
