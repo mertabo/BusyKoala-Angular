@@ -16,6 +16,7 @@ import { WorkspacesService } from '../workspaces.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Subscription } from 'rxjs';
 import { MONTHS } from 'src/app/shared/constants/constants';
+import cloneDeep from 'lodash/cloneDeep';
 
 @Component({
   selector: 'app-own-workspace',
@@ -123,10 +124,11 @@ export class OwnWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
    * Updates the 'ongoing' property of a Workspace.
    */
   updateSession(): void {
-    this.workspace.ongoing = this.ongoing === 'Start' ? 'true' : 'false';
+    let tempWorkspace = cloneDeep(this.workspace);
+    tempWorkspace.ongoing = this.ongoing === 'Start' ? 'true' : 'false';
 
     this.updateSessionSubscription = this.workspacesService
-      .updateWorkspace(this.workspace)
+      .updateWorkspace(tempWorkspace)
       .subscribe((updatedWorkspace) => {
         if (updatedWorkspace.id) {
           this.workspace = updatedWorkspace;

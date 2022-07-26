@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Calendar } from './calendar';
-import { LOGGEDIN_USER } from 'src/app/shared/constants/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -17,14 +16,26 @@ export class CalendarService {
   };
 
   /**
-   * Create event by updating the calendar.
-   * Can only get calendar with ericka id only since auth is not yet fully implemented.
+   * Get calendar of the user.
    *
+   * @param username: string - username of the owner of the calendar
    * @return Observable<Calendar> - observable result of the http GET request
    */
-  getCalendar(): Observable<Calendar> {
+  getCalendar(username: string): Observable<Calendar> {
     return this.http
-      .get<Calendar>(`${this.calendarUrl}/${LOGGEDIN_USER}`)
+      .get<Calendar>(`${this.calendarUrl}/${username}`)
+      .pipe(catchError(this.handleError<any>({ id: '', events: {} })));
+  }
+
+  /**
+   * Create calendar for the user
+   *
+   * @param newCalendar: Calendar - holds the data of the new calendar
+   * @return Observable<Calendar> - observable result of the http POST request
+   */
+  createCalendar(newCalendar: Calendar): Observable<Calendar> {
+    return this.http
+      .post<Calendar>(this.calendarUrl, newCalendar, this.httpOptions)
       .pipe(catchError(this.handleError<any>({ id: '', events: {} })));
   }
 

@@ -9,8 +9,12 @@ import { Workspace } from '../workspaces';
 export class WorkspacesComponent implements OnInit {
   newWorkspaceAlert?: Workspace;
 
-  // gets notified whenever there is new workspace creation in AddWorkspaceModal
-  // alerts WorkspacesList of the new workspace
+  /**
+   * Gets notified whenever there is new workspace creation in AddWorkspaceModal.
+   * Alerts WorkspacesList of the new workspace.
+   *
+   * @param newWorkspace: Workspace = an object of the new workspace created
+   */
   updateWorkspacesList(newWorkspace: Workspace) {
     this.newWorkspaceAlert = newWorkspace;
   }

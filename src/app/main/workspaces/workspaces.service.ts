@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Workspace, WorkspacesTotal } from './workspaces';
-import { LOGGEDIN_USER } from 'src/app/shared/constants/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -17,13 +16,14 @@ export class WorkspacesService {
   };
 
   /**
-   * Get all workspaces where LOGGEDIN_USER is included.
+   * Get all workspaces where logged in user is included.
    *
+   * @param username: string - the username of the logged in user
    * @return Observable<Workspace[]> - observable result of the http GET request
    */
-  getWorkspaces(): Observable<Workspace[]> {
+  getWorkspaces(username: string): Observable<Workspace[]> {
     return this.http
-      .get<Workspace[]>(`${this.workspacesUrl}?q=${LOGGEDIN_USER}`)
+      .get<Workspace[]>(`${this.workspacesUrl}?q=${username}`)
       .pipe(catchError(this.handleError<any>([])));
   }
 

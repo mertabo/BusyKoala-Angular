@@ -5,7 +5,15 @@
     [(ngModel)]="selectedMonth"
     (nzOnOpenChange)="onClose($event)"
   ></nz-date-picker>
-  <button nz-button nzType="text" [disabled]="isTimedIn" (click)="timeIn()">
+  <!-- (click)="timeIn()" -->
+  <button
+    nz-button
+    nzType="text"
+    [disabled]="isTimedIn || workspace.ongoing === 'false'"
+    nz-popconfirm
+    nzPopconfirmTitle="Are you sure you want to start?"
+    (nzOnConfirm)="timeIn()"
+  >
     Start work
   </button>
 </div>

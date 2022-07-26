@@ -13,7 +13,8 @@ export class AuthService {
 
   @Output() fireIsLoggedIn = new EventEmitter();
   @Output() fireCheckedIfLoggedIn = new EventEmitter();
-  loggedInUser = '';
+  loggedInFullName = ''; // full name
+  loggedInUser = ''; // username
 
   // store the URL so we can redirect after logging in
   redirectUrl: string | null = null;
@@ -22,7 +23,8 @@ export class AuthService {
    * Called by NavbarComponent.
    * Sets loggedInUser if there is an ongoing logged in session after refresh.
    */
-  authInit(username: string) {
+  authInit(username: string, fullName: string) {
+    this.loggedInFullName = fullName;
     this.loggedInUser = username;
   }
 
@@ -58,7 +60,8 @@ export class AuthService {
 
           // success
           window.sessionStorage.setItem('user', username);
-          this.loggedInUser = user.fullName;
+          this.loggedInFullName = user.fullName;
+          this.loggedInUser = username;
 
           return {
             statusCode: 200,
@@ -83,6 +86,7 @@ export class AuthService {
    */
   logout(): string {
     window.sessionStorage.clear();
+    this.loggedInFullName = '';
     this.loggedInUser = '';
     return this.loggedInUser;
   }

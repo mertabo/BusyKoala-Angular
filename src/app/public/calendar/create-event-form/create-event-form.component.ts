@@ -10,6 +10,7 @@ import {
 import { formatDate } from '@angular/common';
 import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { CalendarEvent } from '../calendar';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-create-event-form',
@@ -50,6 +51,25 @@ export class CreateEventFormComponent implements OnInit, OnChanges {
   }
 
   /**
+   * Opens a confirmation dialog before creating a workspace.
+   */
+  confirm(): void {
+    if (this.createEventForm.valid) {
+      this.modal.confirm({
+        nzTitle: 'Are you sure you want to create a new event?',
+        nzContent: 'Click OK to proceed with creating a new event.',
+        nzOnOk: () => this.submitForm(),
+      });
+    } else {
+      const titleControl = this.createEventForm.controls['title'];
+      const dateControl = this.createEventForm.controls['date'];
+
+      if (titleControl.invalid) this.markAsInvalid(titleControl);
+      if (dateControl.invalid) this.markAsInvalid(dateControl);
+    }
+  }
+
+  /**
    * Submits the form that contains details about the new event.
    * Triggers the CalendarComponent to communicate with the server.
    */
@@ -59,32 +79,27 @@ export class CreateEventFormComponent implements OnInit, OnChanges {
     const timeControl = this.createEventForm.controls['time'];
     const workplaceControl = this.createEventForm.controls['workplace'];
 
-    if (this.createEventForm.valid) {
-      // event name format: Title (Time @ Workplace)
-      const newEventDetails: CalendarEvent = {
-        title: titleControl.value,
-        time: '',
-        workplace: '',
-      };
+    // event name format: Title (Time @ Workplace)
+    const newEventDetails: CalendarEvent = {
+      title: titleControl.value,
+      time: '',
+      workplace: '',
+    };
 
-      if (timeControl.value)
-        newEventDetails.time = formatDate(timeControl.value, 'h:mm a', 'en-US');
-      if (workplaceControl.value)
-        newEventDetails.workplace = workplaceControl.value;
+    if (timeControl.value)
+      newEventDetails.time = formatDate(timeControl.value, 'h:mm a', 'en-US');
+    if (workplaceControl.value)
+      newEventDetails.workplace = workplaceControl.value;
 
-      const newEvent = {
-        date: dateControl.value,
-        event: newEventDetails,
-      };
+    const newEvent = {
+      date: dateControl.value,
+      event: newEventDetails,
+    };
 
-      this.submitted.emit(newEvent);
-    } else {
-      if (titleControl.invalid) this.markAsInvalid(titleControl);
-      if (dateControl.invalid) this.markAsInvalid(dateControl);
-    }
+    this.submitted.emit(newEvent);
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private modal: NzModalService) {}
 
   ngOnInit(): void {}
 

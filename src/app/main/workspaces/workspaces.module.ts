@@ -14,6 +14,9 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 import { WorkspacesRoutingModule } from './workspaces-routing.module';
 
@@ -55,6 +58,9 @@ import { WorkspacesListComponent } from './workspaces-list/workspaces-list.compo
     NzNotificationModule,
     NzSpinModule,
     NzAutocompleteModule,
+    NzPopconfirmModule,
+    NzMessageModule,
+    NzModalModule,
   ],
 })
 export class WorkspacesModule {}

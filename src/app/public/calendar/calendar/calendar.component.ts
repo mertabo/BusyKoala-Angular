@@ -4,6 +4,7 @@ import { Calendar, CalendarEvent } from '../calendar';
 import { Subscription } from 'rxjs';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import cloneDeep from 'lodash/cloneDeep';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-calendar',
@@ -18,30 +19,31 @@ export class CalendarComponent implements OnInit, OnDestroy {
   isProcessingRequest = false;
   successfulRequest = false;
   hasCalendarLoaded = false;
+  loggedInUser = '';
 
   // subscriptions
-  getCalendarSubscription!: Subscription;
+  getCalendarSubscription?: Subscription;
+  createCalendarSubscription?: Subscription;
   addEventSubscription?: Subscription;
 
   /**
    * Get Calendar of logged in user.
-   * Can only get calendar with ericka id only since auth is not yet fully implemented.
    */
   getCalendar(): void {
     this.hasCalendarLoaded = false;
     this.getCalendarSubscription = this.calendarService
-      .getCalendar()
+      .getCalendar(this.loggedInUser)
       .subscribe((data: Calendar) => {
         if (data.id) {
           this.calendar = data;
           this.getEvents();
+          this.showNotification(
+            true,
+            'Calendar successfully loaded',
+            'Your calendar is now ready! :)'
+          );
         } else {
           this.hasCalendarLoaded = true;
-          this.showNotification(
-            false,
-            'Calendar failed to load',
-            'An error was encountered while loading your calendar! :('
-          );
         }
       });
   }
@@ -50,7 +52,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
    * Get events of the Calendar on selected date.
    */
   getEvents(): void {
-    if (!this.calendar.id) return; // no calendar found
+    if (!this.calendar?.id) return; // no calendar found
 
     const year = this.selectedDate.getFullYear();
     const month = this.selectedDate.getMonth();
@@ -73,7 +75,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
       this.selectedDate.getMonth() !== this.prevSelectedDate.getMonth() ||
       this.selectedDate.getFullYear() !== this.prevSelectedDate.getFullYear()
     ) {
-      this.getCalendar();
+      this.getEvents();
       this.prevSelectedDate = this.selectedDate;
     }
   }
@@ -96,59 +98,101 @@ export class CalendarComponent implements OnInit, OnDestroy {
     // clone so updates on UI will only happen if adding is successful
     const calendarTemp = cloneDeep(this.calendar);
 
-    if (!calendarTemp) return;
+    // check if user has no calendar yet
+    if (!calendarTemp && this.loggedInUser) {
+      // create calendar
+      const newCalendar: Calendar = {
+        id: this.loggedInUser,
+        events: {
+          [newEventYear]: {
+            [newEventMonth]: {
+              [newEventDate]: [newEvent],
+            },
+          },
+        },
+      };
 
-    if (!calendarTemp.events[newEventYear]) {
-      // year not found
-      calendarTemp.events[newEventYear] = {
-        [newEventMonth]: { [newEventDate]: [newEvent] },
-      };
-    } else if (!calendarTemp.events[newEventYear][newEventMonth]) {
-      // month not found
-      calendarTemp.events[newEventYear][newEventMonth] = {
-        [newEventDate]: [newEvent],
-      };
-    } else if (
-      !calendarTemp.events[newEventYear][newEventMonth][newEventDate]
-    ) {
-      // date not found
-      calendarTemp.events[newEventYear][newEventMonth][newEventDate] = [
-        newEvent,
-      ];
+      this.createCalendarSubscription = this.calendarService
+        .createCalendar(newCalendar)
+        .subscribe((calendar: any) => {
+          if (calendar.id) {
+            this.calendar = calendar;
+            this.getEvents();
+            this.successfulRequest = true;
+            this.showNotification(
+              true,
+              'New event added',
+              'Your new event has been successfully added to your calendar! :)'
+            );
+          } else {
+            this.successfulRequest = false;
+            this.showNotification(
+              false,
+              'New event failed',
+              'Your new event failed to be added to your calendar! :('
+            );
+          }
+          this.isProcessingRequest = false;
+        });
+    } else if (!calendarTemp) {
+      return;
     } else {
-      // [year][month][date] exists
-      calendarTemp.events[newEventYear][newEventMonth][newEventDate].push(
-        newEvent
-      );
-    }
+      if (!calendarTemp.events[newEventYear]) {
+        // year not found
+        calendarTemp.events[newEventYear] = {
+          [newEventMonth]: { [newEventDate]: [newEvent] },
+        };
+      } else if (!calendarTemp.events[newEventYear][newEventMonth]) {
+        // month not found
+        calendarTemp.events[newEventYear][newEventMonth] = {
+          [newEventDate]: [newEvent],
+        };
+      } else if (
+        !calendarTemp.events[newEventYear][newEventMonth][newEventDate]
+      ) {
+        // date not found
+        calendarTemp.events[newEventYear][newEventMonth][newEventDate] = [
+          newEvent,
+        ];
+      } else {
+        // [year][month][date] exists
+        calendarTemp.events[newEventYear][newEventMonth][newEventDate].push(
+          newEvent
+        );
+      }
 
-    // add to database then update UI
-    this.addEventSubscription = this.calendarService
-      .addEvent(calendarTemp)
-      .subscribe((data: any) => {
-        if (data.id) {
-          this.calendar = data;
-          this.getEvents();
-          this.successfulRequest = true;
-          this.showNotification(
-            true,
-            'New event added',
-            'Your new event has been successfully added to your calendar! :)'
-          );
-        } else {
-          this.successfulRequest = false;
-          this.showNotification(
-            false,
-            'New event failed',
-            'Your new event failed to be added to your calendar! :('
-          );
-        }
-        this.isProcessingRequest = false;
-      });
+      // add to database then update UI
+      this.addEventSubscription = this.calendarService
+        .addEvent(calendarTemp)
+        .subscribe((updatedCalendar: any) => {
+          if (updatedCalendar.id) {
+            this.calendar = updatedCalendar;
+            this.getEvents();
+            this.successfulRequest = true;
+            this.showNotification(
+              true,
+              'New event added',
+              'Your new event has been successfully added to your calendar! :)'
+            );
+          } else {
+            this.successfulRequest = false;
+            this.showNotification(
+              false,
+              'New event failed',
+              'Your new event failed to be added to your calendar! :('
+            );
+          }
+          this.isProcessingRequest = false;
+        });
+    }
   }
 
   /**
    * Shows notification whether a process was a success or an error.
+   *
+   * @param status: boolean - true for success, false for error
+   * @param title: string - title of the notification
+   * @param content: strong - content in the body of the notification
    */
   showNotification(status: boolean, title: string, content: string): void {
     if (status) {
@@ -160,15 +204,24 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   constructor(
     private calendarService: CalendarService,
+    private authService: AuthService,
     private notification: NzNotificationService
   ) {}
 
   ngOnInit(): void {
-    this.getCalendar();
+    // get the logged in user
+    this.loggedInUser = this.authService.loggedInUser;
+
+    if (this.loggedInUser) {
+      this.getCalendar();
+    } else {
+      this.hasCalendarLoaded = true;
+    }
   }
 
   ngOnDestroy(): void {
-    this.getCalendarSubscription.unsubscribe();
+    this.getCalendarSubscription?.unsubscribe();
+    this.createCalendarSubscription?.unsubscribe();
     this.addEventSubscription?.unsubscribe();
   }
 }

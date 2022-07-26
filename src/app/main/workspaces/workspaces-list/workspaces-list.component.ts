@@ -16,7 +16,7 @@ import {
   Router,
 } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { LOGGEDIN_USER } from 'src/app/shared/constants/constants';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-workspaces-list',
@@ -29,7 +29,7 @@ export class WorkspacesListComponent implements OnInit, OnChanges, OnDestroy {
   searchedWorkspaces: Workspace[] = [];
   selectedWorkspaceID?: string;
   hasWorkspaceLoaded = false;
-  LOGGEDIN_USER = LOGGEDIN_USER;
+  loggedInUser = '';
   searchFor: string = '';
   prevSearched: string = '';
   searchOptions: string[] = [];
@@ -44,7 +44,7 @@ export class WorkspacesListComponent implements OnInit, OnChanges, OnDestroy {
    */
   getWorkspaces(): void {
     this.getWorkspacesSubscription = this.workspacesService
-      .getWorkspaces()
+      .getWorkspaces(this.loggedInUser)
       .subscribe((workspacesResult: any) => {
         this.workspaces = workspacesResult;
         this.searchedWorkspaces = workspacesResult;
@@ -137,6 +137,7 @@ export class WorkspacesListComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(
     private workspacesService: WorkspacesService,
+    private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -155,11 +156,17 @@ export class WorkspacesListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getWorkspaces();
+    this.loggedInUser = this.authService.loggedInUser;
+
+    if (this.loggedInUser) {
+      this.getWorkspaces();
+    } else {
+      this.hasWorkspaceLoaded = true;
+    }
   }
 
   // listen to alerts whenever there is a new workspace
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(_: SimpleChanges): void {
     if (this.newWorkspaceAlert) {
       this.workspaces.push(this.newWorkspaceAlert!);
     }

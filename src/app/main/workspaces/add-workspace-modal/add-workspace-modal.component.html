@@ -11,6 +11,7 @@
       <div class="modal-header">
         <h5 class="modal-title" id="addWorkspaceModalLabel">Add workspace</h5>
         <button
+          id="buttonClose"
           type="button"
           class="btn-close"
           data-bs-dismiss="modal"
@@ -79,7 +80,7 @@
         <button type="button" class="btn btn-text" data-bs-dismiss="modal">
           Close
         </button>
-        <button type="button" class="btn btn-cta" (click)="createWorkspace()">
+        <button type="button" class="btn btn-cta" (click)="confirm()">
           Create
         </button>
       </div>

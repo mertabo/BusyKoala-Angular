@@ -1,4 +1,3 @@
-export const LOGGEDIN_USER = 'ericka';
 export const CODE_LENGTH = 8; // for the workspace code
 export const MONTHS = [
   'Jan',

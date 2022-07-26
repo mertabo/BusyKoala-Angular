@@ -23,8 +23,12 @@
     <button
       nz-button
       nzType="text"
-      (click)="updateSession()"
       [disabled]="!ongoing"
+      nz-popconfirm
+      [nzPopconfirmTitle]="
+        'Are you sure you want to ' + ongoing.toLowerCase() + ' session?'
+      "
+      (nzOnConfirm)="updateSession()"
     >
       {{ ongoing + " session" }}
     </button>

@@ -8,14 +8,12 @@ import {
 } from '@angular/core';
 import { differenceInSeconds } from 'date-fns';
 import { cloneDeep } from 'lodash';
+import { AuthService } from 'src/app/auth/auth.service';
 import {
   militaryToStandardTimeFormat,
   secondsToDurationString,
 } from 'src/app/shared/utils/utils';
-import {
-  LOGGEDIN_USER,
-  TIME_SEPARATOR,
-} from '../../../shared/constants/constants';
+import { TIME_SEPARATOR } from '../../../shared/constants/constants';
 import { UserTimeData } from '../workspaces';
 
 @Component({
@@ -28,6 +26,7 @@ export class TimeInOutComponent implements OnInit, DoCheck {
   @Input() date!: string;
   @Output() timed = new EventEmitter();
   localTimeInOutData!: UserTimeData;
+  loggedInUser = '';
   duration: string = '';
   times: string[][] = [];
   currentlyTimedIn: boolean = false;
@@ -69,7 +68,7 @@ export class TimeInOutComponent implements OnInit, DoCheck {
     updatedTime[updatedTime.length - 1] += ` - ${time}`;
 
     const updatedUserTimeData: UserTimeData = {
-      user: LOGGEDIN_USER,
+      user: this.loggedInUser,
       time: updatedTime,
       duration: updatedDuration,
     };
@@ -79,11 +78,12 @@ export class TimeInOutComponent implements OnInit, DoCheck {
     this.timed.emit({ date: timeIn, updatedUserTimeData });
   }
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.duration = secondsToDurationString(this.timeInOutData.duration);
     this.localTimeInOutData = cloneDeep(this.timeInOutData);
+    this.loggedInUser = this.authService.loggedInUser;
     this.fillTimes();
   }
 

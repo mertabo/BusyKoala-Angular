@@ -11,8 +11,10 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Subscription } from 'rxjs';
-import { LOGGEDIN_USER } from 'src/app/shared/constants/constants';
+import { AuthService } from 'src/app/auth/auth.service';
 import { generateRandomCode } from 'src/app/shared/utils/utils';
 import { Workspace } from '../workspaces';
 import { WorkspacesService } from '../workspaces.service';
@@ -24,6 +26,7 @@ import { WorkspacesService } from '../workspaces.service';
 })
 export class AddWorkspaceModalComponent implements OnInit, OnDestroy {
   @Output() updateWorkspacesList = new EventEmitter<Workspace>();
+  loggedInUser = '';
 
   createWorkspaceForm = this.fb.group({
     title: [null, Validators.required],
@@ -64,9 +67,9 @@ export class AddWorkspaceModalComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Creates a new workspace.
+   * Opens a confirmation dialog before creating a workspace.
    */
-  createWorkspace(): void {
+  confirm(): void {
     const titleControl = this.createWorkspaceForm.controls['title'];
 
     if (!this.createWorkspaceForm.valid) {
@@ -74,6 +77,17 @@ export class AddWorkspaceModalComponent implements OnInit, OnDestroy {
       return;
     }
 
+    this.modal.confirm({
+      nzTitle: 'Are you sure you want to create a new workspace?',
+      nzContent: 'Click OK to proceed with creating a new workspace.',
+      nzOnOk: () => this.createWorkspace(),
+    });
+  }
+
+  /**
+   * Creates a new workspace.
+   */
+  createWorkspace(): void {
     let schedule = '';
     let isStart = true;
     let endDay = '';
@@ -111,12 +125,14 @@ export class AddWorkspaceModalComponent implements OnInit, OnDestroy {
 
       // create new workspace object
       const newId = workspacesTotal.total + 1;
+      const titleControl = this.createWorkspaceForm.controls['title'];
+
       const newWorkspace: Workspace = {
         id: newId.toString(),
         ongoing: 'false',
         inviteCode: generateRandomCode(),
         name: titleControl.value,
-        owner: LOGGEDIN_USER,
+        owner: this.loggedInUser,
         schedule,
         attendance: {},
       };
@@ -150,22 +166,57 @@ export class AddWorkspaceModalComponent implements OnInit, OnDestroy {
    */
   creationSuccess(newWorkspace: Workspace): void {
     this.updateWorkspacesList.emit(newWorkspace);
-    console.log('creation success');
+    // reset form
+    this.createWorkspaceForm.reset();
+
+    // close form
+    document.getElementById('buttonClose')?.click();
+
+    // show notification
+    this.showNotification(
+      true,
+      'New workplace added',
+      'You have successfully created a new workplace! :)'
+    );
   }
 
   /**
    * Prompts user of failed creation.
    */
   creationFail(): void {
-    console.log('error creating');
+    this.showNotification(
+      false,
+      'Failed to create',
+      'Sorry, the workplace cannot be created! :('
+    );
+  }
+
+  /**
+   * Shows notification whether a process was a success or an error.
+   *
+   * @param status: boolean - true for success, false for error
+   * @param title: string - title of the notification
+   * @param content: strong - content in the body of the notification
+   */
+  showNotification(status: boolean, title: string, content: string): void {
+    if (status) {
+      this.notification.success(title, content, { nzPlacement: 'bottomRight' });
+    } else {
+      this.notification.error(title, content, { nzPlacement: 'bottomRight' });
+    }
   }
 
   constructor(
     private fb: FormBuilder,
-    private workspacesService: WorkspacesService
+    private workspacesService: WorkspacesService,
+    private authService: AuthService,
+    private notification: NzNotificationService,
+    private modal: NzModalService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loggedInUser = this.authService.loggedInUser;
+  }
 
   ngOnDestroy(): void {
     this.getWorkspacesTotalSubscription?.unsubscribe();

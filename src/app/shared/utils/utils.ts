@@ -14,7 +14,7 @@ export function militaryToStandardTimeFormat(date: Date): string {
   let minutes = `${date.getMinutes()}`;
   if (Number(minutes) < 10) minutes = '0' + minutes; // add 0 for single-digit minutes
 
-  if (hours == 12) {
+  if (hours == 0) {
     // 00:MM
     time += `12:${minutes} AM`;
   } else if (hours < 12) {

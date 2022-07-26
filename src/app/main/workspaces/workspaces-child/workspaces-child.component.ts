@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { LOGGEDIN_USER } from 'src/app/shared/constants/constants';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Workspace } from '../workspaces';
 import { WorkspacesService } from '../workspaces.service';
 
@@ -13,6 +13,7 @@ import { WorkspacesService } from '../workspaces.service';
 export class WorkspacesChildComponent implements OnInit, OnDestroy {
   ownWorkspace!: boolean;
   workspace?: Workspace;
+  loggedInUser = '';
 
   // subscriptions
   getWorkspaceSubscription?: Subscription;
@@ -31,7 +32,7 @@ export class WorkspacesChildComponent implements OnInit, OnDestroy {
       .subscribe((data: Workspace) => {
         if (data.id) {
           this.workspace = data;
-          this.ownWorkspace = data.owner === LOGGEDIN_USER;
+          this.ownWorkspace = data.owner === this.loggedInUser;
         }
       });
   }
@@ -39,14 +40,17 @@ export class WorkspacesChildComponent implements OnInit, OnDestroy {
   // https://stackoverflow.com/questions/33520043/how-to-detect-a-route-change-in-angular
   constructor(
     private route: ActivatedRoute,
-    private workspacesService: WorkspacesService
+    private workspacesService: WorkspacesService,
+    private authService: AuthService
   ) {
     this.routeSubscription = this.route.url.subscribe((url) => {
       this.getWorkspace(url[0].path);
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loggedInUser = this.authService.loggedInUser;
+  }
 
   ngOnDestroy(): void {
     this.getWorkspaceSubscription?.unsubscribe();

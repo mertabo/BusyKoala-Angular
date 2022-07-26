@@ -49,7 +49,7 @@
           <h5 class="card-title">
             {{ workspace.name }}
             <span
-              *ngIf="workspace.owner === LOGGEDIN_USER"
+              *ngIf="workspace.owner === loggedInUser"
               class="badge bg-info"
               >Own</span
             >

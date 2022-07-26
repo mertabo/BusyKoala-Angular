@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   checkedIfLoggedIn = false;
+  verifyUserSubscription?: Subscription;
   loginSubscription?: Subscription;
 
   loginForm = this.fb.group({
@@ -94,10 +95,23 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    if (!sessionStorage.getItem('user')) this.checkedIfLoggedIn = true;
+    const loggedSession = sessionStorage.getItem('user');
+
+    if (!loggedSession) this.checkedIfLoggedIn = true;
+    else {
+      this.verifyUserSubscription = this.authService
+        .getUser(loggedSession)
+        .subscribe((user) => {
+          if (!user.id) {
+            this.checkedIfLoggedIn = true;
+            sessionStorage.clear();
+          }
+        });
+    }
   }
 
   ngOnDestroy(): void {
+    this.verifyUserSubscription?.unsubscribe();
     this.loginSubscription?.unsubscribe();
   }
 }

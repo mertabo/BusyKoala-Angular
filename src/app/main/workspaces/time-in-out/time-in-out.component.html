@@ -31,5 +31,10 @@
   <h6>{{ date }}</h6>
 </ng-template>
 <ng-template #actionTimeOut>
-  <span (click)="timeOut()">Take a break</span>
+  <span
+    nz-popconfirm
+    nzPopconfirmTitle="Are you sure you want to take a break?"
+    (nzOnConfirm)="timeOut()"
+    >Take a break</span
+  >
 </ng-template>

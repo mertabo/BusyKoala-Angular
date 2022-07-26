@@ -8,13 +8,11 @@ import {
   OnInit,
 } from '@angular/core';
 import cloneDeep from 'lodash/cloneDeep';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 import { militaryToStandardTimeFormat } from 'src/app/shared/utils/utils';
-import {
-  LOGGEDIN_USER,
-  MONTHS,
-  TIME_SEPARATOR,
-} from '../../../shared/constants/constants';
+import { MONTHS, TIME_SEPARATOR } from '../../../shared/constants/constants';
 import { UserTimeData, Workspace } from '../workspaces';
 import { WorkspacesService } from '../workspaces.service';
 
@@ -29,6 +27,7 @@ export class OtherWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
   hasWorkspaceDataLoaded = false;
   selectedMonth = new Date();
   prevSelectedMonth = new Date();
+  loggedInUser = '';
   timeInOutData: UserTimeData[] = [];
   dates: string[] = []; // dates (in string format) of the cards
   isTimedIn: boolean = false;
@@ -58,7 +57,7 @@ export class OtherWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
 
           // get data that belongs to the logged in user
           const filteredDates = attendees.filter(
-            (attendee: UserTimeData) => attendee.user === LOGGEDIN_USER
+            (attendee: UserTimeData) => attendee.user === this.loggedInUser
           )[0];
 
           if (filteredDates) {
@@ -128,7 +127,7 @@ export class OtherWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
     const date = now.getDate();
 
     const newTimeInData: UserTimeData = {
-      user: LOGGEDIN_USER,
+      user: this.loggedInUser,
       time: [militaryToStandardTimeFormat(now)],
       duration: 0,
     };
@@ -152,7 +151,9 @@ export class OtherWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
       // existing data
       const attendeeIndex = this.localWorkspace.attendance[year][month][
         date
-      ].findIndex((attendee: UserTimeData) => attendee.user === LOGGEDIN_USER);
+      ].findIndex(
+        (attendee: UserTimeData) => attendee.user === this.loggedInUser
+      );
 
       // user has no time in data yet
       if (attendeeIndex < 0) {
@@ -181,6 +182,8 @@ export class OtherWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
           } else {
             this.timeInOutData[0].time.push(newTimeInData.time[0]);
           }
+
+          this.message.success('Started working. Good luck! :)');
         } else {
           this.isTimedIn = false;
         }
@@ -217,6 +220,7 @@ export class OtherWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
         if (updatedWorkspace.id) {
           this.localWorkspace = updatedWorkspace;
           this.getTimeInOutData();
+          this.message.success('Started break! :)');
         }
       });
 
@@ -225,12 +229,15 @@ export class OtherWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
 
   constructor(
     private differs: KeyValueDiffers,
-    private workspacesService: WorkspacesService
+    private workspacesService: WorkspacesService,
+    private authService: AuthService,
+    private message: NzMessageService
   ) {}
 
   ngOnInit(): void {
     this.workspaceDiffer = this.differs.find(this.workspace).create();
     this.localWorkspace = cloneDeep(this.workspace);
+    this.loggedInUser = this.authService.loggedInUser;
     this.getTimeInOutData();
   }
 

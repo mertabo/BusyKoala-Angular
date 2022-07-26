@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         if (user.id) {
           // valid user
           this.loggedInUserInitials = this.getInitials(user.fullName);
-          this.authService.authInit(user.fullName);
+          this.authService.authInit(username, user.fullName);
           this.isLoggedIn = true;
 
           // redirect to /workspaces
@@ -78,7 +78,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this.isLoggedIn = this.authService.loggedInUser !== '';
       if (this.isLoggedIn)
         this.loggedInUserInitials = this.getInitials(
-          this.authService.loggedInUser
+          this.authService.loggedInFullName
         );
     });
   }
