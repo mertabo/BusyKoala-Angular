@@ -36,6 +36,7 @@ export class OtherWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
   // subscriptions
   timeInSubscription?: Subscription;
   timeOutSubscription?: Subscription;
+  checkIfOngoingSubscription?: Subscription;
 
   /**
    * Get logged in user's time in/out date in a workspace.
@@ -132,60 +133,80 @@ export class OtherWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
       duration: 0,
     };
 
-    // do not manipulate original data in case of failed process
-    const tempLocalWorkspace = cloneDeep(this.localWorkspace);
+    // check if workspace is still ongoing
+    this.checkIfOngoingSubscription = this.workspacesService
+      .getWorkspace(this.localWorkspace.id)
+      .subscribe((workspace) => {
+        if (!workspace.id) {
+          // error in server
+          this.message.error('Sorry, try again later! :(');
+        } else if (workspace.ongoing === 'false') {
+          // workspace has ended session
+          this.localWorkspace = workspace;
+          this.message.error('Sorry, the session has now ended! :(');
+        } else {
+          // do not manipulate original data in case of failed process
+          const tempLocalWorkspace = cloneDeep(this.localWorkspace);
 
-    // update the tempLocalWorkspace accordingly
-    if (!this.localWorkspace.attendance[year]) {
-      // year not found
-      tempLocalWorkspace.attendance[year] = {
-        [month]: { [date]: [newTimeInData] },
-      };
-    } else if (!this.localWorkspace.attendance[year][month]) {
-      // month not found
-      tempLocalWorkspace.attendance[year][month] = { [date]: [newTimeInData] };
-    } else if (!this.localWorkspace.attendance[year][month][date]) {
-      // date not found
-      tempLocalWorkspace.attendance[year][month][date] = [newTimeInData];
-    } else {
-      // existing data
-      const attendeeIndex = this.localWorkspace.attendance[year][month][
-        date
-      ].findIndex(
-        (attendee: UserTimeData) => attendee.user === this.loggedInUser
-      );
-
-      // user has no time in data yet
-      if (attendeeIndex < 0) {
-        tempLocalWorkspace.attendance[year][month][date].push(newTimeInData);
-      } else {
-        // user already has time in data
-        tempLocalWorkspace.attendance[year][month][date][
-          attendeeIndex
-        ].time.push(newTimeInData.time[0]);
-      }
-    }
-
-    // update the db and UI
-    this.timeInSubscription = this.workspacesService
-      .updateWorkspace(tempLocalWorkspace)
-      .subscribe((updatedWorkspace) => {
-        if (updatedWorkspace.id) {
-          this.localWorkspace = updatedWorkspace;
-
-          const dateIndex = this.dates.indexOf(
-            `${MONTHS[Number(month)]} ${date}, ${year}`
-          );
-          if (dateIndex < 0) {
-            this.dates.unshift(`${MONTHS[Number(month)]} ${date}, ${year}`);
-            this.timeInOutData.unshift(newTimeInData);
+          // update the tempLocalWorkspace accordingly
+          if (!this.localWorkspace.attendance[year]) {
+            // year not found
+            tempLocalWorkspace.attendance[year] = {
+              [month]: { [date]: [newTimeInData] },
+            };
+          } else if (!this.localWorkspace.attendance[year][month]) {
+            // month not found
+            tempLocalWorkspace.attendance[year][month] = {
+              [date]: [newTimeInData],
+            };
+          } else if (!this.localWorkspace.attendance[year][month][date]) {
+            // date not found
+            tempLocalWorkspace.attendance[year][month][date] = [newTimeInData];
           } else {
-            this.timeInOutData[0].time.push(newTimeInData.time[0]);
+            // existing data
+            const attendeeIndex = this.localWorkspace.attendance[year][month][
+              date
+            ].findIndex(
+              (attendee: UserTimeData) => attendee.user === this.loggedInUser
+            );
+
+            // user has no time in data yet
+            if (attendeeIndex < 0) {
+              tempLocalWorkspace.attendance[year][month][date].push(
+                newTimeInData
+              );
+            } else {
+              // user already has time in data
+              tempLocalWorkspace.attendance[year][month][date][
+                attendeeIndex
+              ].time.push(newTimeInData.time[0]);
+            }
           }
 
-          this.message.success('Started working. Good luck! :)');
-        } else {
-          this.isTimedIn = false;
+          // update the db and UI
+          this.timeInSubscription = this.workspacesService
+            .updateWorkspace(tempLocalWorkspace)
+            .subscribe((updatedWorkspace) => {
+              if (updatedWorkspace.id) {
+                this.localWorkspace = updatedWorkspace;
+
+                const dateIndex = this.dates.indexOf(
+                  `${MONTHS[Number(month)]} ${date}, ${year}`
+                );
+                if (dateIndex < 0) {
+                  this.dates.unshift(
+                    `${MONTHS[Number(month)]} ${date}, ${year}`
+                  );
+                  this.timeInOutData.unshift(newTimeInData);
+                } else {
+                  this.timeInOutData[0].time.push(newTimeInData.time[0]);
+                }
+
+                this.message.success('Started working. Good luck! :)');
+              } else {
+                this.isTimedIn = false;
+              }
+            });
         }
       });
   }
@@ -254,5 +275,6 @@ export class OtherWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
   ngOnDestroy(): void {
     this.timeInSubscription?.unsubscribe();
     this.timeOutSubscription?.unsubscribe();
+    this.checkIfOngoingSubscription?.unsubscribe();
   }
 }

@@ -11,21 +11,21 @@
       [nzTooltipTitle]="tooltipTitleTemplate"
       [class]="
         'fa fa-circle-info ' +
-        (isTimedIn || workspace.ongoing === 'false' ? '' : 'd-none')
+        (isTimedIn || localWorkspace.ongoing === 'false' ? '' : 'd-none')
       "
     ></button>
     <ng-template #tooltipTitleTemplate>
-      <p *ngIf="isTimedIn && workspace.ongoing === 'true'">
+      <p *ngIf="isTimedIn && localWorkspace.ongoing === 'true'">
         You are already working.
       </p>
-      <p *ngIf="workspace.ongoing === 'false'">
+      <p *ngIf="localWorkspace.ongoing === 'false'">
         Workspace has no ongoing session.
       </p>
     </ng-template>
     <button
       nz-button
       nzType="text"
-      [disabled]="isTimedIn || workspace.ongoing === 'false'"
+      [disabled]="isTimedIn || localWorkspace.ongoing === 'false'"
       nz-popconfirm
       nzPopconfirmTitle="Are you sure you want to start?"
       (nzOnConfirm)="timeIn()"
