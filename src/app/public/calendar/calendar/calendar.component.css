@@ -29,3 +29,13 @@ nz-spin {
 #popoverEventTemplate {
   max-width: 250px !important;
 }
+.delete-button {
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+}
+.delete-button:hover {
+  background: #fde9eb;
+}

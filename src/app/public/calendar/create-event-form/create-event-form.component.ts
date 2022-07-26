@@ -53,7 +53,7 @@ export class CreateEventFormComponent implements OnInit, OnChanges {
   /**
    * Opens a confirmation dialog before creating a workspace.
    */
-  confirm(): void {
+  confirmCreate(): void {
     if (this.createEventForm.valid) {
       this.modal.confirm({
         nzTitle: 'Are you sure you want to create a new event?',

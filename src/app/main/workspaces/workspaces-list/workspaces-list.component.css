@@ -17,11 +17,17 @@ a.m-1 {
 ::ng-deep .cdk-overlay-container {
   z-index: 9999 !important;
 }
-a .card button {
-  /* background: transparent; */
+.delete-button {
+  background: transparent;
   border: 0;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
   display: none;
 }
-a .card:hover button {
+a .card:hover .delete-button {
   display: inline-block;
+}
+.delete-button:hover {
+  background: #fdfdfd;
 }

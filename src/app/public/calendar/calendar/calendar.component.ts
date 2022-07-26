@@ -6,6 +6,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import cloneDeep from 'lodash/cloneDeep';
 import { AuthService } from 'src/app/auth/auth.service';
 import { generateRandomCode } from 'src/app/shared/utils/utils';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-calendar',
@@ -26,6 +27,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   getCalendarSubscription?: Subscription;
   createCalendarSubscription?: Subscription;
   addEventSubscription?: Subscription;
+  deleteEventSubscription?: Subscription;
 
   /**
    * Get Calendar of logged in user.
@@ -205,6 +207,76 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Opens a confirmation dialog before deleting an event.
+   *
+   * @param date: Date - date of the event to be deleted
+   * @param event: CalendarEvent - the event to be deleted
+   * @param index: number - index of event from the array of events
+   */
+  confirmDelete(date: Date, event: CalendarEvent, index: number): void {
+    this.modal.confirm({
+      nzTitle: `Are you sure you want to delete "${event.title}"?`,
+      nzContent: 'Click OK to proceed with deleting the event.',
+      nzOnOk: () => this.deleteEvent(date, event, index),
+    });
+  }
+
+  /**
+   * Deletes an event
+   *
+   * @param date: Date - date of the event to be deleted
+   * @param event: CalendarEvent - the event to be deleted
+   * @param index: number - index of event from the array of events
+   */
+  deleteEvent(date: Date, event: CalendarEvent, index: number): void {
+    const tempCalendar = cloneDeep(this.calendar);
+
+    if (!tempCalendar.id) return;
+
+    if (index > -1) {
+      // only splice array when item is found
+      tempCalendar.events[date.getFullYear()][date.getMonth()][
+        date.getDate()
+      ].splice(index, 1);
+
+      // if date has now empty array, remove date
+      if (
+        tempCalendar.events[date.getFullYear()][date.getMonth()][date.getDate()]
+          .length === 0
+      ) {
+        const eventDate = date.getDate();
+
+        const { [eventDate]: number, ...updatedMonthEvents } =
+          tempCalendar.events[date.getFullYear()][date.getMonth()];
+
+        tempCalendar.events[date.getFullYear()][date.getMonth()] =
+          updatedMonthEvents;
+      }
+
+      // delete event in database and reflect result in ui
+      this.deleteEventSubscription = this.calendarService
+        .updateCalendar(tempCalendar)
+        .subscribe((updatedCalendar) => {
+          if (updatedCalendar.id) {
+            this.calendar = updatedCalendar;
+            this.getEvents();
+            this.showNotification(
+              true,
+              'Event deleted',
+              'The event has been successfully deleted! :)'
+            );
+          } else {
+            this.showNotification(
+              false,
+              'Event deletion failed',
+              'Sorry, the event cannot be deleted! :('
+            );
+          }
+        });
+    }
+  }
+
+  /**
    * Shows notification whether a process was a success or an error.
    *
    * @param status: boolean - true for success, false for error
@@ -222,7 +294,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
   constructor(
     private calendarService: CalendarService,
     private authService: AuthService,
-    private notification: NzNotificationService
+    private notification: NzNotificationService,
+    private modal: NzModalService
   ) {}
 
   ngOnInit(): void {
@@ -246,5 +319,6 @@ export class CalendarComponent implements OnInit, OnDestroy {
     this.getCalendarSubscription?.unsubscribe();
     this.createCalendarSubscription?.unsubscribe();
     this.addEventSubscription?.unsubscribe();
+    this.deleteEventSubscription?.unsubscribe();
   }
 }

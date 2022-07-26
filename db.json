@@ -402,25 +402,11 @@
             ]
           },
           "6": {
-            "5": [
-              {
-                "title": "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest",
-                "time": "10:00 AM",
-                "workplace": "Test Session"
-              }
-            ],
             "15": [
               {
                 "title": "fg",
                 "time": "",
                 "workplace": ""
-              }
-            ],
-            "19": [
-              {
-                "title": "again",
-                "time": "",
-                "workplace": "SF"
               }
             ],
             "25": [
@@ -480,6 +466,6 @@
     }
   ],
   "workspacesTotal": {
-    "total": 10
+    "total": 11
   }
 }

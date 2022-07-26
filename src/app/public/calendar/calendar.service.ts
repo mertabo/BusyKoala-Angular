@@ -40,6 +40,22 @@ export class CalendarService {
   }
 
   /**
+   * Update calendar.
+   *
+   * @param updatedCalendar: Calendar - holds the data of the updated calendar
+   * @return Observable<Calendar> - observable result of the http PUT request
+   */
+  updateCalendar(updatedCalendar: Calendar): Observable<Calendar> {
+    return this.http
+      .put<Calendar>(
+        `${this.calendarUrl}/${updatedCalendar.id}`,
+        updatedCalendar,
+        this.httpOptions
+      )
+      .pipe(catchError(this.handleError<any>({ id: '', events: {} })));
+  }
+
+  /**
    * Create event by updating the calendar.
    *
    * @param updatedCalendar: Calendar - new calendar that will replace the calendar in the db.

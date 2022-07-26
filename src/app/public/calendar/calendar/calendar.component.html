@@ -66,13 +66,21 @@
                     <ng-container *ngSwitchCase="eventData.key">
                       <li
                         nz-popover
-                        *ngFor="let event of eventData.value"
+                        *ngFor="let event of eventData.value; index as i"
                         [nzPopoverTitle]="popoverDateTemplate"
                         [nzPopoverContent]="popoverEventTemplate"
                       >
                         <!-- popover -->
                         <ng-template #popoverDateTemplate>
-                          <p>{{ date | date }}</p>
+                          <div class="d-flex justify-content-between">
+                            <p>{{ date | date }}</p>
+                            <button
+                              class="delete-button"
+                              (click)="confirmDelete(date, event, i)"
+                            >
+                              <i class="fa fa-trash-can text-danger"></i>
+                            </button>
+                          </div>
                         </ng-template>
                         <ng-template #popoverEventTemplate>
                           <div id="popoverEventTemplate">
