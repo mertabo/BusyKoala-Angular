@@ -17,3 +17,11 @@ a.m-1 {
 ::ng-deep .cdk-overlay-container {
   z-index: 9999 !important;
 }
+a .card button {
+  /* background: transparent; */
+  border: 0;
+  display: none;
+}
+a .card:hover button {
+  display: inline-block;
+}

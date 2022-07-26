@@ -46,14 +46,24 @@
         [class.active]="selectedWorkspaceID === workspace.id"
       >
         <div class="card-body">
-          <h5 class="card-title">
-            {{ workspace.name }}
-            <span
+          <div class="d-flex justify-content-between">
+            <h5 class="card-title">
+              {{ workspace.name }}
+              <span
+                *ngIf="workspace.owner === loggedInUser"
+                class="badge bg-info"
+                >Own</span
+              >
+            </h5>
+            <button
               *ngIf="workspace.owner === loggedInUser"
-              class="badge bg-info"
-              >Own</span
+              nz-popconfirm
+              nzPopconfirmTitle="Are you sure you want to delete this workspace?"
+              (nzOnConfirm)="deleteWorkspace(workspace.id)"
             >
-          </h5>
+              <i class="fa fa-trash-can text-danger delete-icon"></i>
+            </button>
+          </div>
           <p class="card-subtitle mb-2 text-secondary">
             {{ workspace.schedule }}
           </p>

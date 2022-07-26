@@ -5,17 +5,34 @@
     [(ngModel)]="selectedMonth"
     (nzOnOpenChange)="onClose($event)"
   ></nz-date-picker>
-  <!-- (click)="timeIn()" -->
-  <button
-    nz-button
-    nzType="text"
-    [disabled]="isTimedIn || workspace.ongoing === 'false'"
-    nz-popconfirm
-    nzPopconfirmTitle="Are you sure you want to start?"
-    (nzOnConfirm)="timeIn()"
-  >
-    Start work
-  </button>
+  <div>
+    <button
+      nz-tooltip
+      [nzTooltipTitle]="tooltipTitleTemplate"
+      [class]="
+        'fa fa-circle-info ' +
+        (isTimedIn || workspace.ongoing === 'false' ? '' : 'd-none')
+      "
+    ></button>
+    <ng-template #tooltipTitleTemplate>
+      <p *ngIf="isTimedIn && workspace.ongoing === 'true'">
+        You are already working.
+      </p>
+      <p *ngIf="workspace.ongoing === 'false'">
+        Workspace has no ongoing session.
+      </p>
+    </ng-template>
+    <button
+      nz-button
+      nzType="text"
+      [disabled]="isTimedIn || workspace.ongoing === 'false'"
+      nz-popconfirm
+      nzPopconfirmTitle="Are you sure you want to start?"
+      (nzOnConfirm)="timeIn()"
+    >
+      Start work
+    </button>
+  </div>
 </div>
 
 <!-- Time ins/outs -->

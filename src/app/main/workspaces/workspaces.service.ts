@@ -56,6 +56,17 @@ export class WorkspacesService {
   }
 
   /**
+   * Delete a workspace.
+   *
+   * @param workspaceID: string - the id of the workspace to be deleted.
+   */
+  deleteWorkspace(workspaceID: string): Observable<Workspace> {
+    return this.http
+      .delete<Workspace>(`${this.workspacesUrl}/${workspaceID}`)
+      .pipe(catchError(this.handleError<any>({ error: '' })));
+  }
+
+  /**
    * Get the total number of workspaces.
    * For dummy workspace id.
    */

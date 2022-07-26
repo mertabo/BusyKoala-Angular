@@ -17,6 +17,7 @@ import {
 } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-workspaces-list',
@@ -38,6 +39,7 @@ export class WorkspacesListComponent implements OnInit, OnChanges, OnDestroy {
   // subscriptions
   routeSubscription!: Subscription;
   getWorkspacesSubscription!: Subscription;
+  deleteWorkspaceSubscription?: Subscription;
 
   /**
    * Get all workspaces where LOGGEDIN_USER is included.
@@ -135,9 +137,51 @@ export class WorkspacesListComponent implements OnInit, OnChanges, OnDestroy {
     this.prevSearched = this.searchFor;
   }
 
+  /**
+   * Delete a workspace.
+   *
+   * @param workspaceID: string - the id of the workspace to be deleted.
+   */
+  deleteWorkspace(workspaceID: string): void {
+    this.deleteWorkspaceSubscription = this.workspacesService
+      .deleteWorkspace(workspaceID)
+      .subscribe((res: any) => {
+        if (!res.error) {
+          this.getWorkspaces();
+          this.showNotification(
+            true,
+            'Workspace deleted',
+            'Your workspace has been successfully deleted! :)'
+          );
+        } else {
+          this.showNotification(
+            false,
+            'Workspace failed to delete',
+            'Sorry, the workplace cannot be deleted! :('
+          );
+        }
+      });
+  }
+
+  /**
+   * Shows notification whether a process was a success or an error.
+   *
+   * @param status: boolean - true for success, false for error
+   * @param title: string - title of the notification
+   * @param content: strong - content in the body of the notification
+   */
+  showNotification(status: boolean, title: string, content: string): void {
+    if (status) {
+      this.notification.success(title, content, { nzPlacement: 'bottomRight' });
+    } else {
+      this.notification.error(title, content, { nzPlacement: 'bottomRight' });
+    }
+  }
+
   constructor(
     private workspacesService: WorkspacesService,
     private authService: AuthService,
+    private notification: NzNotificationService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -175,5 +219,6 @@ export class WorkspacesListComponent implements OnInit, OnChanges, OnDestroy {
   ngOnDestroy() {
     this.routeSubscription.unsubscribe();
     this.getWorkspacesSubscription.unsubscribe();
+    this.deleteWorkspaceSubscription?.unsubscribe();
   }
 }

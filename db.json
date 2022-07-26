@@ -304,9 +304,10 @@
                   "0:13 AM - 12:15 AM",
                   "12:15 AM - 12:15 AM",
                   "12:15 AM - 12:15 AM",
-                  "12:27 AM - 12:27 AM"
+                  "12:27 AM - 12:27 AM",
+                  "2:19 PM - 2:30 PM"
                 ],
-                "duration": 210
+                "duration": 919
               }
             ]
           }
@@ -370,47 +371,6 @@
                   "6:19 PM - 6:19 PM"
                 ],
                 "duration": 55
-              }
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": "5",
-      "ongoing": "false",
-      "inviteCode": "M4h4dMSs",
-      "name": "test",
-      "owner": "ericka",
-      "schedule": "Mon",
-      "attendance": {}
-    },
-    {
-      "id": "6",
-      "ongoing": "false",
-      "inviteCode": "u0501BCq",
-      "name": "testing confirmation",
-      "owner": "ericka",
-      "schedule": "Sun",
-      "attendance": {}
-    },
-    {
-      "id": "7",
-      "ongoing": "true",
-      "inviteCode": "FUPLrzl2",
-      "name": "taylor test",
-      "owner": "ericka",
-      "schedule": "Sun-Wed, Fri-Sat",
-      "attendance": {
-        "2022": {
-          "6": {
-            "26": [
-              {
-                "user": "taylor",
-                "time": [
-                  "11:53 AM - 11:54 AM"
-                ],
-                "duration": 67
               }
             ]
           }
@@ -520,6 +480,6 @@
     }
   ],
   "workspacesTotal": {
-    "total": 8
+    "total": 10
   }
 }
