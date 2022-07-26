@@ -17,8 +17,11 @@ export function militaryToStandardTimeFormat(date: Date): string {
   if (hours == 0) {
     // 00:MM
     time += `12:${minutes} AM`;
+  } else if (hours == 12) {
+    // 12:MM
+    time += `12:${minutes} PM`;
   } else if (hours < 12) {
-    // <= 12:MM
+    // < 12:MM
     time += `${hours}:${minutes} AM`;
   } else {
     // > 12:MM

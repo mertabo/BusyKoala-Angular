@@ -315,7 +315,7 @@
     },
     {
       "id": "2",
-      "ongoing": "true",
+      "ongoing": "false",
       "inviteCode": "fdsnOiwD",
       "name": "My Session",
       "owner": "ericka",
@@ -327,49 +327,12 @@
               {
                 "user": "taylor",
                 "time": [
-                  "11:48 AM - 11:48 AM"
+                  "11:48 AM - 11:48 AM",
+                  "0:01 PM - 12:02 AM",
+                  "12:05 PM - 12:06 PM",
+                  "12:06 PM - 12:07 PM"
                 ],
-                "duration": 55
-              }
-            ],
-            "31": [
-              {
-                "user": "millie",
-                "time": [
-                  "9:05 AM - 10:30 AM"
-                ],
-                "duration": 54531
-              },
-              {
-                "user": "taylor",
-                "time": [
-                  "9:04 AM - 10:04 AM"
-                ],
-                "duration": 2324
-              },
-              {
-                "user": "steve",
-                "time": [
-                  "9:02 AM - 9:48 AM",
-                  "10:00 AM - 10:30 AM",
-                  "9:02 AM - 9:48 AM",
-                  "10:00 AM - 10:30 AM",
-                  "10:00 AM - 10:30 AM",
-                  "10:00 AM - 10:30 AM",
-                  "10:00 AM - 10:30 AM",
-                  "10:00 AM - 10:30 AM",
-                  "10:00 AM - 10:30 AM",
-                  "10:00 AM - 10:30 AM",
-                  "10:00 AM - 10:30 AM"
-                ],
-                "duration": 215313
-              },
-              {
-                "user": "dusty-bun",
-                "time": [
-                  "8:59 AM - 10:30 AM"
-                ],
-                "duration": 54566
+                "duration": 321
               }
             ]
           }
@@ -388,43 +351,7 @@
         "steve",
         "dusty-bun"
       ],
-      "attendance": {
-        "2022": {
-          "6": {
-            "31": [
-              {
-                "user": "millie",
-                "time": [
-                  "9:05 AM - 10:30 AM"
-                ],
-                "duration": 54531
-              },
-              {
-                "user": "taylor",
-                "time": [
-                  "9:04 AM - 10:04 AM"
-                ],
-                "duration": 2324
-              },
-              {
-                "user": "steve",
-                "time": [
-                  "9:02 AM - 9:48 AM",
-                  "10:00 AM - 10:30 AM"
-                ],
-                "duration": 215313
-              },
-              {
-                "user": "dusty-bun",
-                "time": [
-                  "8:59 AM - 10:30 AM"
-                ],
-                "duration": 54566
-              }
-            ]
-          }
-        }
-      }
+      "attendance": {}
     },
     {
       "id": "4",
@@ -443,30 +370,6 @@
                   "6:19 PM - 6:19 PM"
                 ],
                 "duration": 55
-              }
-            ],
-            "31": [
-              {
-                "user": "taylor",
-                "time": [
-                  "9:04 AM - 10:04 AM"
-                ],
-                "duration": 2324
-              },
-              {
-                "user": "steve",
-                "time": [
-                  "9:02 AM - 9:48 AM",
-                  "10:00 AM - 10:30 AM"
-                ],
-                "duration": 215313
-              },
-              {
-                "user": "ericka",
-                "time": [
-                  "8:59 AM - 10:30 AM"
-                ],
-                "duration": 54566
               }
             ]
           }
@@ -591,6 +494,22 @@
             "8": [
               {
                 "title": "test",
+                "time": "",
+                "workplace": ""
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "n9AwciwO",
+      "events": {
+        "2022": {
+          "6": {
+            "8": [
+              {
+                "title": "guest test",
                 "time": "",
                 "workplace": ""
               }

@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import cloneDeep from 'lodash/cloneDeep';
 import { AuthService } from 'src/app/auth/auth.service';
+import { generateRandomCode } from 'src/app/shared/utils/utils';
 
 @Component({
   selector: 'app-calendar',
@@ -98,11 +99,27 @@ export class CalendarComponent implements OnInit, OnDestroy {
     // clone so updates on UI will only happen if adding is successful
     const calendarTemp = cloneDeep(this.calendar);
 
-    // check if user has no calendar yet
-    if (!calendarTemp && this.loggedInUser) {
+    // check if guest is trying to create event or a valid user with no calendar yet
+    if (!calendarTemp) {
+      let calendarId = this.loggedInUser;
+
+      if (!calendarId) {
+        // guest
+        let tempUser = localStorage.getItem('temp_user');
+
+        if (tempUser) {
+          // the guest already has calendar data
+          calendarId = tempUser;
+        } else {
+          // guest has no calendar data yet
+          calendarId = generateRandomCode();
+          localStorage.setItem('temp_user', calendarId);
+        }
+      }
+
       // create calendar
       const newCalendar: Calendar = {
-        id: this.loggedInUser,
+        id: calendarId,
         events: {
           [newEventYear]: {
             [newEventMonth]: {
@@ -112,6 +129,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
         },
       };
 
+      // create calendar
       this.createCalendarSubscription = this.calendarService
         .createCalendar(newCalendar)
         .subscribe((calendar: any) => {
@@ -134,9 +152,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
           }
           this.isProcessingRequest = false;
         });
-    } else if (!calendarTemp) {
-      return;
     } else {
+      // logged in and has calendar data
       if (!calendarTemp.events[newEventYear]) {
         // year not found
         calendarTemp.events[newEventYear] = {
@@ -211,8 +228,14 @@ export class CalendarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // get the logged in user
     this.loggedInUser = this.authService.loggedInUser;
+    const tempUser = localStorage.getItem('temp_user');
 
     if (this.loggedInUser) {
+      // a valid user
+      this.getCalendar();
+    } else if (tempUser) {
+      // a guest
+      this.loggedInUser = tempUser;
       this.getCalendar();
     } else {
       this.hasCalendarLoaded = true;

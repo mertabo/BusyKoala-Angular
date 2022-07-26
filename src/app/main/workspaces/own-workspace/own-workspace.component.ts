@@ -49,7 +49,9 @@ export class OwnWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
 
     if (attendance) {
       const attendanceToday =
-        attendance[this.today.getFullYear()]?.[this.today.getMonth()]?.['31'];
+        attendance[this.today.getFullYear()]?.[this.today.getMonth()]?.[
+          this.today.getDate()
+        ];
 
       if (attendanceToday) {
         this.attendeesToday = attendanceToday;
