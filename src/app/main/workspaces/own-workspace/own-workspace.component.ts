@@ -37,6 +37,7 @@ export class OwnWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
 
   // subscriptions
   updateSessionSubscription?: Subscription;
+  refreshSubscription?: Subscription;
 
   /**
    * Get attendees today.
@@ -153,6 +154,17 @@ export class OwnWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
     );
   }
 
+  /**
+   * Gets the latest data of workspace.
+   */
+  refresh(): void {
+    this.refreshSubscription = this.workspacesService
+      .getWorkspace(this.workspace.id)
+      .subscribe((workspace) => {
+        if (this.workspace) this.workspace = workspace;
+      });
+  }
+
   constructor(
     private differs: KeyValueDiffers,
     private workspacesService: WorkspacesService,
@@ -177,5 +189,6 @@ export class OwnWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
 
   ngOnDestroy(): void {
     this.updateSessionSubscription?.unsubscribe();
+    this.refreshSubscription?.unsubscribe();
   }
 }

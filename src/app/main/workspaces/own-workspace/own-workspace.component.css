@@ -3,3 +3,10 @@
     height: calc(100% - 32px);
   }
 }
+.refresh-button {
+  font-size: 14px;
+  color: #58abdd;
+}
+.refresh-button:hover {
+  color: #488fbb;
+}

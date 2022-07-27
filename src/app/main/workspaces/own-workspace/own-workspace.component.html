@@ -47,6 +47,9 @@
   </div>
   <div class="scrollable-content">
     <div class="container-fluid">
+      <a (click)="refresh()" class="refresh-button"
+        ><i class="fa fa-rotate-right"></i> Refresh</a
+      >
       <div class="row g-2 pt-2 pb-3">
         <div *ngFor="let attendee of attendeesToday" class="col-12 col-md-6">
           <app-attendees-today [attendee]="attendee"></app-attendees-today>
