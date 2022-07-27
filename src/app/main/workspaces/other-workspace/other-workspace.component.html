@@ -47,6 +47,7 @@
   </div>
   <div class="scrollable-content">
     <div class="container-fluid">
+      <nz-empty *ngIf="timeInOutData.length === 0"></nz-empty>
       <div class="row g-2 pt-2 pb-3">
         <div
           *ngFor="let userTimeData of timeInOutData; index as i"

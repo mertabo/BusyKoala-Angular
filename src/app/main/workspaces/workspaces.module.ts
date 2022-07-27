@@ -18,6 +18,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 
 import { WorkspacesRoutingModule } from './workspaces-routing.module';
 
@@ -63,6 +64,7 @@ import { WorkspacesListComponent } from './workspaces-list/workspaces-list.compo
     NzMessageModule,
     NzModalModule,
     NzToolTipModule,
+    NzEmptyModule,
   ],
 })
 export class WorkspacesModule {}

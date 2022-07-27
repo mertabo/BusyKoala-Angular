@@ -50,6 +50,7 @@
       <a (click)="refresh()" class="refresh-button"
         ><i class="fa fa-rotate-right"></i> Refresh</a
       >
+      <nz-empty *ngIf="attendeesToday.length === 0"></nz-empty>
       <div class="row g-2 pt-2 pb-3">
         <div *ngFor="let attendee of attendeesToday" class="col-12 col-md-6">
           <app-attendees-today [attendee]="attendee"></app-attendees-today>
@@ -70,7 +71,11 @@
     ></nz-spin>
   </div>
   <div class="scrollable-content">
-    <div class="p-2" *ngIf="selectedDate && attendeesMonth">
+    <div class="px-2" *ngIf="selectedDate && attendeesMonth">
+      <a (click)="refresh()" class="refresh-button"
+        ><i class="fa fa-rotate-right"></i> Refresh</a
+      >
+      <nz-empty *ngIf="attendeesMonth.length === 0"></nz-empty>
       <div *ngFor="let monthlySummary of attendeesMonth">
         <app-attendees-month
           [monthlySummary]="monthlySummary"
