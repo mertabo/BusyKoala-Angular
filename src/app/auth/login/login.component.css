@@ -1,6 +1,14 @@
 .col-8 {
   margin: 80px 0;
 }
+i {
+  cursor: pointer;
+  color: #b1b1b1;
+}
+.fa-eye:hover,
+.fa-eye-slash:hover {
+  color: #58abdd;
+}
 .fa-brands {
   border: 1px solid #d9d9d9;
   border-radius: 4px;

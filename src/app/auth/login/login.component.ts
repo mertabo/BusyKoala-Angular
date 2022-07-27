@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   checkedIfLoggedIn = false;
   verifyUserSubscription?: Subscription;
   loginSubscription?: Subscription;
+  passwordVisible = false;
 
   loginForm = this.fb.group({
     username: [null, Validators.required],

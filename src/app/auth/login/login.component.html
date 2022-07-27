@@ -35,13 +35,15 @@
           <nz-form-item>
             <nz-form-label nzRequired nzFor="password">Password</nz-form-label>
             <nz-form-control [nzErrorTip]="passwordErrorTpl">
-              <input
-                nz-input
-                type="password"
-                formControlName="password"
-                placeholder="●●●●●●●●"
-                (focusout)="handleFocusOut('password')"
-              />
+              <nz-input-group [nzSuffix]="suffixTemplate">
+                <input
+                  nz-input
+                  [type]="passwordVisible ? 'text' : 'password'"
+                  formControlName="password"
+                  placeholder="●●●●●●●●"
+                  (focusout)="handleFocusOut('password')"
+                />
+              </nz-input-group>
               <ng-template #passwordErrorTpl let-control>
                 <ng-container *ngIf="control.hasError('required')"
                   >Please input your password!</ng-container
@@ -49,6 +51,12 @@
                 <ng-container *ngIf="control.hasError('incorrectPW')"
                   >Incorrect password!</ng-container
                 >
+              </ng-template>
+              <ng-template #suffixTemplate>
+                <i
+                  [class]="passwordVisible ? 'fa fa-eye-slash' : 'fa fa-eye'"
+                  (click)="passwordVisible = !passwordVisible"
+                ></i>
               </ng-template>
             </nz-form-control>
             <a class="text-end">Forgot password?</a>
@@ -58,28 +66,31 @@
             Login
           </button>
           <div class="fluid-container">
-            <div class="row my-4">
+            <div class="row mt-4">
               <div class="col">
                 <hr />
               </div>
               <div class="col-5 col-sm-4 col-lg-3 text-center">
-                <p class="text-secondary">Or login with</p>
+                <span class="text-secondary">Or login with</span>
               </div>
               <div class="col">
                 <hr />
               </div>
             </div>
-            <div class="d-flex justify-content-center">
-              <a class="">
-                <i class="fa-brands fa-facebook-f"></i>
-              </a>
-              <a class="">
-                <i class="fa-brands fa-instagram"></i>
-              </a>
-              <a class="">
-                <i class="fa-brands fa-twitter"></i>
-              </a>
-            </div>
+          </div>
+          <div class="d-flex justify-content-center mt-4">
+            <a class="">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a class="">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a class="">
+              <i class="fa-brands fa-twitter"></i>
+            </a>
+          </div>
+          <div class="mt-5 text-center text-secondary">
+            New here? <a routerLink="">Create an account</a>
           </div>
         </form>
       </div>
