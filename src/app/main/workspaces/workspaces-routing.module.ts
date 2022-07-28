@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '../../auth/auth.guard';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 import { WorkspacesChildComponent } from './workspaces-child/workspaces-child.component';
 import { WorkspacesComponent } from './workspaces/workspaces.component';
 

@@ -7,14 +7,12 @@ import {
   Router,
   Route,
 } from '@angular/router';
-import { AuthService } from './auth.service';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanLoad {
-  constructor(private authService: AuthService, private router: Router) {}
-
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -42,4 +40,6 @@ export class AuthGuard implements CanActivate, CanLoad {
     this.router.navigate(['/login']);
     return false;
   }
+
+  constructor(private authService: AuthService, private router: Router) {}
 }

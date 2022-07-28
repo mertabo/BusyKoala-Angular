@@ -11,8 +11,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  checkedIfLoggedIn = false;
-  verifyUserSubscription?: Subscription;
   loginSubscription?: Subscription;
   passwordVisible = false;
 
@@ -95,24 +93,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     private fb: FormBuilder
   ) {}
 
-  ngOnInit(): void {
-    const loggedSession = sessionStorage.getItem('user');
-
-    if (!loggedSession) this.checkedIfLoggedIn = true;
-    else {
-      this.verifyUserSubscription = this.authService
-        .getUser(loggedSession)
-        .subscribe((user) => {
-          if (!user.id) {
-            this.checkedIfLoggedIn = true;
-            sessionStorage.clear();
-          }
-        });
-    }
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
-    this.verifyUserSubscription?.unsubscribe();
     this.loginSubscription?.unsubscribe();
   }
 }
