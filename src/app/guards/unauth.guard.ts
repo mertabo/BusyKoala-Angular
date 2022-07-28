@@ -33,11 +33,11 @@ export class UnauthGuard implements CanActivate {
       map((user) => {
         if (!user.id) {
           sessionStorage.clear();
-          return false;
+          return true;
         }
 
         this.router.navigate(['/workspaces']);
-        return true;
+        return false;
       })
     );
   }
