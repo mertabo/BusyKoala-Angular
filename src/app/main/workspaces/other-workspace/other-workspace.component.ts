@@ -11,11 +11,11 @@ import cloneDeep from 'lodash/cloneDeep';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
-import { militaryToStandardTimeFormat } from 'src/app/shared/services/util/utils';
 import { MONTHS, TIME_SEPARATOR } from 'src/app/shared/constants';
 import { UserTimeData, Workspace } from 'src/app/shared/models';
 import { WorkspacesService } from '../workspaces.service';
 import { MESSAGE } from 'src/app/shared/constants';
+import { DateUtilService } from 'src/app/shared/services/util';
 
 @Component({
   selector: 'app-other-workspace',
@@ -130,7 +130,7 @@ export class OtherWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
 
     const newTimeInData: UserTimeData = {
       user: this.loggedInUser,
-      time: [militaryToStandardTimeFormat(now)],
+      time: [this.dateUtilService.militaryToStandardTimeFormat(now)],
       duration: 0,
     };
 
@@ -253,7 +253,8 @@ export class OtherWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
     private differs: KeyValueDiffers,
     private workspacesService: WorkspacesService,
     private authService: AuthService,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private dateUtilService: DateUtilService
   ) {}
 
   ngOnInit(): void {

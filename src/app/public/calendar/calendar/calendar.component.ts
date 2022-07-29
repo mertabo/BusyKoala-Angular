@@ -5,9 +5,9 @@ import { Subscription } from 'rxjs';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import cloneDeep from 'lodash/cloneDeep';
 import { AuthService } from 'src/app/auth/auth.service';
-import { generateRandomCode } from 'src/app/shared/services/util/utils';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { MESSAGE } from 'src/app/shared/constants';
+import { GenericUtilService } from 'src/app/shared/services/util';
 
 @Component({
   selector: 'app-calendar',
@@ -115,7 +115,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
           calendarId = tempUser;
         } else {
           // guest has no calendar data yet
-          calendarId = generateRandomCode();
+          calendarId = this.genericUtilService.generateRandomCode();
           localStorage.setItem('temp_user', calendarId);
         }
       }
@@ -296,7 +296,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
     private calendarService: CalendarService,
     private authService: AuthService,
     private notification: NzNotificationService,
-    private modal: NzModalService
+    private modal: NzModalService,
+    private genericUtilService: GenericUtilService
   ) {}
 
   ngOnInit(): void {

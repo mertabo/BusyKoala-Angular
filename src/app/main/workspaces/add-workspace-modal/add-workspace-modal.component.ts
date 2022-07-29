@@ -5,21 +5,18 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
-import { generateRandomCode } from 'src/app/shared/services/util/utils';
 import { Workspace } from 'src/app/shared/models';
 import { WorkspacesService } from '../workspaces.service';
 import { MESSAGE } from 'src/app/shared/constants';
-import { FormUtilService } from 'src/app/shared/services/util/form-util.service';
+import {
+  FormUtilService,
+  GenericUtilService,
+} from 'src/app/shared/services/util';
 
 @Component({
   selector: 'app-add-workspace-modal',
@@ -123,7 +120,7 @@ export class AddWorkspaceModalComponent implements OnInit, OnDestroy {
       const newWorkspace: Workspace = {
         id: newId.toString(),
         ongoing: 'false',
-        inviteCode: generateRandomCode(),
+        inviteCode: this.genericUtilService.generateRandomCode(),
         name: titleControl.value,
         owner: this.loggedInUser,
         schedule,
@@ -205,7 +202,8 @@ export class AddWorkspaceModalComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private notification: NzNotificationService,
     private modal: NzModalService,
-    private formUtilService: FormUtilService
+    private formUtilService: FormUtilService,
+    private genericUtilService: GenericUtilService
   ) {}
 
   ngOnInit(): void {

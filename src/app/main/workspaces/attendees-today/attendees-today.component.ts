@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { User } from 'src/app/shared/models';
-import { secondsToDurationString } from 'src/app/shared/services/util/utils';
+import { DateUtilService } from 'src/app/shared/services/util';
 
 @Component({
   selector: 'app-attendees-today',
@@ -28,11 +28,16 @@ export class AttendeesTodayComponent implements OnInit, OnDestroy {
       });
   }
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private dateUtilService: DateUtilService
+  ) {}
 
   ngOnInit(): void {
     this.getFullName();
-    this.duration = secondsToDurationString(this.attendee.duration);
+    this.duration = this.dateUtilService.secondsToDurationString(
+      this.attendee.duration
+    );
   }
 
   ngOnDestroy(): void {

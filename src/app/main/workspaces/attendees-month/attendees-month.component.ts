@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
-import { secondsToDurationString } from 'src/app/shared/services/util/utils';
 import { AttendanceMonthlySummary } from 'src/app/shared/models/workspace.model';
+import { DateUtilService } from 'src/app/shared/services/util';
 
 @Component({
   selector: 'app-attendees-month',
@@ -24,13 +24,18 @@ export class AttendeesMonthComponent implements OnInit {
     return this.authService.getUser(user).pipe(map((data) => data.fullName));
   }
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private dateUtilService: DateUtilService
+  ) {}
 
   ngOnInit(): void {
     // get the full name of each attendee
     this.monthlySummary?.attendees.forEach((attendee: any) => {
       this.attendeeNames$.push(this.getFullName(attendee.user));
-      this.attendeeDurations.push(secondsToDurationString(attendee.duration));
+      this.attendeeDurations.push(
+        this.dateUtilService.secondsToDurationString(attendee.duration)
+      );
     });
   }
 }

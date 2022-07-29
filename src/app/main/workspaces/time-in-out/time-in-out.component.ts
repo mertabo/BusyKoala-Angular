@@ -9,12 +9,9 @@ import {
 import { differenceInSeconds } from 'date-fns';
 import { cloneDeep } from 'lodash';
 import { AuthService } from 'src/app/auth/auth.service';
-import {
-  militaryToStandardTimeFormat,
-  secondsToDurationString,
-} from 'src/app/shared/services/util/utils';
 import { TIME_SEPARATOR } from 'src/app/shared/constants';
 import { UserTimeData } from 'src/app/shared/models';
+import { DateUtilService } from 'src/app/shared/services/util';
 
 @Component({
   selector: 'app-time-in-out',
@@ -62,7 +59,7 @@ export class TimeInOutComponent implements OnInit, DoCheck {
       this.timeInOutData.duration + differenceInSeconds(timeOut, timeIn);
 
     // get time out in string format
-    let time = militaryToStandardTimeFormat(timeOut);
+    let time = this.dateUtilService.militaryToStandardTimeFormat(timeOut);
 
     let updatedTime = this.localTimeInOutData.time;
     updatedTime[updatedTime.length - 1] += ` - ${time}`;
@@ -78,10 +75,15 @@ export class TimeInOutComponent implements OnInit, DoCheck {
     this.timed.emit({ date: timeIn, updatedUserTimeData });
   }
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private dateUtilService: DateUtilService
+  ) {}
 
   ngOnInit(): void {
-    this.duration = secondsToDurationString(this.timeInOutData.duration);
+    this.duration = this.dateUtilService.secondsToDurationString(
+      this.timeInOutData.duration
+    );
     this.localTimeInOutData = cloneDeep(this.timeInOutData);
     this.loggedInUser = this.authService.loggedInUser;
     this.fillTimes();
