@@ -1,4 +1,3 @@
-export const CODE_LENGTH = 8; // for the workspace code
 export const MONTHS = [
   'Jan',
   'Feb',
@@ -14,11 +13,11 @@ export const MONTHS = [
   'Dec',
 ];
 export const TIME_SUFFIX = {
-  year: 'y',
-  month: 'mo',
-  day: 'd',
-  hour: 'h',
-  minute: 'min',
-  second: 's',
+  YEAR: 'y',
+  MONTH: 'mo',
+  DAY: 'd',
+  HOUR: 'h',
+  MINUTE: 'min',
+  SECOND: 's',
 };
 export const TIME_SEPARATOR = ' - ';

@@ -12,9 +12,10 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { militaryToStandardTimeFormat } from 'src/app/shared/utils/utils';
-import { MONTHS, TIME_SEPARATOR } from '../../../shared/constants/constants';
-import { UserTimeData, Workspace } from '../../../shared/models';
+import { MONTHS, TIME_SEPARATOR } from 'src/app/shared/constants';
+import { UserTimeData, Workspace } from 'src/app/shared/models';
 import { WorkspacesService } from '../workspaces.service';
+import { MESSAGE } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-other-workspace',
@@ -139,11 +140,11 @@ export class OtherWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
       .subscribe((workspace) => {
         if (!workspace.id) {
           // error in server
-          this.message.error('Sorry, try again later! :(');
+          this.message.error(MESSAGE.GENERIC_FAILED);
         } else if (workspace.ongoing === 'false') {
           // workspace has ended session
           this.localWorkspace = workspace;
-          this.message.error('Sorry, the session has now ended! :(');
+          this.message.error(MESSAGE.TIME_IN_FAILED_SESSION_ENDED);
         } else {
           // do not manipulate original data in case of failed process
           const tempLocalWorkspace = cloneDeep(this.localWorkspace);
@@ -202,7 +203,7 @@ export class OtherWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
                   this.timeInOutData[0].time.push(newTimeInData.time[0]);
                 }
 
-                this.message.success('Started working. Good luck! :)');
+                this.message.success(MESSAGE.TIME_IN_SUCCESS);
               } else {
                 this.isTimedIn = false;
               }
@@ -241,7 +242,7 @@ export class OtherWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
         if (updatedWorkspace.id) {
           this.localWorkspace = updatedWorkspace;
           this.getTimeInOutData();
-          this.message.success('Started break! :)');
+          this.message.success(MESSAGE.TIME_OUT_SUCCESS);
         }
       });
 

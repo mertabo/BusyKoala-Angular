@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CalendarService } from '../calendar.service';
-import { Calendar, CalendarEvent } from '../../../shared/models';
+import { Calendar, CalendarEvent } from 'src/app/shared/models';
 import { Subscription } from 'rxjs';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import cloneDeep from 'lodash/cloneDeep';
 import { AuthService } from 'src/app/auth/auth.service';
 import { generateRandomCode } from 'src/app/shared/utils/utils';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { MESSAGE } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-calendar',
@@ -42,8 +43,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
           this.getEvents();
           this.showNotification(
             true,
-            'Calendar successfully loaded',
-            'Your calendar is now ready! :)'
+            MESSAGE.CALENDAR_SUCCESS_TITLE,
+            MESSAGE.CALENDAR_SUCCESS_CONTENT
           );
         } else {
           this.hasCalendarLoaded = true;
@@ -141,15 +142,15 @@ export class CalendarComponent implements OnInit, OnDestroy {
             this.successfulRequest = true;
             this.showNotification(
               true,
-              'New event added',
-              'Your new event has been successfully added to your calendar! :)'
+              MESSAGE.CREATE_EVENT_SUCCESS_TITLE,
+              MESSAGE.CREATE_EVENT_SUCCESS_CONTENT
             );
           } else {
             this.successfulRequest = false;
             this.showNotification(
               false,
-              'New event failed',
-              'Your new event failed to be added to your calendar! :('
+              MESSAGE.CREATE_EVENT_FAILED_TITLE,
+              MESSAGE.CREATE_EVENT_FAILED_CONTENT
             );
           }
           this.isProcessingRequest = false;
@@ -190,15 +191,15 @@ export class CalendarComponent implements OnInit, OnDestroy {
             this.successfulRequest = true;
             this.showNotification(
               true,
-              'New event added',
-              'Your new event has been successfully added to your calendar! :)'
+              MESSAGE.CREATE_EVENT_SUCCESS_TITLE,
+              MESSAGE.CREATE_EVENT_SUCCESS_CONTENT
             );
           } else {
             this.successfulRequest = false;
             this.showNotification(
               false,
-              'New event failed',
-              'Your new event failed to be added to your calendar! :('
+              MESSAGE.CREATE_EVENT_FAILED_TITLE,
+              MESSAGE.CREATE_EVENT_FAILED_CONTENT
             );
           }
           this.isProcessingRequest = false;
@@ -216,7 +217,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   confirmDelete(date: Date, event: CalendarEvent, index: number): void {
     this.modal.confirm({
       nzTitle: `Are you sure you want to delete "${event.title}"?`,
-      nzContent: 'Click OK to proceed with deleting the event.',
+      nzContent: MESSAGE.CONFIRM_DELETE_EVENT_CONTENT,
       nzOnOk: () => this.deleteEvent(date, event, index),
     });
   }
@@ -262,14 +263,14 @@ export class CalendarComponent implements OnInit, OnDestroy {
             this.getEvents();
             this.showNotification(
               true,
-              'Event deleted',
-              'The event has been successfully deleted! :)'
+              MESSAGE.DELETE_EVENT_SUCCESS_TITLE,
+              MESSAGE.DELETE_EVENT_SUCCESS_CONTENT
             );
           } else {
             this.showNotification(
               false,
-              'Event deletion failed',
-              'Sorry, the event cannot be deleted! :('
+              MESSAGE.DELETE_EVENT_FAILED_TITLE,
+              MESSAGE.DELETE_EVENT_FAILED_CONTENT
             );
           }
         });

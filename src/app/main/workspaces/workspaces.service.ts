@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Workspace, WorkspacesTotal } from '../../shared/models';
+import { Workspace, WorkspacesTotal } from 'src/app/shared/models';
 
 @Injectable({
   providedIn: 'root',

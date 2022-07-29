@@ -16,8 +16,9 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { generateRandomCode } from 'src/app/shared/utils/utils';
-import { Workspace } from '../../../shared/models';
+import { Workspace } from 'src/app/shared/models';
 import { WorkspacesService } from '../workspaces.service';
+import { MESSAGE } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-add-workspace-modal',
@@ -78,8 +79,8 @@ export class AddWorkspaceModalComponent implements OnInit, OnDestroy {
     }
 
     this.modal.confirm({
-      nzTitle: 'Are you sure you want to create a new workspace?',
-      nzContent: 'Click OK to proceed with creating a new workspace.',
+      nzTitle: MESSAGE.CONFIRM_CREATE_WORKSPACE_TITLE,
+      nzContent: MESSAGE.CONFIRM_CREATE_WORKSPACE_CONTENT,
       nzOnOk: () => this.createWorkspace(),
     });
   }
@@ -175,8 +176,8 @@ export class AddWorkspaceModalComponent implements OnInit, OnDestroy {
     // show notification
     this.showNotification(
       true,
-      'New workplace added',
-      'You have successfully created a new workplace! :)'
+      MESSAGE.CREATE_WORKSPACE_SUCCESS_TITLE,
+      MESSAGE.CREATE_WORKSPACE_SUCCESS_CONTENT
     );
   }
 
@@ -186,8 +187,8 @@ export class AddWorkspaceModalComponent implements OnInit, OnDestroy {
   creationFail(): void {
     this.showNotification(
       false,
-      'Failed to create',
-      'Sorry, the workplace cannot be created! :('
+      MESSAGE.CREATE_WORKSPACE_FAILED_TITLE,
+      MESSAGE.CREATE_WORKSPACE_FAILED_CONTENT
     );
   }
 

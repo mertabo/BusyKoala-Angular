@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { secondsToDurationString } from 'src/app/shared/utils/utils';
-import { AttendanceMonthlySummary } from '../../../shared/models/workspace.model';
+import { AttendanceMonthlySummary } from 'src/app/shared/models/workspace.model';
 
 @Component({
   selector: 'app-attendees-month',

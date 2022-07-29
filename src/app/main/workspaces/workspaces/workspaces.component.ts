@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Workspace } from '../../../shared/models';
+import { Component } from '@angular/core';
+import { Workspace } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-workspaces',
   templateUrl: './workspaces.component.html',
   styleUrls: ['./workspaces.component.css'],
 })
-export class WorkspacesComponent implements OnInit {
+export class WorkspacesComponent {
   newWorkspaceAlert?: Workspace;
 
   /**
@@ -18,8 +18,4 @@ export class WorkspacesComponent implements OnInit {
   updateWorkspacesList(newWorkspace: Workspace) {
     this.newWorkspaceAlert = newWorkspace;
   }
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

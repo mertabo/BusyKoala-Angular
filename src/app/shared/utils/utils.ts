@@ -1,5 +1,5 @@
 import { formatDuration, intervalToDuration } from 'date-fns';
-import { TIME_SUFFIX, CODE_LENGTH } from '../constants/constants';
+import { TIME_SUFFIX, CODE_LENGTH } from 'src/app/shared/constants';
 
 /**
  * Transforms 24hr format of time (Date object) into 12hr format (HH:MM M)
@@ -42,12 +42,12 @@ export function secondsToDurationString(seconds: number): string {
     intervalToDuration({ start: 0, end: seconds * 1000 })
   );
 
-  durationString = durationString.replace(/ years?/, TIME_SUFFIX.year);
-  durationString = durationString.replace(/ months?/, TIME_SUFFIX.month);
-  durationString = durationString.replace(/ days?/, TIME_SUFFIX.day);
-  durationString = durationString.replace(/ hours?/, TIME_SUFFIX.hour);
-  durationString = durationString.replace(/ minutes?/, TIME_SUFFIX.minute);
-  durationString = durationString.replace(/ seconds?/, TIME_SUFFIX.second);
+  durationString = durationString.replace(/ years?/, TIME_SUFFIX.YEAR);
+  durationString = durationString.replace(/ months?/, TIME_SUFFIX.MONTH);
+  durationString = durationString.replace(/ days?/, TIME_SUFFIX.DAY);
+  durationString = durationString.replace(/ hours?/, TIME_SUFFIX.HOUR);
+  durationString = durationString.replace(/ minutes?/, TIME_SUFFIX.MINUTE);
+  durationString = durationString.replace(/ seconds?/, TIME_SUFFIX.SECOND);
 
   return durationString;
 }

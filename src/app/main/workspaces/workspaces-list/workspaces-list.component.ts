@@ -7,7 +7,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { WorkspacesService } from '../workspaces.service';
-import { Workspace } from '../../../shared/models';
+import { Workspace } from 'src/app/shared/models';
 import {
   ActivatedRoute,
   Event,
@@ -18,6 +18,7 @@ import {
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { MESSAGE } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-workspaces-list',
@@ -150,14 +151,14 @@ export class WorkspacesListComponent implements OnInit, OnChanges, OnDestroy {
           this.getWorkspaces();
           this.showNotification(
             true,
-            'Workspace deleted',
-            'Your workspace has been successfully deleted! :)'
+            MESSAGE.DELETE_WORKSPACE_SUCCESS_TITLE,
+            MESSAGE.DELETE_WORKSPACE_SUCCESS_CONTENT
           );
         } else {
           this.showNotification(
             false,
-            'Workspace failed to delete',
-            'Sorry, the workplace cannot be deleted! :('
+            MESSAGE.DELETE_WORKSPACE_FAILED_TITLE,
+            MESSAGE.DELETE_WORKSPACE_FAILED_CONTENT
           );
         }
       });

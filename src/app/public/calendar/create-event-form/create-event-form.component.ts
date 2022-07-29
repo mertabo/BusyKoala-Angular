@@ -9,8 +9,9 @@ import {
 } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { CalendarEvent } from '../../../shared/models';
+import { CalendarEvent } from 'src/app/shared/models';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { MESSAGE } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-create-event-form',
@@ -51,13 +52,13 @@ export class CreateEventFormComponent implements OnInit, OnChanges {
   }
 
   /**
-   * Opens a confirmation dialog before creating a workspace.
+   * Opens a confirmation dialog before creating an event.
    */
   confirmCreate(): void {
     if (this.createEventForm.valid) {
       this.modal.confirm({
-        nzTitle: 'Are you sure you want to create a new event?',
-        nzContent: 'Click OK to proceed with creating a new event.',
+        nzTitle: MESSAGE.CONFIRM_CREATE_EVENT_TITLE,
+        nzContent: MESSAGE.CONFIRM_CREATE_EVENT_CONTENT,
         nzOnOk: () => this.submitForm(),
       });
     } else {

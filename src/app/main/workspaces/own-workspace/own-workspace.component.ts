@@ -11,11 +11,11 @@ import {
   AttendanceMonthlySummary,
   UserTimeData,
   Workspace,
-} from '../../../shared/models';
+} from 'src/app/shared/models';
 import { WorkspacesService } from '../workspaces.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Subscription } from 'rxjs';
-import { MONTHS } from 'src/app/shared/constants/constants';
+import { MONTHS } from 'src/app/shared/constants';
 import cloneDeep from 'lodash/cloneDeep';
 
 @Component({
