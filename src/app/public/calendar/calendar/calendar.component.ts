@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CalendarService } from '../calendar.service';
 import { Calendar, CalendarEvent } from 'src/app/shared/models';
 import { Subscription } from 'rxjs';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
@@ -8,6 +7,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { MESSAGE } from 'src/app/shared/constants';
 import { GenericUtilService } from 'src/app/shared/services/util';
+import { CalendarService } from 'src/app/shared/services/api';
 
 @Component({
   selector: 'app-calendar',

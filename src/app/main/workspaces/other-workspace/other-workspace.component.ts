@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { MONTHS, TIME_SEPARATOR } from 'src/app/shared/constants';
 import { UserTimeData, Workspace } from 'src/app/shared/models';
-import { WorkspacesService } from '../workspaces.service';
+import { WorkspacesService } from 'src/app/shared/services/api';
 import { MESSAGE } from 'src/app/shared/constants';
 import { DateUtilService } from 'src/app/shared/services/util';
 

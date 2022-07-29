@@ -12,7 +12,7 @@ import {
   UserTimeData,
   Workspace,
 } from 'src/app/shared/models';
-import { WorkspacesService } from '../workspaces.service';
+import { WorkspacesService } from 'src/app/shared/services/api';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Subscription } from 'rxjs';
 import { MONTHS } from 'src/app/shared/constants';

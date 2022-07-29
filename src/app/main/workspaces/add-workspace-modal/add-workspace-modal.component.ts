@@ -11,7 +11,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Workspace } from 'src/app/shared/models';
-import { WorkspacesService } from '../workspaces.service';
+import { WorkspacesService } from 'src/app/shared/services/api';
 import { MESSAGE } from 'src/app/shared/constants';
 import {
   FormUtilService,

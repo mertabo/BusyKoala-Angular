@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Workspace } from 'src/app/shared/models';
-import { WorkspacesService } from '../workspaces.service';
+import { WorkspacesService } from 'src/app/shared/services/api';
 
 @Component({
   selector: 'app-workspaces-child',
