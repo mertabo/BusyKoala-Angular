@@ -100,6 +100,7 @@ export class WorkspacesListComponent implements OnInit, OnChanges, OnDestroy {
     if (this.searchFor === event.nzValue) return; // same selection
 
     this.searchFor = event.nzValue;
+    this.filterSuggestions();
     this.search();
   }
 
