@@ -15,10 +15,11 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
-import { generateRandomCode } from 'src/app/shared/utils/utils';
+import { generateRandomCode } from 'src/app/shared/services/util/utils';
 import { Workspace } from 'src/app/shared/models';
 import { WorkspacesService } from '../workspaces.service';
 import { MESSAGE } from 'src/app/shared/constants';
+import { FormUtilService } from 'src/app/shared/services/util/form-util.service';
 
 @Component({
   selector: 'app-add-workspace-modal',
@@ -48,23 +49,13 @@ export class AddWorkspaceModalComponent implements OnInit, OnDestroy {
   createWorkspaceSubscription?: Subscription;
 
   /**
-   * Marks a form control as invalid and shows error.
-   *
-   * @param formControl: AbstractControl - the form control to be marked
-   */
-  markAsInvalid(formControl: AbstractControl): void {
-    formControl.markAsDirty();
-    formControl.updateValueAndValidity({ onlySelf: true });
-  }
-
-  /**
    * Handles the error checking of a touched form control
    *
    * @param formControlName: string - the name of the form control to be marked
    */
   handleFocusOut(formControlName: string): void {
     const formControl = this.createWorkspaceForm.controls[formControlName];
-    if (formControl.invalid) this.markAsInvalid(formControl);
+    this.formUtilService.handleFocusOut(formControl);
   }
 
   /**
@@ -74,7 +65,8 @@ export class AddWorkspaceModalComponent implements OnInit, OnDestroy {
     const titleControl = this.createWorkspaceForm.controls['title'];
 
     if (!this.createWorkspaceForm.valid) {
-      if (titleControl.invalid) this.markAsInvalid(titleControl);
+      if (titleControl.invalid)
+        this.formUtilService.markAsInvalid(titleControl);
       return;
     }
 
@@ -212,7 +204,8 @@ export class AddWorkspaceModalComponent implements OnInit, OnDestroy {
     private workspacesService: WorkspacesService,
     private authService: AuthService,
     private notification: NzNotificationService,
-    private modal: NzModalService
+    private modal: NzModalService,
+    private formUtilService: FormUtilService
   ) {}
 
   ngOnInit(): void {

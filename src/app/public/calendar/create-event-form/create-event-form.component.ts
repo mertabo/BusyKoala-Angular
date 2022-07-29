@@ -12,6 +12,7 @@ import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { CalendarEvent } from 'src/app/shared/models';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { MESSAGE } from 'src/app/shared/constants';
+import { FormUtilService } from 'src/app/shared/services/util/form-util.service';
 
 @Component({
   selector: 'app-create-event-form',
@@ -31,24 +32,13 @@ export class CreateEventFormComponent implements OnInit, OnChanges {
   });
 
   /**
-   * Marks a form control invalid.
-   * Shows error in UI.
-   *
-   * @param formControl: AbstractControl - form control to be marked
-   */
-  markAsInvalid(formControl: AbstractControl): void {
-    formControl.markAsDirty();
-    formControl.updateValueAndValidity({ onlySelf: true });
-  }
-
-  /**
    * Checks if a required field was touched but not inputted.
    *
    * @param formControlName: string - name of the form control to be checked
    */
   handleFocusOut(formControlName: string): void {
     const formControl = this.createEventForm.controls[formControlName];
-    if (formControl?.invalid) this.markAsInvalid(formControl);
+    this.formUtilService.handleFocusOut(formControl);
   }
 
   /**
@@ -65,8 +55,9 @@ export class CreateEventFormComponent implements OnInit, OnChanges {
       const titleControl = this.createEventForm.controls['title'];
       const dateControl = this.createEventForm.controls['date'];
 
-      if (titleControl.invalid) this.markAsInvalid(titleControl);
-      if (dateControl.invalid) this.markAsInvalid(dateControl);
+      if (titleControl.invalid)
+        this.formUtilService.markAsInvalid(titleControl);
+      if (dateControl.invalid) this.formUtilService.markAsInvalid(dateControl);
     }
   }
 
@@ -100,7 +91,11 @@ export class CreateEventFormComponent implements OnInit, OnChanges {
     this.submitted.emit(newEvent);
   }
 
-  constructor(private fb: FormBuilder, private modal: NzModalService) {}
+  constructor(
+    private fb: FormBuilder,
+    private modal: NzModalService,
+    private formUtilService: FormUtilService
+  ) {}
 
   ngOnInit(): void {}
 

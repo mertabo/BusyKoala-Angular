@@ -4,6 +4,7 @@ import { AuthService } from '../auth.service';
 import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { LoginResponse } from 'src/app/shared/models';
 import { Subscription } from 'rxjs';
+import { FormUtilService } from 'src/app/shared/services/util/form-util.service';
 
 @Component({
   selector: 'app-login',
@@ -20,24 +21,13 @@ export class LoginComponent implements OnInit, OnDestroy {
   });
 
   /**
-   * Marks a form control invalid.
-   * Shows error in UI.
-   *
-   * @param formControl: AbstractControl - form control to be marked
-   */
-  markAsInvalid(formControl: AbstractControl): void {
-    formControl.markAsDirty();
-    formControl.updateValueAndValidity({ onlySelf: true });
-  }
-
-  /**
    * Checks if a required field was touched but not inputted.
    *
    * @param formControlName: string - name of the form control to be checked
    */
   handleFocusOut(formControlName: string): void {
     const formControl = this.loginForm.controls[formControlName];
-    if (formControl?.invalid) this.markAsInvalid(formControl);
+    this.formUtilService.handleFocusOut(formControl);
   }
 
   /**
@@ -81,7 +71,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     } else {
       Object.values(this.loginForm.controls).forEach((control) => {
         if (control.invalid) {
-          this.markAsInvalid(control);
+          this.formUtilService.markAsInvalid(control);
         }
       });
     }
@@ -90,7 +80,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     public authService: AuthService,
     public router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private formUtilService: FormUtilService
   ) {}
 
   ngOnInit(): void {}

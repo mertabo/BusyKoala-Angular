@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
-import { secondsToDurationString } from 'src/app/shared/utils/utils';
+import { secondsToDurationString } from 'src/app/shared/services/util/utils';
 import { AttendanceMonthlySummary } from 'src/app/shared/models/workspace.model';
 
 @Component({

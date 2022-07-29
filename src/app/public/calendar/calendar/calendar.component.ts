@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import cloneDeep from 'lodash/cloneDeep';
 import { AuthService } from 'src/app/auth/auth.service';
-import { generateRandomCode } from 'src/app/shared/utils/utils';
+import { generateRandomCode } from 'src/app/shared/services/util/utils';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { MESSAGE } from 'src/app/shared/constants';
 

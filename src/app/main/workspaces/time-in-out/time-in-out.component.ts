@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import {
   militaryToStandardTimeFormat,
   secondsToDurationString,
-} from 'src/app/shared/utils/utils';
+} from 'src/app/shared/services/util/utils';
 import { TIME_SEPARATOR } from 'src/app/shared/constants';
 import { UserTimeData } from 'src/app/shared/models';
 

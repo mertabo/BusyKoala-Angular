@@ -11,7 +11,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
-import { militaryToStandardTimeFormat } from 'src/app/shared/utils/utils';
+import { militaryToStandardTimeFormat } from 'src/app/shared/services/util/utils';
 import { MONTHS, TIME_SEPARATOR } from 'src/app/shared/constants';
 import { UserTimeData, Workspace } from 'src/app/shared/models';
 import { WorkspacesService } from '../workspaces.service';
