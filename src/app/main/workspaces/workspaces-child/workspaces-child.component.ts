@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
-import { Workspace } from '../workspaces';
+import { Workspace } from '../../../shared/models';
 import { WorkspacesService } from '../workspaces.service';
 
 @Component({

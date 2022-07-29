@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { militaryToStandardTimeFormat } from 'src/app/shared/utils/utils';
 import { MONTHS, TIME_SEPARATOR } from '../../../shared/constants/constants';
-import { UserTimeData, Workspace } from '../workspaces';
+import { UserTimeData, Workspace } from '../../../shared/models';
 import { WorkspacesService } from '../workspaces.service';
 
 @Component({

@@ -1,10 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
-import { User } from 'src/app/auth/user';
 import { secondsToDurationString } from 'src/app/shared/utils/utils';
-import { AttendanceMonthlySummary } from '../workspaces';
+import { AttendanceMonthlySummary } from '../../../shared/models/workspace.model';
 
 @Component({
   selector: 'app-attendees-month',

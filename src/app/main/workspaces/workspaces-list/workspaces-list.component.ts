@@ -7,7 +7,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { WorkspacesService } from '../workspaces.service';
-import { Workspace } from '../workspaces';
+import { Workspace } from '../../../shared/models';
 import {
   ActivatedRoute,
   Event,

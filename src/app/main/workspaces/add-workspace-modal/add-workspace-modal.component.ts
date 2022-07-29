@@ -16,7 +16,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { generateRandomCode } from 'src/app/shared/utils/utils';
-import { Workspace } from '../workspaces';
+import { Workspace } from '../../../shared/models';
 import { WorkspacesService } from '../workspaces.service';
 
 @Component({

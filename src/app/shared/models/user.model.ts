@@ -4,8 +4,3 @@ export interface User {
   password: string;
   workspaces: string[];
 }
-
-export interface LoginResponse {
-  statusCode: number;
-  user: User;
-}

@@ -1,12 +1,12 @@
-export interface AttendanceMonthlySummary {
-  date: string;
-  attendees: UserTimeData[];
-}
-
 export interface UserTimeData {
   user: string;
   time: string[];
   duration: number;
+}
+
+export interface AttendanceMonthlySummary {
+  date: string;
+  attendees: UserTimeData[];
 }
 
 export interface Workspace {

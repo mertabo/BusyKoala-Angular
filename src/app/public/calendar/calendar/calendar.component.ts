@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CalendarService } from '../calendar.service';
-import { Calendar, CalendarEvent } from '../calendar';
+import { Calendar, CalendarEvent } from '../../../shared/models';
 import { Subscription } from 'rxjs';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import cloneDeep from 'lodash/cloneDeep';

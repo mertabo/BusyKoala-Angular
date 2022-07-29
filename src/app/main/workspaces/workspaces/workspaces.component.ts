@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Workspace } from '../workspaces';
+import { Workspace } from '../../../shared/models';
 
 @Component({
   selector: 'app-workspaces',

@@ -3,7 +3,7 @@ import { EventEmitter, Injectable, Output } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { LoginResponse, User } from './user';
+import { LoginResponse, User } from '../shared/models';
 
 @Injectable({
   providedIn: 'root',

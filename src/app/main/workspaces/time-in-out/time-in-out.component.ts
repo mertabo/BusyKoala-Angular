@@ -14,7 +14,7 @@ import {
   secondsToDurationString,
 } from 'src/app/shared/utils/utils';
 import { TIME_SEPARATOR } from '../../../shared/constants/constants';
-import { UserTimeData } from '../workspaces';
+import { UserTimeData } from '../../../shared/models';
 
 @Component({
   selector: 'app-time-in-out',

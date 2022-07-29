@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
-import { User } from 'src/app/auth/user';
+import { User } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-navbar',

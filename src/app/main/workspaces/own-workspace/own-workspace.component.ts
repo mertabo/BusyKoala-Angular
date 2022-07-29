@@ -11,7 +11,7 @@ import {
   AttendanceMonthlySummary,
   UserTimeData,
   Workspace,
-} from '../workspaces';
+} from '../../../shared/models';
 import { WorkspacesService } from '../workspaces.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Subscription } from 'rxjs';

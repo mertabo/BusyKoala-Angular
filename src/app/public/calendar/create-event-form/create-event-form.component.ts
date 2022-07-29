@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { CalendarEvent } from '../calendar';
+import { CalendarEvent } from '../../../shared/models';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
