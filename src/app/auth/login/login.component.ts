@@ -14,11 +14,27 @@ import { FormUtilService } from 'src/app/shared/services/util';
 export class LoginComponent implements OnInit, OnDestroy {
   loginSubscription?: Subscription;
   passwordVisible = false;
+  validLogin = true;
 
   loginForm = this.fb.group({
     username: [null, Validators.required],
     password: [null, Validators.required],
   });
+
+  /**
+   * Resets the 'invalid' error of the form controls
+   * (that is triggered from submitting invalid credentials)
+   * everytime user changes input
+   */
+  handleChange(): void {
+    this.validLogin = true;
+
+    Object.values(this.loginForm.controls).forEach((control) => {
+      if (!control.errors?.['required']) {
+        control.setErrors(null);
+      }
+    });
+  }
 
   /**
    * Checks if a required field was touched but not inputted.
@@ -27,7 +43,11 @@ export class LoginComponent implements OnInit, OnDestroy {
    */
   handleFocusOut(formControlName: string): void {
     const formControl = this.loginForm.controls[formControlName];
-    this.formUtilService.handleFocusOut(formControl);
+    if (formControl.errors?.['required']) {
+      this.formUtilService.handleFocusOut(formControl);
+    } else {
+      formControl.setErrors(formControl.errors);
+    }
   }
 
   /**
@@ -44,36 +64,23 @@ export class LoginComponent implements OnInit, OnDestroy {
         .subscribe((loginResponse: LoginResponse) => {
           if (loginResponse.statusCode === 200) {
             // success
-            const redirectUrl = '/workspaces';
-
-            // Set our navigation extras object
-            // that passes on our global query params and fragment
-            const navigationExtras: NavigationExtras = {
-              queryParamsHandling: 'preserve',
-              preserveFragment: true,
-            };
-
-            // Redirect the user
             this.authService.fireIsLoggedIn.emit();
-            this.router.navigate([redirectUrl], navigationExtras);
-          } else if (loginResponse.statusCode === 401) {
-            // incorrect password
-            this.loginForm.controls['password'].setErrors({
-              incorrectPW: true,
-            });
+            this.router.navigate(['/workspaces']);
           } else {
-            // 404: user not found
-            this.loginForm.controls['username'].setErrors({
-              userNotFound: true,
+            this.validLogin = false;
+
+            Object.values(this.loginForm.controls).forEach((control) => {
+              control.setErrors({ invalid: true });
             });
           }
         });
     } else {
       Object.values(this.loginForm.controls).forEach((control) => {
-        if (control.invalid) {
+        if (control.errors?.['required']) {
           this.formUtilService.markAsInvalid(control);
         } else {
-          console.log(control);
+          // retains the errors
+          control.setErrors(control.errors);
         }
       });
     }

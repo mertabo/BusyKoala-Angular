@@ -19,13 +19,11 @@
                 formControlName="username"
                 placeholder="username"
                 (focusout)="handleFocusOut('username')"
+                (ngModelChange)="handleChange()"
               />
               <ng-template #userErrorTpl let-control>
                 <ng-container *ngIf="control.hasError('required')"
                   >Please input your username!</ng-container
-                >
-                <ng-container *ngIf="control.hasError('userNotFound')"
-                  >Username does not exist!</ng-container
                 >
               </ng-template>
             </nz-form-control>
@@ -42,14 +40,12 @@
                   formControlName="password"
                   placeholder="●●●●●●●●"
                   (focusout)="handleFocusOut('password')"
+                  (ngModelChange)="handleChange()"
                 />
               </nz-input-group>
               <ng-template #passwordErrorTpl let-control>
                 <ng-container *ngIf="control.hasError('required')"
                   >Please input your password!</ng-container
-                >
-                <ng-container *ngIf="control.hasError('incorrectPW')"
-                  >Incorrect password!</ng-container
                 >
               </ng-template>
               <ng-template #suffixTemplate>
@@ -61,6 +57,13 @@
             </nz-form-control>
             <a class="text-end">Forgot password?</a>
           </nz-form-item>
+
+          <nz-alert
+            *ngIf="!validLogin"
+            nzType="error"
+            nzMessage="Username or password is invalid!"
+            nzShowIcon
+          ></nz-alert>
 
           <button class="btn btn-cta mt-2 w-100" (click)="login()">
             Login
