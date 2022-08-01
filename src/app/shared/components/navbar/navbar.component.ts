@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { User } from 'src/app/shared/models';
+import { NAVROUTES } from '../../constants/routes';
+import { GenericUtilService } from '../../services/util';
 
 @Component({
   selector: 'app-navbar',
@@ -17,6 +19,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   loggedInSubscription?: Subscription;
   getUserSubscription!: Subscription;
 
+  // routes
+  loginRoute = NAVROUTES.LOGIN;
+  calendarRoute = NAVROUTES.CALENDAR;
+  workspacesRoute = NAVROUTES.WORKSPACES;
+
   /**
    * Checks if there is a currently logged in user
    * on first render of app by checking sessionStorage
@@ -29,7 +36,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this.authService.getUser(username).subscribe((user: User) => {
         if (user.id) {
           // valid user
-          this.loggedInUserInitials = this.getInitials(user.fullName);
+          this.loggedInUserInitials = this.genericUtilService.getInitials(
+            user.fullName
+          );
           this.authService.authInit(username, user.fullName);
           this.isLoggedIn = true;
 
@@ -45,19 +54,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Gets the initials of the logged in user.
-   *
-   * @param fullName: string - username of the logged in user
-   * @return string - the initials
-   */
-  getInitials(fullName: string): string {
-    const initials =
-      fullName.split(' ')[0].substring(0, 1) +
-      fullName.split(' ')[1].substring(0, 1);
-    return initials;
-  }
-
-  /**
    * Logs out the user.
    * Resets variables.
    * Redirects to homepage.
@@ -68,7 +64,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.router.navigate(['/home']);
   }
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private genericUtilService: GenericUtilService
+  ) {
     this.authInit();
   }
 
@@ -77,7 +77,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.authService.getIsLoggedInEmitter().subscribe(() => {
       this.isLoggedIn = this.authService.loggedInUser !== '';
       if (this.isLoggedIn)
-        this.loggedInUserInitials = this.getInitials(
+        this.loggedInUserInitials = this.genericUtilService.getInitials(
           this.authService.loggedInFullName
         );
     });

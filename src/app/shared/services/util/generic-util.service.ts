@@ -24,4 +24,18 @@ export class GenericUtilService {
 
     return code;
   }
+
+  /**
+   * Gets the initials of the logged in user.
+   *
+   * @param fullName: string - username of the logged in user
+   * @return string - the initials
+   */
+  getInitials(fullName: string): string {
+    const initials =
+      fullName.split(' ')[0].substring(0, 1) +
+      fullName.split(' ')[1].substring(0, 1);
+
+    return initials;
+  }
 }
