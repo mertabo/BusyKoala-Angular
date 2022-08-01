@@ -11,7 +11,7 @@
       [nzTooltipTitle]="tooltipTitleTemplate"
       [class]="
         'fa fa-circle-info ' +
-        (isTimedIn || localWorkspace.ongoing === 'true' ? 'd-none' : '')
+        (isTimedIn || localWorkspace.ongoing === 'false' ? '' : 'd-none')
       "
     ></button>
     <ng-template #tooltipTitleTemplate>

@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
+import { TIME_SEPARATOR } from 'src/app/shared/constants';
 import { User } from 'src/app/shared/models';
 import { DateUtilService } from 'src/app/shared/services/util';
 
@@ -13,6 +14,7 @@ export class AttendeesTodayComponent implements OnInit, OnDestroy {
   @Input() attendee: any;
   name?: string;
   duration: string = '';
+  TIME_SEPARATOR = TIME_SEPARATOR;
 
   // subscriptions
   getFullNameSubscription!: Subscription;

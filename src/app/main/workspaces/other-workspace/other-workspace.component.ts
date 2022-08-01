@@ -122,6 +122,7 @@ export class OtherWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
    * Handles the action of timing in.
    */
   timeIn(): void {
+    console.log(this.localWorkspace.ongoing === 'true');
     this.isTimedIn = true;
     const now = new Date();
     const year = now.getFullYear();

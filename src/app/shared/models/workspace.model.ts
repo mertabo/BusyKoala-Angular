@@ -19,7 +19,7 @@ export interface Attendance {
 
 export interface Workspace {
   id?: string;
-  ongoing?: string;
+  ongoing?: 'true' | 'false';
   inviteCode?: string;
   name?: string;
   owner?: string;
