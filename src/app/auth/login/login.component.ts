@@ -72,6 +72,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       Object.values(this.loginForm.controls).forEach((control) => {
         if (control.invalid) {
           this.formUtilService.markAsInvalid(control);
+        } else {
+          console.log(control);
         }
       });
     }
