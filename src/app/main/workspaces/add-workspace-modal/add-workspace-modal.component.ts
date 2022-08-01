@@ -5,15 +5,16 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Workspace } from 'src/app/shared/models';
 import { WorkspacesService } from 'src/app/shared/services/api';
-import { MESSAGE } from 'src/app/shared/constants';
+import { MESSAGE, WEEKDAYS } from 'src/app/shared/constants';
 import {
+  DateUtilService,
   FormUtilService,
   GenericUtilService,
 } from 'src/app/shared/services/util';
@@ -26,18 +27,19 @@ import {
 export class AddWorkspaceModalComponent implements OnInit, OnDestroy {
   @Output() updateWorkspacesList = new EventEmitter<Workspace>();
   loggedInUser = '';
+  WEEKDAYS = WEEKDAYS;
 
   createWorkspaceForm = this.fb.group({
     title: [null, Validators.required],
-    schedule: this.fb.group({
-      Sun: [null],
-      Mon: [null],
-      Tue: [null],
-      Wed: [null],
-      Thu: [null],
-      Fri: [null],
-      Sat: [null],
-    }),
+    schedule: this.fb.array([
+      this.fb.control(null),
+      this.fb.control(null),
+      this.fb.control(null),
+      this.fb.control(null),
+      this.fb.control(null),
+      this.fb.control(null),
+      this.fb.control(null),
+    ]),
   });
 
   // subscriptions
@@ -78,36 +80,10 @@ export class AddWorkspaceModalComponent implements OnInit, OnDestroy {
    * Creates a new workspace.
    */
   createWorkspace(): void {
-    let schedule = '';
-    let isStart = true;
-    let endDay = '';
-
-    // get the string of schedule
-    Object.keys(
-      (this.createWorkspaceForm.controls['schedule'] as FormGroup).controls
-    ).forEach((controlName) => {
-      if (this.createWorkspaceForm.get(`schedule.${controlName}`)?.value) {
-        // checked
-        // first day of a possible daily schedule (e.g. Mon-Fri)
-        if (isStart) {
-          if (schedule) schedule += ', ';
-          schedule += controlName;
-          isStart = false;
-        } else {
-          // store the possible end of a daily schedule
-          endDay = controlName;
-        }
-      } else {
-        // unchecked
-        // if there is an end day, then there is a daily schedule. append end of daily schedule
-        if (endDay) schedule += `-${endDay}`;
-        isStart = true;
-        endDay = '';
-      }
-    });
-
-    // catches if Sat is part of a daily schedule
-    if (endDay) schedule += `-${endDay}`;
+    const tempWeekArr = (
+      this.createWorkspaceForm.controls['schedule'] as FormArray
+    ).controls.map((control, index) => (control.value ? WEEKDAYS[index] : ''));
+    const schedule = this.dateUtilService.generateScheduleString(tempWeekArr);
 
     // get dummy id
     this.workspacesService.getWorkspacesTotal().subscribe((workspacesTotal) => {
@@ -202,6 +178,7 @@ export class AddWorkspaceModalComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private notification: NzNotificationService,
     private modal: NzModalService,
+    private dateUtilService: DateUtilService,
     private formUtilService: FormUtilService,
     private genericUtilService: GenericUtilService
   ) {}

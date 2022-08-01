@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { formatDuration, intervalToDuration } from 'date-fns';
-import { TIME_SUFFIX } from 'src/app/shared/constants';
+import { TIME_SUFFIX, WEEKDAYS } from 'src/app/shared/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -57,5 +57,45 @@ export class DateUtilService {
     durationString = durationString.replace(/ seconds?/, TIME_SUFFIX.SECOND);
 
     return durationString;
+  }
+
+  /**
+   * Formats the schedule.
+   * Sample input: ['', 'Monday', 'Tuesday', '', '', '', 'Saturday']
+   * Sample output: Mon-Tue, Sat
+   *
+   * @param weekArray: string[] - array of weekdays (empty string if weekday is not included)
+   * @return schedule: string - the formatted schedule
+   */
+  generateScheduleString(weekArray: string[]): string {
+    let schedule = '';
+    let isStart = true;
+    let endDay = '';
+
+    weekArray.forEach((day, i) => {
+      if (day) {
+        const weekday = WEEKDAYS[i].substring(0, 3);
+
+        // first day of a possible daily schedule (e.g. Mon-Fri)
+        if (isStart) {
+          if (schedule) schedule += ', ';
+          schedule += weekday;
+          isStart = false;
+        } else {
+          // store the possible end of a daily schedule
+          endDay = weekday;
+        }
+      } else {
+        // if there is an end day, then there is a daily schedule. append end of daily schedule
+        if (endDay) schedule += `-${endDay}`;
+        isStart = true;
+        endDay = '';
+      }
+    });
+
+    // catches if Sat is part of a daily schedule
+    if (endDay) schedule += `-${endDay}`;
+
+    return schedule;
   }
 }

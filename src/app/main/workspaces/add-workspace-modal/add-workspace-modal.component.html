@@ -41,36 +41,15 @@
               </nz-form-item>
 
               <!-- Schedule checkbox -->
-              <nz-form-item formGroupName="schedule">
+              <nz-form-item formArrayName="schedule">
                 <nz-form-label>Schedule:</nz-form-label>
-
-                <nz-form-control>
-                  <label nz-checkbox formControlName="Sun">Sunday</label>
-                </nz-form-control>
-
-                <nz-form-control>
-                  <label nz-checkbox formControlName="Mon">Monday</label>
-                </nz-form-control>
-
-                <nz-form-control>
-                  <label nz-checkbox formControlName="Tue">Tuesday</label>
-                </nz-form-control>
-
-                <nz-form-control>
-                  <label nz-checkbox formControlName="Wed">Wednesday</label>
-                </nz-form-control>
-
-                <nz-form-control>
-                  <label nz-checkbox formControlName="Thu">Thursday</label>
-                </nz-form-control>
-
-                <nz-form-control>
-                  <label nz-checkbox formControlName="Fri">Friday</label>
-                </nz-form-control>
-
-                <nz-form-control>
-                  <label nz-checkbox formControlName="Sat">Saturday</label>
-                </nz-form-control>
+                <ng-container *ngFor="let weekday of WEEKDAYS; index as i">
+                  <nz-form-control>
+                    <label nz-checkbox [formControlName]="i">{{
+                      weekday
+                    }}</label>
+                  </nz-form-control>
+                </ng-container>
               </nz-form-item>
             </form>
           </div>
