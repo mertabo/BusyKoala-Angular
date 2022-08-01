@@ -23,14 +23,13 @@
     <button
       nz-button
       nzType="text"
-      [disabled]="!ongoing"
       nz-popconfirm
       [nzPopconfirmTitle]="
-        'Are you sure you want to ' + ongoing.toLowerCase() + ' session?'
+        'Are you sure you want to ' + (ongoing ? 'end' : 'start') + ' session?'
       "
       (nzOnConfirm)="updateSession()"
     >
-      {{ ongoing + " session" }}
+      {{ (ongoing ? "End" : "Start") + " session" }}
     </button>
   </div>
 </div>

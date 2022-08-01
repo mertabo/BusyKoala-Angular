@@ -136,36 +136,36 @@ export class OtherWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
 
     // check if workspace is still ongoing
     this.checkIfOngoingSubscription = this.workspacesService
-      .getWorkspace(this.localWorkspace.id)
+      .getWorkspace(this.localWorkspace.id!)
       .subscribe((workspace) => {
         if (!workspace.id) {
           // error in server
           this.message.error(MESSAGE.GENERIC_FAILED);
-        } else if (workspace.ongoing === 'false') {
+        } else if (!workspace.ongoing) {
           // workspace has ended session
           this.localWorkspace = workspace;
           this.message.error(MESSAGE.TIME_IN_FAILED_SESSION_ENDED);
         } else {
           // do not manipulate original data in case of failed process
-          const tempLocalWorkspace = cloneDeep(this.localWorkspace);
+          const tempAttendance = cloneDeep(this.localWorkspace.attendance!);
 
-          // update the tempLocalWorkspace accordingly
-          if (!this.localWorkspace.attendance[year]) {
+          // update the tempAttendance accordingly
+          if (!this.localWorkspace.attendance![year]) {
             // year not found
-            tempLocalWorkspace.attendance[year] = {
+            tempAttendance[year] = {
               [month]: { [date]: [newTimeInData] },
             };
-          } else if (!this.localWorkspace.attendance[year][month]) {
+          } else if (!this.localWorkspace.attendance![year][month]) {
             // month not found
-            tempLocalWorkspace.attendance[year][month] = {
+            tempAttendance[year][month] = {
               [date]: [newTimeInData],
             };
-          } else if (!this.localWorkspace.attendance[year][month][date]) {
+          } else if (!this.localWorkspace.attendance![year][month][date]) {
             // date not found
-            tempLocalWorkspace.attendance[year][month][date] = [newTimeInData];
+            tempAttendance[year][month][date] = [newTimeInData];
           } else {
             // existing data
-            const attendeeIndex = this.localWorkspace.attendance[year][month][
+            const attendeeIndex = this.localWorkspace.attendance![year][month][
               date
             ].findIndex(
               (attendee: UserTimeData) => attendee.user === this.loggedInUser
@@ -173,20 +173,20 @@ export class OtherWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
 
             // user has no time in data yet
             if (attendeeIndex < 0) {
-              tempLocalWorkspace.attendance[year][month][date].push(
-                newTimeInData
-              );
+              tempAttendance[year][month][date].push(newTimeInData);
             } else {
               // user already has time in data
-              tempLocalWorkspace.attendance[year][month][date][
-                attendeeIndex
-              ].time.push(newTimeInData.time[0]);
+              tempAttendance[year][month][date][attendeeIndex].time.push(
+                newTimeInData.time[0]
+              );
             }
           }
-
+          const test = { attendance: tempAttendance };
           // update the db and UI
           this.timeInSubscription = this.workspacesService
-            .updateWorkspace(tempLocalWorkspace)
+            .updateWorkspace(this.localWorkspace.id!, {
+              attendance: tempAttendance,
+            })
             .subscribe((updatedWorkspace) => {
               if (updatedWorkspace.id) {
                 this.localWorkspace = updatedWorkspace;
@@ -227,17 +227,19 @@ export class OtherWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
     const date = userTimeDataDate.getDate();
 
     // find attendee data to be updated
-    const attendeeIndex = this.localWorkspace.attendance[year][month][
+    const attendeeIndex = this.localWorkspace.attendance![year][month][
       date
     ].findIndex(
       (attendee: UserTimeData) => attendee.user === updatedUserTimeData.user
     );
 
+    // do not manipulate original data in case of failed process
+    const tempAttendance = cloneDeep(this.localWorkspace.attendance);
+
     // update data of attendee
-    this.localWorkspace.attendance[year][month][date][attendeeIndex] =
-      updatedUserTimeData;
+    tempAttendance![year][month][date][attendeeIndex] = updatedUserTimeData;
     this.timeOutSubscription = this.workspacesService
-      .updateWorkspace(this.localWorkspace)
+      .updateWorkspace(this.localWorkspace.id!, { attendance: tempAttendance })
       .subscribe((updatedWorkspace) => {
         if (updatedWorkspace.id) {
           this.localWorkspace = updatedWorkspace;

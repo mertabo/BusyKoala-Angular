@@ -16,7 +16,6 @@ import { WorkspacesService } from 'src/app/shared/services/api';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Subscription } from 'rxjs';
 import { MONTHS } from 'src/app/shared/constants';
-import cloneDeep from 'lodash/cloneDeep';
 
 @Component({
   selector: 'app-own-workspace',
@@ -26,7 +25,7 @@ import cloneDeep from 'lodash/cloneDeep';
 export class OwnWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
   @Input() workspace!: Workspace;
   hasWorkspaceDataLoaded = false;
-  ongoing = '';
+  ongoing = false;
   buttonView = 'today';
   today = new Date();
   selectedDate = new Date();
@@ -92,7 +91,7 @@ export class OwnWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
 
     const year = this.selectedDate.getFullYear();
     const month = this.selectedDate.getMonth();
-    const attendees = this.workspace.attendance[year]?.[month];
+    const attendees = this.workspace.attendance![year]?.[month];
 
     if (attendees) {
       Object.entries(attendees).forEach(([date, attendees]) => {
@@ -127,16 +126,15 @@ export class OwnWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
    * Updates the 'ongoing' property of a Workspace.
    */
   updateSession(): void {
-    let tempWorkspace = cloneDeep(this.workspace);
-    tempWorkspace.ongoing = this.ongoing === 'Start' ? 'true' : 'false';
-
     this.updateSessionSubscription = this.workspacesService
-      .updateWorkspace(tempWorkspace)
+      .updateWorkspace(this.workspace.id!, {
+        ongoing: (!this.ongoing).toString(),
+      })
       .subscribe((updatedWorkspace) => {
         if (updatedWorkspace.id) {
           this.workspace = updatedWorkspace;
+          this.ongoing = updatedWorkspace.ongoing === 'true';
           this.showSessionUpdate();
-          this.ongoing = updatedWorkspace.ongoing === 'true' ? 'End' : 'Start';
         }
       });
   }
@@ -146,10 +144,8 @@ export class OwnWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
    */
   showSessionUpdate(): void {
     this.notification.success(
-      `Session ${this.ongoing.toLowerCase()}ed`,
-      `Attendees can ${
-        this.ongoing === 'Start' ? 'now' : 'no longer'
-      } time in.`,
+      `Session ${this.ongoing ? 'started' : 'ended'}`,
+      `Attendees can ${this.ongoing ? 'now' : 'no longer'} time in.`,
       { nzKey: 'sessionUpdate', nzPlacement: 'bottomRight' }
     );
   }
@@ -159,7 +155,7 @@ export class OwnWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
    */
   refresh(): void {
     this.refreshSubscription = this.workspacesService
-      .getWorkspace(this.workspace.id)
+      .getWorkspace(this.workspace.id!)
       .subscribe((workspace) => {
         if (this.workspace) this.workspace = workspace;
       });
@@ -173,7 +169,7 @@ export class OwnWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
 
   ngOnInit(): void {
     this.workspaceDiffer = this.differs.find(this.workspace).create();
-    this.ongoing = this.workspace.ongoing === 'true' ? 'End' : 'Start';
+    this.ongoing = this.workspace.ongoing === 'true';
     this.getToday();
   }
 
@@ -182,7 +178,7 @@ export class OwnWorkspaceComponent implements OnInit, DoCheck, OnDestroy {
     const changes = this.workspaceDiffer.diff(this.workspace);
 
     if (changes) {
-      this.ongoing = this.workspace.ongoing === 'true' ? 'End' : 'Start';
+      this.ongoing = this.workspace.ongoing === 'true';
       this.getToday();
     }
   }

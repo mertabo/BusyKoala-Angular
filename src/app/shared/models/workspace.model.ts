@@ -9,20 +9,22 @@ export interface AttendanceMonthlySummary {
   attendees: UserTimeData[];
 }
 
-export interface Workspace {
-  id: string;
-  ongoing: string;
-  inviteCode: string;
-  name: string;
-  owner: string;
-  schedule: string;
-  attendance: {
-    [year: number]: {
-      [month: number]: {
-        [date: number]: UserTimeData[];
-      };
+export interface Attendance {
+  [year: number]: {
+    [month: number]: {
+      [date: number]: UserTimeData[];
     };
   };
+}
+
+export interface Workspace {
+  id?: string;
+  ongoing?: string;
+  inviteCode?: string;
+  name?: string;
+  owner?: string;
+  schedule?: string;
+  attendance?: Attendance;
 }
 
 // just for dummy workspace id only

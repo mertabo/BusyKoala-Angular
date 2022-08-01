@@ -122,13 +122,13 @@ export class WorkspacesListComponent implements OnInit, OnChanges, OnDestroy {
     // render the results in UI, filter workspaces
     if (this.filteredSearchOptions.length) {
       this.searchedWorkspaces = this.workspaces.filter((workspace) => {
-        return this.filteredSearchOptions.includes(workspace.name);
+        return this.filteredSearchOptions.includes(workspace.name!);
       });
 
       this.selectedWorkspaceID = this.searchedWorkspaces[0].id;
     } else {
       this.searchedWorkspaces = [];
-      this.selectedWorkspaceID = '.';
+      this.selectedWorkspaceID = '';
     }
 
     // open the first workspace

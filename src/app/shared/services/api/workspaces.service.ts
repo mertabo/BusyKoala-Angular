@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Workspace, WorkspacesTotal } from 'src/app/shared/models';
+import { Attendance, Workspace, WorkspacesTotal } from 'src/app/shared/models';
 
 @Injectable({
   providedIn: 'root',
@@ -42,14 +42,18 @@ export class WorkspacesService {
   /**
    * Update a workspace.
    *
-   * @param updatedWorkspace: Workspace - updated workspace that will replace the old workspace in the db.
-   * @return Observable<Workspace> - observable result of the http PUT request
+   * @param id: string - id of the workspace to be updated
+   * @param newData: -  an object that holds the new data
+   * @return Observable<Workspace> - observable result of the http PATCH request
    */
-  updateWorkspace(updatedWorkspace: Workspace): Observable<Workspace> {
+  updateWorkspace(
+    id: string,
+    newData: { [key in keyof Workspace]: string | Attendance }
+  ): Observable<Workspace> {
     return this.http
-      .put<Observable<Workspace>>(
-        `${this.workspacesUrl}/${updatedWorkspace.id}`,
-        updatedWorkspace,
+      .patch<Observable<Workspace>>(
+        `${this.workspacesUrl}/${id}`,
+        newData,
         this.httpOptions
       )
       .pipe(catchError(this.handleError<any>({ id: '' })));
@@ -73,7 +77,7 @@ export class WorkspacesService {
   getWorkspacesTotal(): Observable<WorkspacesTotal> {
     return this.http
       .get<Observable<WorkspacesTotal>>(`${this.workspacesUrl}Total`)
-      .pipe(catchError(this.handleError<any>({ total: 23 })));
+      .pipe(catchError(this.handleError<any>({ total: 0 })));
   }
 
   /**
